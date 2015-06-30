@@ -52,3 +52,6 @@ Open SSH, direct to your GameServer folder. Then run the following command:
 ````
 wget https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh && chmod +x arkserver.sh && ./arkserver.sh
 ````
+
+# Contributers
+- Zendrex
