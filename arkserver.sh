@@ -134,13 +134,11 @@ fi
 
 
 # Check if serverscript directory is already made.
-if [ ! -d .serverscript ]; then
-    if [ $safetyNotif = True ]; then
-        echo -e "$ERR Unable to find script directory. Making it now."
-        mkdir .serverscript
-        sleep 1s
-        echo -e; echo -e "$YELLOW Directory Created. $RESET"
-    fi
+if [ -d .serverscript ]; then
+    echo -e "$ERR Unable to find script directory. Making it now."
+    mkdir .serverscript
+    sleep 1s
+    echo -e; echo -e "$YELLOW Directory Created. $RESET"
 fi
 cd .serverscript
 echo -e; echo -e "$YELLOW Checking script files. $RESET"; echo -e
