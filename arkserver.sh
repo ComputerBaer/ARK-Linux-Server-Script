@@ -178,9 +178,7 @@ if [ ! -f formatting.ini ]; then
     echo -e "$YELLOW Formatting $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
 fi
-chmod 777 *
 cd ../
-fi
 
 # Config file.
 source configuration.ini
