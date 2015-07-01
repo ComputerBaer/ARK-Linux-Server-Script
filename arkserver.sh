@@ -134,25 +134,52 @@ fi
 
 
 # Check if serverscript directory is already made.
-if [ -d .serverscript ]; then
+if [ ! -d .serverscript ]; then
     if [ $safetyNotif = True ]; then
-        echo -e; sleep 1s
-        echo -e " Script directory is found."
+        echo -e "$ERR Unable to find script directory. Making it now."
+        mkdir .serverscript
+        sleep 1s
+        echo -e; echo -e "$YELLOW Directory Created. $RESET"
     fi
-else
-    echo -e "$ERR Unable to find script directory. Making it now."
-    mkdir .serverscript
-    cd .serverscript
-    echo -e; echo -e "$YELLOW Now downloading script files. $RESET"; echo -e
-    echo -e "$YELLOW Start Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
-    echo -e "$YELLOW Stop Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
-    echo -e "$YELLOW View Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
-    echo -e "$YELLOW Install Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
-    echo -e "$YELLOW Update Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
-    echo -e "$YELLOW Backup Script $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
-    echo -e "$YELLOW Formatting $RESET" ; curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
-    chmod 777 *
-    cd ../
+fi
+cd .serverscript
+echo -e; echo -e "$YELLOW Checking script files. $RESET"; echo -e
+if [ ! -f startserver ]; then
+    echo -e "$YELLOW Start Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o startserver -#
+    chmod 777 startserver
+fi
+if [ ! -f stopserver ]; then
+    echo -e "$YELLOW Stop Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
+    chmod 777 stopserver
+fi
+if [ ! -f viewserver ]; then
+    echo -e "$YELLOW View Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
+    chmod 777 viewserver
+fi
+if [ ! -f installserver ]; then
+    echo -e "$YELLOW Install Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
+    chmod 777 installserver
+fi
+if [ ! -f updateserver ]; then
+    echo -e "$YELLOW Update Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
+    chmod 777 updateserver
+fi
+if [ ! -f backupserver ]; then
+    echo -e "$YELLOW Backup Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
+    chmod 777 backupserver
+fi
+if [ ! -f formatting.ini ]; then
+    echo -e "$YELLOW Formatting $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
+fi
+chmod 777 *
+cd ../
 fi
 
 # Config file.
@@ -191,40 +218,51 @@ help () {
 }
 
 start () {
-    clear
     cd .serverscript
+    clear
     ./startserver
 }
 
 stop () {
-    clear
     cd .serverscript
+    clear
     ./stopserver
 }
 
 view () {
-    clear
     cd .serverscript
+    clear
+    if [ ! -f viewserver ]; then
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
+    fi
     ./viewserver
 }
 
 install () {
-    clear
     cd .serverscript
+    clear
+    if [ ! -f installserver ]; then
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
+    fi
     ./installserver
 }
 
 update () {
-    clear
     cd .serverscript
+    clear
+    if [ ! -f updateserver ]; then
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
+    fi
     ./updateserver
 }
 
 backup () {
-    clear
     cd .serverscript
-    ./updateserver
-    
+    clear
+    if [ ! -f backupserver ]; then
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
+    fi
+    ./backupserver
 }
 
 [ "$1" = "" ] && {
