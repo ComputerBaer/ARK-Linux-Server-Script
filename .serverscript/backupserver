@@ -20,13 +20,12 @@ else
     echo -e " Up to date!"
     echo -e
 fi
-
-echo -e "$GREEN Beginning backup process. $RESET"
-echo -e; sleep 2s
-echo -e " Checking if there is a backups directory."
+sleep 1s
+echo -e "$YELLOW Checking if there is a backups directory. $RESET"
 cd ../
+sleep 1s
 if [ -d backups ]; then
-  echo -e "$YELLOW Backups directory already made. Moving forward. $RESET"
+  echo -e " Backups directory already made. Moving forward."
   echo -e
 else
   echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
@@ -34,12 +33,43 @@ else
   echo -e 
 fi
 
-DATE=`date +"%m-%d-%Y"`
-TIME=`date + "%T"`
+sleep 1s
+echo -e "$YELLOW Checking compression format. $RESET"
+sleep 1s
+if [ $compFormat = "gz" ]; then
+	compressionFormat=""
+	echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
+elif [ $compFormat = "bz2" ]; then
+	compressionFormat=".bz2"
+	echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
+else
+	sleep 1s
+	echo -e "$ERR Invalid format detected in the configuration file!"
+	echo -e " Please fix the configuration.ini file 'Compression Format' section."
+	exit 0
+fi
 
-echo -e "$YELLOW Backing up save files now. $RESET"
-cd ShooterGame/Saved/
-cp -r SavedArks/ ../../backups/
-mv SavedArks/ SavedArks_$DATE_$TIME/
-echo -e "$GREEN Backup complete! $RESET"
-exit 0
+DATE=`date +"%m-%d-%y_%H.%M.%S"`
+
+echo -e; echo -e "$YELLOW Backing up save files now. $RESET"
+if [ -d ShooterGame/Saved/SavedArks/ ]; then
+
+	echo -e " Saves directory found, Copying files."
+	cd ShooterGame/Saved/
+	cp -r SavedArks/ ../../backups
+	echo -e " Save files copied."
+	cd ../../backups
+	echo -e
+	
+	echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
+	FILE="Backup_$DATE.tar$compressionFormat"
+	tar -zcf $FILE SavedArks/
+	rm -rf SavedArks
+	echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
+	sleep 1s
+else
+	echo -e " $ERR No saves folder available found! (Maybe you never ran the server?)"
+	echo -e " Directory Checked: $YELLOW ShooterGame/Saved/ $RESET"
+	echo -e " Looking For: $YELLOW SavedArks/ $RESET"
+	exit 0
+fi
