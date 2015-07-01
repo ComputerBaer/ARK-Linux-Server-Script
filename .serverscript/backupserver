@@ -1,41 +1,39 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.4"
+version="1.1.6"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
 # Compare Versions
-echo -e
-echo -e "$YELLOW Checking version with github. $RESET"
+echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $backupserver ]; then
-    echo -e "$YELLOW Script update avaibale! (Backup Script)$RESET"
-    echo -e "$YELLOW Downloading shell file. $RESET"
+    echo -e " Script update avaibale! (Backup Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
-    echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
-    echo -e " Up to date!"
-    echo -e
+    echo -e " Up to date!"; echo -e
+    sleep 1s
 fi
-sleep 1s
+
+
+# Check for backups directory.
 echo -e "$YELLOW Checking if there is a backups directory. $RESET"
-cd ../
-sleep 1s
+sleep 0.5s; cd ../
 if [ -d backups ]; then
   echo -e " Backups directory already made. Moving forward."
-  echo -e
 else
   echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
   mkdir backups
-  echo -e 
 fi
 
-sleep 1s
+echo -e; sleep 0.5s
 echo -e "$YELLOW Checking compression format. $RESET"
-sleep 1s
+sleep 0.5s
 if [ $compFormat = "gz" ]; then
 	compressionFormat=""
 	echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
@@ -43,7 +41,6 @@ elif [ $compFormat = "bz2" ]; then
 	compressionFormat=".bz2"
 	echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
 else
-	sleep 1s
 	echo -e "$ERR Invalid format detected in the configuration file!"
 	echo -e " Please fix the configuration.ini file 'Compression Format' section."
 	exit 0
@@ -52,14 +49,13 @@ fi
 DATE=`date +"%m-%d-%y_%H.%M.%S"`
 
 echo -e; echo -e "$YELLOW Backing up save files now. $RESET"
+sleep 0.5s
 if [ -d ShooterGame/Saved/SavedArks/ ]; then
-
 	echo -e " Saves directory found, Copying files."
 	cd ShooterGame/Saved/
 	cp -r SavedArks/ ../../backups
 	echo -e " Save files copied."
-	cd ../../backups
-	echo -e
+	echo -e; cd ../../backups
 	
 	echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
 	FILE="Backup_$DATE.tar$compressionFormat"
