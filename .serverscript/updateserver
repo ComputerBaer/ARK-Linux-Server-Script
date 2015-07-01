@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.9"
+version="1.1.6"
 
 source ../version.ini
 source ../configuration.ini
@@ -10,58 +10,61 @@ source formatting.ini
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $updateserver ]; then
-    echo -e; echo -e "$YELLOW Script update avaibale! $RESET"
-    echo -e "$YELLOW Downloading shell file. $RESET"
+    echo -e " Script update avaibale! (Update Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
-    echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
     echo -e " Up to date!"; echo -e
+    sleep 1s
 fi
 
-echo -e; echo -e "$GREEN Prepairing to update the server. $RESET"; echo -e
-sleep 1s
-echo -e "Checking to see if the server is running."
-sleep 2s
-# Server Running Check
+echo -e; echo -e "$YELLOW Prepairing to stop the server. $RESET"
+sleep 0.5s
 if screen -list | grep -q "$sessionName"; then
     echo -e " Server is running, now stopping it."
     screen -S $sessionName -X quit
     echo -e " Session stopped. Removing PID's"
     PID=`pgrep -f $arkExecute`
     kill -9 $PID
-    echo -e " PID's Removed"; echo -e
+    sleep 0.5s
+    echo -e " PID's Removed"
+    echo -e; sleep 0.5s
     echo -e "$RED Server Stopped $RESET"
-    sleep 1s
 else
     echo -e " Server is offline. Moving forward."
 fi
 
-echo -e; echo -e "$YELLOW Locating SteamCMD directory. $RESET"
-cd ../
+echo -e; sleep 0.5s
+echo -e "$YELLOW Locating SteamCMD directory. $RESET"
+sleep 0.5s; cd ../
 if [ -d steamcmd ]; then
-    echo -e " SteamCMD directory found, moving forward."
+    echo -e " SteamCMD directory found."
 else
     echo -e " $ERR Couldnt find the SteamCMD directory, Installing it now."
-    echo -e " Creating directory 'steamcmd'"
+    sleep 0.5s; echo -e " Creating directory 'steamcmd'"
     mkdir steamcmd
     cd ../steamcmd
     
-    echo -e " Installing linux steam dependencies."
+    sleep 0.5s; echo -e " Installing linux steam dependencies."
     sudo apt-get install lib32gcc1
     echo -e "$YELLOW Lib32gcc1 is installed. $RESET"
     
-    echo -e " Downloading steamcmd zip."
+    sleep 0.5s; echo -e " Downloading steamcmd zip."
     curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
     tar -xvzf steamcmd_linux.tar.gz
     cd ../
 fi
 
 cd steamcmd
-echo -e; echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
+echo -e; sleep 0.5s
+echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
 echo -e
 ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
 
-echo -e; echo -e "$GREEN Server Update Complete. $RESET"
-echo -e; echo -e "$YELLOW Please restart the script to start the server. $RESET"
+echo -e; sleep 0.5s
+echo -e "$GREEN Server Update Complete. $RESET"
+echo -e; sleep 0.5s
+echo -e "$YELLOW Please restart the script to start the server. $RESET"
 exit 0

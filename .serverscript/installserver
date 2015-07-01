@@ -1,64 +1,50 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.9"
+version="1.1.6"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-# Compare Versions
+# Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $stopserver ]; then
-    echo -e "$YELLOW Script update avaibale! $RESET"
-    echo -e "$YELLOW Downloading shell file. $RESET"
+    echo -e " Script update avaibale! (Install Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
-    echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
     echo -e " Up to date!"; echo -e
+    sleep 1s
 fi
+
 
 cd ../
-if [ -d steamcmd ]; then
-  echo -e "$YELLOW There was a directory already named 'steamcmd', is it ok to delete this? $RESET"
-  echo -e -n " Type: Yes or No: " ; read installchoice
-  echo -e
-  
-  if [ $installchoice = yes ]; then
-    rm -rf steamcmd/
-    echo -e " Old SteamCMD directory deleted."
-  elif [ $installchoice = no ]; then
-    echo -e "$RED SteamCMD directory wont be deleted."
-    echo -e " If the script fails, pleas select Yes next time."
-  else
-    echo -e "$ERR You have put an invalid answer. $RESET"
-    echo -e " Directory will not be deleted, script stopping."
-    exit 0
-  fi
-fi
-
+# Remove old steamcmd directory.
+# Create Directory
 echo -e "$YELLOW Creating the SteamCMD directory. $RESET"
-mkdir steamcmd
-if [ -d steamcmd ]; then
-  echo -e " Directory created, moving forward."
-  cd steamcmd
-else
-  echo -e "$ERR Unable to make the directory, please post this to the issues on github. $RESET"
-  echo -e " https://github.com/Zendrex/ARK-Linux-Server-Script/issues"
-  exit 0
-fi
+sleep 0.5s; mkdir steamcmd
+echo -e " Directory created, moving forward."
+cd steamcmd; sleep 1s
 
+# Install Lib32GCC1
 echo -e; echo -e "$YELLOW Installing linux steam dependencies. $RESET"
 sudo apt-get install lib32gcc1
 echo -e " Lib32gcc1 is installed."
+sleep 0.5s
 
+# Install SteamCMD
 echo -e; echo -e "$YELLOW Installing SteamCMD $RESET"
 curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
 tar -xvzf steamcmd_linux.tar.gz
+echo -e; sleep 0.5s
 
-echo -e; echo -e "$YELLOW SteamCMD Installed. Now installing game server. This may take a while. $RESET"
+# Install Server Files
+echo -e "$YELLOW SteamCMD Installed. Now installing game server. This may take a while. $RESET"
 ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
-echo -e
+
+echo -e; sleep 0.5s
 echo -e "$GREEN Complete. Exiting. $RESET"
 echo -e " You may now start the server with $GREEN ./arkserver start $RESET"

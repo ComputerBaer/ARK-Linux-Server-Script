@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.9"
+version="1.1.6"
 
 source ../version.ini
 source ../configuration.ini
@@ -10,57 +10,73 @@ source formatting.ini
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $startserver ]; then
-    echo -e "$YELLOW Script update avaibale! $RESET"
-    echo -e "$YELLOW Downloading shell file. $RESET"
+    echo -e " Script update avaibale! (Start Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
-    echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
     echo -e " Up to date!"; echo -e
+    sleep 1s
 fi
 
 
 echo -e " Checking if server session exists..."
-sleep 1s
-cd ../
+sleep 0.5s; cd ../
 if screen -list | grep -q "$sessionName"; then
     echo -e "$ERR The server is already running. The server session name is:$YELLOW $sessionname $RESET"
     echo -e " Would you like me to stop this running server?"
+    sleep 0.5s
     echo -e; echo -e -n "$YELLOW Type: Yes(Y) or No(N): " ; read runningsession
-    
+    sleep 0.5s
     if [ $runningsession = Y ]; then
-		cd .serverscript
-		./stopserver
-    else
-        echo -e; echo -e "$ERR The script will NOT stop the session as you chose against it."
-        echo -e; echo -e " Exiting the script now."; echo -e
+    	echo -e " Server is running, now stopping it."
+	screen -S $sessionName -X quit
+	echo -e " Session stopped. Removing PID's"
+	PID=`pgrep -f $arkExecute`
+	kill -9 $PID
+    	echo -e " PID's Removed"
+    	echo -e; sleep 0.5s
+    	echo -e "$RED Server Stopped $RESET"
+    elif [ $runningsession = N ]; then
+        echo -e; echo -e "$RED Exiting script."
         exit 0
+    else
+    	echo -e "$ERR You have entered an invaild response. Exiting"
+    	echo -e; exit 0
     fi
+else
+	echo -e " Server isnt currently running."
+	echo -e; sleep 0.5s
 fi
 
-# Start Function (ignore my sleeps and echos, looks nicer this way)
-echo -e; echo -e "$GREEN Starting Server. Please Wait. $RESET"
-echo -e; sleep 1s
-echo -e " $YELLOW Setting ULIMIT to 100000 $RESET"
 
 # ULIMIT CHANGE
+echo -e " $YELLOW Setting ULIMIT to 100000 $RESET"
 ulimit -n 100000
+echo -e " ULIMIT set to 100000"
 cd $gameDir
 
-echo -e; echo -e " Making sure executable is properly named."
+echo -e; sleep 0.5s
+echo -e "$YELLOW Making sure executable is properly named."
 if [ -f $arkExecute ]; then
+    sleep 0.5s
     echo -e " Executable found."
 else
+    sleep 0.5s
     echo -e "$ERR Executable could not be found. Fixing it."
     cp ShooterGameServer $arkExecute
+    sleep 0.5s
     if [ -f $arkExecute ]; then
         echo -e " Executable renamed. Moving forward."
     else
         echo -e; echo -e "$ERR Unable to fix executable name."
         echo -e " Please change the file named$YELLOW ShooterGameServer$RESET to$GREEN $arkExecute $RESET"
-        exit 0
+        sleep 1s; exit 0
     fi
 fi
+
+
 sleep 1s
 echo -e; echo -e "$YELLOW Running startup parameters. These parameter will be listed below now. $RESET"
 echo -e; echo -e "-----------------------------------------------------"; echo -e

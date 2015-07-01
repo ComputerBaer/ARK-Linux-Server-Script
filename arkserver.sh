@@ -12,82 +12,79 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.4"
-clear
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
+version="1.1.6"
+
 if [ -f version.ini ]; then
     rm version.ini
 fi
 
+# Download Version File
 curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -# -o version.ini -#
+clear
+echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 source version.ini
+
+# Check Script Version
 if [ $version != $arkserver ]; then
-    echo -e "$YELLOW Script update avaibale! $RESET"
-    echo -e "$YELLOW Downloading shell file. $RESET"
+    echo -e " Script update avaibale!"
+    echo -e; echo -e "$YELLOW Downloading shell file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh -o arkserver.sh -#
-    echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
     echo -e " Up to date!"; echo -e
 fi
 
+
+# Check for config file.
 if [ -f configuration.ini ]; then
 source configuration.ini
-    if [ -z $configVersion ]; then
-        echo -e "$ERR You have an outdated configuration file!"; echo -e
-        echo -e "$YELLOW There is a config update! any config updaters are important to the script. $RESET"
-        echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
-        echo -e "$YELLOW re edit the config file. Sorry for the flaw in this design of the script. $RESET"
-        sleep 1s
-        mv configuration.ini configuration_backup.ini
-        echo -e; echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
-        echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
-        echo -e "$GREEN Most options you can simply copy paste as most config updaters are additions/formatting. $RESET"
-        echo -e; exit 0
-    fi
 
+    if [ -f $safetyNotify = True ]; then
+        sleep 1s
+        echo -e "$YELLOW Configuration file found. $RESET"; echo -e
+    fi
+    
+    # Config Version Checker
     if [ $configVersion != $liveConfig ]; then
-        echo -e "$YELLOW There is a config update! any config updaters are important to the script. $RESET"
+        echo -e "$ERR You have an outdated configuration file!"
+        echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
         echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
         echo -e "$YELLOW re edit the config file. Sorry for the flaw in this design of the script. $RESET"
         sleep 1s
-        mv configuration.ini configuration_backup.ini
+        echo -e; mv configuration.ini configuration_backup.ini
         echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
         echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
         echo -e "$GREEN Most options you can simply copy paste as most config updaters are additions/formatting. $RESET"
         echo -e; exit 0
     fi
-fi
-
-# Check for config file.
-if [ -f configuration.ini ]; then
-    # Config file.
-    source configuration.ini
-    if [ $safetyNotif = True ]; then
-        clear
-        echo -e; sleep 1s
-        echo -e "$YELLOW Configuration file found. $RESET"; echo -e
+    
+    # Saftey Switch Notification
+    if [ $safetySwitch = False ]; then
+        echo -e =========================================================================
+        echo -e
+        echo -e "$ERR You have yet to edit the config file!"
+        echo -e " Please edit the config and alter the 'Safety Switch' to TRUE once done."
+        echo -e
+        echo -e =========================================================================
+        echo -e
+        exit 0
     fi
+
 else
-    clear
-    echo -e; echo -e "$ERR No configuration file found. Dowloading from github now."
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
-    if [ -f configuration.ini ]; then
-        echo -e; echo -e "$GREEN Configuration file download was successful."
-        echo -e " Please edit the config file before running the script again. $RESET"
-        echo -e; exit 0
-    else
-        echo -e "$ERR The script was unable to obtain the configuration.ini file. Is Github down?"
-        echo -e " Please try to download it yourself and add it to the same dir as this script."
-        echo -e; exit 0
-    fi
+    echo -e "$ERR No configuration file found. Dowloading from github now."
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#; echo -e
+    echo -e "$GREEN Configuration file download was successful."
+    echo -e " Please edit the config file before running the script again. $RESET"
+    echo -e; exit 0
 fi
 
-# Hard dep's check. If one isnt installed, it will install it whithout asking. Can change this in the future.
+
+# Hard dep's check.
 if [ -x /usr/bin/curl ]; then
     if [ $safetyNotif = True ]; then
+		sleep 0.5s
         echo -e "$GREEN CURL Installed $RESET"
     fi
 else
@@ -98,6 +95,7 @@ fi
 
 if [ -x /usr/bin/screen ]; then
     if [ $safetyNotif = True ]; then
+		sleep 0.5s
         echo -e "$GREEN SCREEN Installed $RESET"
     fi
 else
@@ -108,6 +106,7 @@ fi
 
 if [ -x /usr/bin/git ]; then
     if [ $safetyNotif = True ]; then
+		sleep 0.5s
         echo -e "$GREEN GIT Installed $RESET"
     fi
 else
@@ -116,24 +115,44 @@ else
     echo "$YELLOW GIT now installed. $RESET"
 fi
 
-if [ -z "$(iptables -nL | grep $querryPort)" ]; then
-    echo -e " Adding iptables requirments. (Querry Port)"
-    iptables -I INPUT -p udp --dport $querryPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $querryPort -j ACCEPT
+
+# IPTables Check
+if [ $safetyNotif = True ]; then
+	echo -e; sleep 0.5s
+    echo -e "$YELLOW Checking IPTables $RESET"
+	sleep 0.5s
+fi
+
+if [ -z "$(iptables -nL | grep $queryPort)" ]; then
+    echo -e " IPTables (Query Port):$RED MISSING $RESET"
+    echo -e " Adding iptables requirments. (Query Port)"
+    iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
-    echo -e " IPTables responded correctly. (Querry Port)"
+    if [ $safetyNotif = True ]; then
+        echo -e " IPTables (Querry Port):$GREEN OK $RESET"
+    fi
 fi
 
 if [ -z "$(iptables -nL | grep $serverPort)" ]; then
+    echo -e " IPTables (Server Port):$RED MISSING $RESET"
     echo -e " Adding iptables requirments. (Server Port)"
     iptables -I INPUT -p udp --dport $serverPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $serverPort -j ACCEPT
 else
-    echo -e " IPTables responded correctly. (Server Port)"
+    if [ $safetyNotif = True ]; then
+        echo -e " IPTables (Server Port):$GREEN OK $RESET"
+    fi
 fi
 
 
 # Check if serverscript directory is already made.
+if [ $safetyNotif = True ]; then
+	echo -e; sleep 0.5s
+    echo -e "$YELLOW Checking script files. $RESET"
+    sleep 1s
+fi
+#####################################[ SERVER SCRIPT SCAN ]#####################################
 if [ ! -d .serverscript ]; then
     echo -e "$ERR Unable to find script directory. Making it now."
     mkdir .serverscript
@@ -141,110 +160,87 @@ if [ ! -d .serverscript ]; then
     echo -e; echo -e "$YELLOW Directory Created. $RESET"
 fi
 cd .serverscript
-echo -e; echo -e "$YELLOW Checking script files. $RESET"; echo -e
+# Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o startserver -#
     chmod 777 startserver
 fi
+# Stop Server Script
 if [ ! -f stopserver ]; then
     echo -e "$YELLOW Stop Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
     chmod 777 stopserver
 fi
+# View Server Script
 if [ ! -f viewserver ]; then
     echo -e "$YELLOW View Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
     chmod 777 viewserver
 fi
+# Install Server Script
 if [ ! -f installserver ]; then
     echo -e "$YELLOW Install Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
     chmod 777 installserver
 fi
+# Update Server Script
 if [ ! -f updateserver ]; then
     echo -e "$YELLOW Update Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
     chmod 777 updateserver
 fi
+# Backup Server Script
 if [ ! -f backupserver ]; then
     echo -e "$YELLOW Backup Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     chmod 777 backupserver
 fi
+# Formatting File
 if [ ! -f formatting.ini ]; then
     echo -e "$YELLOW Formatting $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
 fi
-cd ../
-
-# Config file.
-source configuration.ini
-#dir
-
-if [ $safetySwitch = False ]; then
-    echo -e =========================================================================
-    echo -e
-    echo -e "$ERR You have yet to edit the config file!"
-    echo -e " Please edit the config and alter the 'Safety Switch' to TRUE once done."
-    echo -e
-    echo -e =========================================================================
-    exit
-else
-    if [ $safetyNotif = True ]; then
-        echo -e
-        echo -e =========================================================
-        echo -e
-        echo -e "$ERR Safty Switch turned off. This script assumes you have"
-        echo " configured the file correctly and are ready to move on."
-        echo -e
-        echo -e =========================================================
-    fi
+#####################################[ SERVER SCRIPT SCAN ]#####################################
+if [ $safetyNotif = True ]; then
+    echo -e " All scripts found."
+	echo -e; sleep 0.5s
 fi
 
+
+# Commands
 help () {
-    if [ $safetyNotif != True ]; then
-        clear
-    fi
-    echo -e
-    echo -e "$WHITE Use the following commands: $RESET"
-    echo -e
-    echo -e "$CYAN ./arkserver.sh <start|stop|view|install|update|backup> $RESET"
-    echo -e
+    echo -e; echo -e "$WHITE Use the following commands: $RESET"
+    echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|install|update|backup> $RESET"
+	echo -e; echo -e
 }
 
 start () {
-    cd .serverscript
     clear
     ./startserver
 }
 
 stop () {
-    cd .serverscript
     clear
     ./stopserver
 }
 
 view () {
-    cd .serverscript
     clear
     ./viewserver
 }
 
 install () {
-    cd .serverscript
     clear
     ./installserver
 }
 
 update () {
-    cd .serverscript
     clear
     ./updateserver
 }
 
 backup () {
-    cd .serverscript
     clear
     ./backupserver
 }
@@ -255,5 +251,5 @@ backup () {
 }
 
 $*
-    echo
+echo
 exit 0
