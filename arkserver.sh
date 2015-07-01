@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
-configVersion="1.1.1"
+Version="1.1.1"
 
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ -f version.ini ]; then
