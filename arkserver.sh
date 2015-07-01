@@ -134,7 +134,7 @@ fi
 
 
 # Check if serverscript directory is already made.
-if [ -d .serverscript ]; then
+if [ ! -d .serverscript ]; then
     echo -e "$ERR Unable to find script directory. Making it now."
     mkdir .serverscript
     sleep 1s
