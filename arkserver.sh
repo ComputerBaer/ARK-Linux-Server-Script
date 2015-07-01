@@ -124,8 +124,8 @@ if [ $safetyNotif = True ]; then
 fi
 
 if [ -z "$(iptables -nL | grep $queryPort)" ]; then
-    echo -e " IPTables (Querry Port):$RED MISSING $RESET"
-    echo -e " Adding iptables requirments. (Querry Port)"
+    echo -e " IPTables (Query Port):$RED MISSING $RESET"
+    echo -e " Adding iptables requirments. (Query Port)"
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
