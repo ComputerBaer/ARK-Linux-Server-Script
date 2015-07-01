@@ -120,7 +120,6 @@ echo -e "$YELLOW Now executing.... $RESET"
 executeString="
 $map?\
 listen?\
-Port=$serverPort?\
 QueryPort=$querryPort?\
 SessionName=$hostName?\
 MaxPlayers=$playerCount?\
