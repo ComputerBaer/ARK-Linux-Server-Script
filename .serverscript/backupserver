@@ -25,7 +25,7 @@ echo -e "$GREEN Beginning backup process. $RESET"
 echo -e; sleep 2s
 echo -e " Checking if there is a backups directory."
 cd ../
-if [-d backups ]; then
+if [ -d backups ]; then
   echo -e "$YELLOW Backups directory already made. Moving forward. $RESET"
   echo -e
 else
