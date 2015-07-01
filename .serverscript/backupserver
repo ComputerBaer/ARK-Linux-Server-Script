@@ -10,8 +10,8 @@ source formatting.ini
 # Compare Versions
 echo -e
 echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $backup ]; then
-    echo -e "$YELLOW Script update avaibale! $RESET"
+if [ $version != $backupserver ]; then
+    echo -e "$YELLOW Script update avaibale! (Backup Script)$RESET"
     echo -e "$YELLOW Downloading shell file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backup -o backup -#
     echo -e "$GREEN File overwritten. Please restart the script. $RESET"
