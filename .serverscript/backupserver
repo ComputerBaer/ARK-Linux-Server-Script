@@ -7,7 +7,7 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-# Compare Versions
+# Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $backupserver ]; then
     echo -e " Script update avaibale! (Backup Script)"
