@@ -229,36 +229,24 @@ stop () {
 view () {
     cd .serverscript
     clear
-    if [ ! -f viewserver ]; then
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
-    fi
     ./viewserver
 }
 
 install () {
     cd .serverscript
     clear
-    if [ ! -f installserver ]; then
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
-    fi
     ./installserver
 }
 
 update () {
     cd .serverscript
     clear
-    if [ ! -f updateserver ]; then
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
-    fi
     ./updateserver
 }
 
 backup () {
     cd .serverscript
     clear
-    if [ ! -f backupserver ]; then
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
-    fi
     ./backupserver
 }
 
