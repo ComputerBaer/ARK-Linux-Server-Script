@@ -76,8 +76,7 @@ else
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
     if [ -f configuration.ini ]; then
         echo -e; echo -e "$GREEN Configuration file download was successful."
-        echo -e " Please edit the config file before running the script again."
-        echo -e; echo -e " Command: ./arkserver.sh <start|stop|view>"
+        echo -e " Please edit the config file before running the script again. $RESET"
         echo -e; exit 0
     else
         echo -e "$ERR The script was unable to obtain the configuration.ini file. Is Github down?"
