@@ -137,6 +137,8 @@ DontAlwaysNotifyPlayerJoined=$dontNotifyJoin?\
 ServerPVE=$pveServer?ServerCrosshair=$crossHair?\
 ServerForceNoHUD=$noHud?\
 DifficultyOffset=$difficulty?\
+KickIdlePlayersPeriod=$afkTimer?\
+AutoSavePeriodMinutes=$autoSave?\
 TamingSpeedMultiplier=$TamingSpeedMultiplier?\
 HarvestAmountMultiplier=$HarvestAmountMultiplier?\
 PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier?\
