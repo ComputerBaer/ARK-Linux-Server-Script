@@ -52,7 +52,7 @@ fi
 
 
 # ULIMIT CHANGE
-echo -e " $YELLOW Setting ULIMIT to 100000 $RESET"
+echo -e "$YELLOW Setting ULIMIT to 100000 $RESET"
 ulimit -n 100000
 echo -e " ULIMIT set to 100000"
 cd $gameDir
