@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.6"
+version="1.1.7"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -163,7 +163,7 @@ cd .serverscript
 # Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o startserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
     chmod 777 startserver
 fi
 # Stop Server Script
