@@ -34,11 +34,12 @@ else
   echo -e 
 fi
 
-DATE=$(date +"%m-%d-%Y")
-TIME=$(date + "%r")
+DATE=`date +"%m-%d-%Y"`
+TIME=`date + "%T"`
 
 echo -e "$YELLOW Backing up save files now. $RESET"
-cp -R ShooterGame/Saved/SavedArks/ ../../backups/
+cd ShooterGame/Saved/
+cp -r SavedArks/ ../../backups/
 mv SavedArks/ SavedArks_$DATE_$TIME/
 echo -e "$GREEN Backup complete! $RESET"
 exit 0
