@@ -35,6 +35,6 @@ else
 fi
 
 echo -e "$YELLOW Backing up save files now. $RESET"
-cp ShooterGame/Saved/SavedArks/ ../../backups/SavedArks
+cp -R ShooterGame/Saved/SavedArks/ ../../backups/SavedArks
 echo -e "$GREEN Backup complete! $RESET"
 exit 0
