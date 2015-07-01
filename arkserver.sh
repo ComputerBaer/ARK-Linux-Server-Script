@@ -13,7 +13,7 @@ ERR='\e[1;31m ERROR\e[0m'
 # Version Checker
 # Dont change this number.
 version="1.1.2"
-
+clear
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ -f version.ini ]; then
     rm version.ini
