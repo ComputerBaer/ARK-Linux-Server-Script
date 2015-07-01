@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
-version="1.0.9"
+version="1.1.0"
 
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ -f version.ini ]; then
@@ -218,6 +218,13 @@ update () {
     clear
     cd .serverscript
     ./updateserver
+}
+
+backup () {
+    clear
+    cd .serverscript
+    ./updateserver
+    
 }
 
 [ "$1" = "" ] && {
