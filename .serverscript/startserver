@@ -105,7 +105,7 @@ executeString="
 $map?\
 listen?\
 Port=$serverPort?\
-QuerryPort=$querryPort?\
+QueryPort=$querryPort?\
 SessionName=$hostName?\
 MaxPlayers=$playerCount?\
 ServerAdminPassword=$adminPass?\
