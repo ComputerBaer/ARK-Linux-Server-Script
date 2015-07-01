@@ -216,37 +216,31 @@ help () {
 }
 
 start () {
-    cd .serverscript
     clear
     ./startserver
 }
 
 stop () {
-    cd .serverscript
     clear
     ./stopserver
 }
 
 view () {
-    cd .serverscript
     clear
     ./viewserver
 }
 
 install () {
-    cd .serverscript
     clear
     ./installserver
 }
 
 update () {
-    cd .serverscript
     clear
     ./updateserver
 }
 
 backup () {
-    cd .serverscript
     clear
     ./backupserver
 }
