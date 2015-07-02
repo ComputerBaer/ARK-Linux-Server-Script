@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.8"
+version="1.1.9"
 
 source ../version.ini
 source ../configuration.ini
@@ -101,25 +101,11 @@ if [ -z $arkServersName ]; then
 else    
     echo -e " ArkServers \e[1;31m$arkServers $RESET"   
 fi
-    
-echo -e
-echo -e " #### SERVER SETTINGS ###"
-echo -e
-echo -e " ShowPlayers:        \e[1;36m$showPlayers $RESET"
-echo -e " Hardcore:           \e[1;36m$hardcore $RESET"
-echo -e " GlobalVoice:        \e[1;36m$globalVoice $RESET"
-echo -e " Ranged Chat:        \e[1;36m$proxChat $RESET"
-echo -e " No Tribute DL:      \e[1;36m$noTributeDl $RESET"
-echo -e " Third Person:       \e[1;36m$thirdPerson $RESET"
-echo -e " Notify Left:        \e[1;36m$notifyLeft $RESET"
-echo -e " No Notify Join:     \e[1;36m$dontNotifyJoin $RESET"
-echo -e " PVE:                \e[1;36m$pveServer $RESET"
-echo -e " CrossHair:          \e[1;36m$crossHair $RESET"
-echo -e " No Hud:             \e[1;36m$noHud $RESET"
-echo -e " Difficulty Ratio:   \e[1;36m$difficulty $RESET"
+
 echo -e
 echo -e "-----------------------------------------------------"; echo -e
-sleep 2s
+sleep 0.5s
+echo -e "$YELLOW To view server settings, use:$GREEN ./arkserver status $RESET"; echo -e
 echo -e "$YELLOW Now executing.... $RESET"
 
 executeString="
