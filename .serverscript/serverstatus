@@ -9,7 +9,7 @@ source formatting.ini
 
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $startserver ]; then
+if [ $version != $serverstatus ]; then
     echo -e " Script update avaibale! (Status Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
