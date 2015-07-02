@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.2.3"
+version="1.2.4"
 
 source ../version.ini
 source ../configuration.ini
@@ -76,10 +76,10 @@ else
     fi
 fi
 
-if [ -z $ipAddress ]; then
+if [[ -z "$ipAddress" ]]; then
 	setIpAddress="MultiHome="
 else
-	setIpAddress="MultiHome=$ipAddress"
+	setIpAddress="MultiHome=$ipAddress?"
 fi
 
 sleep 1s
@@ -111,7 +111,7 @@ echo -e "$YELLOW Now executing.... $RESET"
 executeString="
 $map?\
 listen?\
-QueryPort=$querryPort?\
+QueryPort=$queryPort?\
 SessionName=$hostName?\
 MaxPlayers=$playerCount?\
 $setIpAddress?\
