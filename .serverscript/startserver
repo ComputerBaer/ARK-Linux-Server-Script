@@ -76,6 +76,11 @@ else
     fi
 fi
 
+if [ -z ipAddress ]; then
+	setIpAddress=""
+else
+	setIpAddress="MultiHome=$ipAddress?\"
+fi
 
 sleep 1s
 echo -e; echo -e "$YELLOW Running startup parameters. These parameter will be listed below now. $RESET"
@@ -123,7 +128,7 @@ listen?\
 QueryPort=$querryPort?\
 SessionName=$hostName?\
 MaxPlayers=$playerCount?\
-MultiHome=$ipAddress?\
+$setIpAddress
 ServerAdminPassword=$adminPass?\
 ServerPassword=$serverPass?\
 bEnablePvPGamma=$enablePvPGamma?\
