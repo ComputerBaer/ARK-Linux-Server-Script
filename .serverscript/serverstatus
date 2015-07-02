@@ -38,7 +38,7 @@ fi
 # Show Information
 echo -e "$YELLOW Collecting status of your Ark server... $RESET"
 sleep 0.5s; cd ../
-if ps aux | grep -v grep | grep "$arkExecute"; then
+if ps aux | grep "$1" | grep "$arkExecute"; then
     echo -e; sleep 0.5s
     sleep 0.3s; echo -e " Is Server Running:$GREEN YES $RESET"
     sleep 0.3s; echo -e " Executable:$YELLOW $arkExecute $RESET"
