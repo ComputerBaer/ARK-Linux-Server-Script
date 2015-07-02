@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.0"
+version="1.0.1"
 
 source ../version.ini
 source ../configuration.ini
@@ -28,7 +28,7 @@ else
     address="$YELLOW $ipAddress $RESET"
 fi
 
-if [-z $arkServers  ]; then
+if [ -z $arkServers  ]; then
     arkServerList="$RED DISABLED $RESET"
 else
     arkServerList="$YELLOW $arkServers $RESET"
@@ -71,32 +71,32 @@ if ps aux | grep -v grep | grep "$arkExecute"; then
     fi
     if [ $showServerMutipliers = "True" ]; then
         sleep 0.3s; echo -e "#######[ Server Multipliers ]#######"
-        sleep 0.3s; echo -e " TamingSpeed:$CYAN                 $TamingSpeedMultiplier
-        sleep 0.3s; echo -e " HarvestAmount:$CYAN               $HarvestAmountMultiplier
-        sleep 0.3s; echo -e " PlayerWaterDrain:$CYAN            $PlayerCharacterWaterDrainMultiplier
-        sleep 0.3s; echo -e " PlayerFoodDrain:$CYAN             $PlayerCharacterFoodDrainMultiplier
-        sleep 0.3s; echo -e " DinoFoodDrain:$CYAN               $DinoCharacterFoodDrainMultiplier
-        sleep 0.3s; echo -e " PlayerStaminaDrain:$CYAN          $PlayerCharacterStaminaDrainMultiplier
-        sleep 0.3s; echo -e " DinoStaminaDrain:$CYAN            $DinoCharacterStaminaDrainMultiplier
-        sleep 0.3s; echo -e " PlayerHealthRecovery:$CYAN        $PlayerCharacterHealthRecoveryMultiplier
-        sleep 0.3s; echo -e " DinoHealthRecovery:$CYAN          $DinoCharacterHealthRecoveryMultiplier
-        sleep 0.3s; echo -e " DinoCount:$CYAN                   $DinoCountMultiplier
-        sleep 0.3s; echo -e " HarvestHealth:$CYAN               $HarvestHealthMultiplier
-        sleep 0.3s; echo -e " PvEStructureDecayPeriod:$CYAN     $PvEStructureDecayDestructionPeriod
+        sleep 0.3s; echo -e " TamingSpeed:$CYAN                 $TamingSpeedMultiplier $RESET"
+        sleep 0.3s; echo -e " HarvestAmount:$CYAN               $HarvestAmountMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerWaterDrain:$CYAN            $PlayerCharacterWaterDrainMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerFoodDrain:$CYAN             $PlayerCharacterFoodDrainMultiplier $RESET"
+        sleep 0.3s; echo -e " DinoFoodDrain:$CYAN               $DinoCharacterFoodDrainMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerStaminaDrain:$CYAN          $PlayerCharacterStaminaDrainMultiplier $RESET"
+        sleep 0.3s; echo -e " DinoStaminaDrain:$CYAN            $DinoCharacterStaminaDrainMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerHealthRecovery:$CYAN        $PlayerCharacterHealthRecoveryMultiplier $RESET"
+        sleep 0.3s; echo -e " DinoHealthRecovery:$CYAN          $DinoCharacterHealthRecoveryMultiplier $RESET"
+        sleep 0.3s; echo -e " DinoCount:$CYAN                   $DinoCountMultiplier $RESET"
+        sleep 0.3s; echo -e " HarvestHealth:$CYAN               $HarvestHealthMultiplier $RESET"
+        sleep 0.3s; echo -e " PvEStructureDecayPeriod:$CYAN     $PvEStructureDecayDestructionPeriod $RESET"
         echo -e; sleep 0.3s
-        sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange
-        sleep 0.3s; echo -e " DayCycleSpeedScale:$CYAN          $DayCycleSpeedScale
-        sleep 0.3s; echo -e " NightTimeSpeedScale:$CYAN         $NightTimeSpeedScale
-        sleep 0.3s; echo -e " DayTimeSpeedScale:$CYAN           $DayTimeSpeedScale
-        sleep 0.3s; echo -e " DinoDamage:$CYAN                  $DinoDamageMultiplier
-        sleep 0.3s; echo -e " TamedDinoDamage:$CYAN             $TamedDinoDamageMultiplier
-        sleep 0.3s; echo -e " PlayerDamage:$CYAN                $PlayerDamageMultiplier
-        sleep 0.3s; echo -e " StructureDamage:$CYAN             $StructureDamageMultiplier
-        sleep 0.3s; echo -e " PlayerResistance:$CYAN            $PlayerResistanceMultiplier
-        sleep 0.3s; echo -e " DinoResistance:$CYAN              $DinoResistanceMultiplier
-        sleep 0.3s; echo -e " TamedDinoResistance:$CYAN         $TamedDinoResistanceMultiplier
-        sleep 0.3s; echo -e " StructureResistance:$CYAN         $StructureResistanceMultiplier
-        sleep 0.3s; echo -e " XPMultiplier:$CYAN                $XPMultiplier
+        sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange $RESET"
+        sleep 0.3s; echo -e " DayCycleSpeedScale:$CYAN          $DayCycleSpeedScale $RESET"
+        sleep 0.3s; echo -e " NightTimeSpeedScale:$CYAN         $NightTimeSpeedScale $RESET"
+        sleep 0.3s; echo -e " DayTimeSpeedScale:$CYAN           $DayTimeSpeedScale $RESET"
+        sleep 0.3s; echo -e " DinoDamage:$CYAN                  $DinoDamageMultiplier $RESET"
+        sleep 0.3s; echo -e " TamedDinoDamage:$CYAN             $TamedDinoDamageMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerDamage:$CYAN                $PlayerDamageMultiplier $RESET"
+        sleep 0.3s; echo -e " StructureDamage:$CYAN             $StructureDamageMultiplier $RESET"
+        sleep 0.3s; echo -e " PlayerResistance:$CYAN            $PlayerResistanceMultiplier $RESET"
+        sleep 0.3s; echo -e " DinoResistance:$CYAN              $DinoResistanceMultiplier $RESET"
+        sleep 0.3s; echo -e " TamedDinoResistance:$CYAN         $TamedDinoResistanceMultiplier $RESET"
+        sleep 0.3s; echo -e " StructureResistance:$CYAN         $StructureResistanceMultiplier $RESET"
+        sleep 0.3s; echo -e " XPMultiplier:$CYAN                $XPMultiplier $RESET"
     fi
 else
     echo -e "$ERR Server is not running!"
