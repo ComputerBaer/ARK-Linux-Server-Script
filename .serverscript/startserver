@@ -123,6 +123,7 @@ listen?\
 QueryPort=$querryPort?\
 SessionName=$hostName?\
 MaxPlayers=$playerCount?\
+MultiHome=$ipAddress?\
 ServerAdminPassword=$adminPass?\
 ServerPassword=$serverPass?\
 bEnablePvPGamma=$enablePvPGamma?\
