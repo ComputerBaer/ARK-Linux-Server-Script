@@ -12,14 +12,14 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.9"
+version="1.2.0"
 
 if [ -f version.ini ]; then
     rm version.ini
 fi
 
 # Download Version File
-curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -# -o version.ini -#
+curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -#
 clear
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 source version.ini
