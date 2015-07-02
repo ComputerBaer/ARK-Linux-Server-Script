@@ -98,4 +98,7 @@ if ps aux | grep -v grep | grep "$arkExecute"; then
         sleep 0.3s; echo -e " StructureResistance:$CYAN         $StructureResistanceMultiplier
         sleep 0.3s; echo -e " XPMultiplier:$CYAN                $XPMultiplier
     fi
+else
+    echo -e "$ERR Server is not running!"
+    exit 0
 fi
