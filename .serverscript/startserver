@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.9"
+version="1.2.0"
 
 source ../version.ini
 source ../configuration.ini
@@ -77,7 +77,7 @@ else
 fi
 
 if [ -z ipAddress ]; then
-	setIpAddress=""
+	setIpAddress="127.0.0.1"
 else
 	setIpAddress="MultiHome=$ipAddress?\"
 fi
