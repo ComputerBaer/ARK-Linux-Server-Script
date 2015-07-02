@@ -30,20 +30,20 @@ if screen -list | grep -q "$sessionName"; then
     echo -e; echo -e -n "$YELLOW Type: Yes(Y) or No(N): " ; read runningsession
     sleep 0.5s
     if [ $runningsession = Y ]; then
-    	echo -e " Server is running, now stopping it."
+		echo -e " Server is running, now stopping it."
 	screen -S $sessionName -X quit
 	echo -e " Session stopped. Removing PID's"
 	PID=`pgrep -f $arkExecute`
 	kill -9 $PID
-    	echo -e " PID's Removed"
-    	echo -e; sleep 0.5s
-    	echo -e "$RED Server Stopped $RESET"
+		echo -e " PID's Removed"
+		echo -e; sleep 0.5s
+		echo -e "$RED Server Stopped $RESET"
     elif [ $runningsession = N ]; then
         echo -e; echo -e "$RED Exiting script."
         exit 0
     else
-    	echo -e "$ERR You have entered an invaild response. Exiting"
-    	echo -e; exit 0
+		echo -e "$ERR You have entered an invaild response. Exiting"
+		echo -e; exit 0
     fi
 else
 	echo -e " Server isnt currently running."
@@ -52,7 +52,7 @@ fi
 
 
 # ULIMIT CHANGE
-echo -e " $YELLOW Setting ULIMIT to 100000 $RESET"
+echo -e "$YELLOW Setting ULIMIT to 100000 $RESET"
 ulimit -n 100000
 echo -e " ULIMIT set to 100000"
 cd $gameDir
@@ -63,7 +63,7 @@ if [ -f $arkExecute ]; then
     sleep 0.5s
     echo -e " Executable found."
 else
-    sleep 0.5s
+	sleep 0.5s
     echo -e "$ERR Executable could not be found. Fixing it."
     cp ShooterGameServer $arkExecute
     sleep 0.5s
@@ -143,6 +143,8 @@ DontAlwaysNotifyPlayerJoined=$dontNotifyJoin?\
 ServerPVE=$pveServer?ServerCrosshair=$crossHair?\
 ServerForceNoHUD=$noHud?\
 DifficultyOffset=$difficulty?\
+KickIdlePlayersPeriod=$afkTimer?\
+AutoSavePeriodMinutes=$autoSave?\
 TamingSpeedMultiplier=$TamingSpeedMultiplier?\
 HarvestAmountMultiplier=$HarvestAmountMultiplier?\
 PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier?\

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.6"
+version="1.1.8"
 
 source ../version.ini
 source ../configuration.ini
@@ -25,10 +25,10 @@ fi
 echo -e "$YELLOW Checking if there is a backups directory. $RESET"
 sleep 0.5s; cd ../
 if [ -d backups ]; then
-  echo -e " Backups directory already made. Moving forward."
+	echo -e " Backups directory already made. Moving forward."
 else
-  echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
-  mkdir backups
+	echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
+	mkdir backups
 fi
 
 echo -e; sleep 0.5s

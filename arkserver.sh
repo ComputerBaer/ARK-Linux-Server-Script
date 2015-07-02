@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.7"
+version="1.1.8"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -196,6 +196,11 @@ if [ ! -f backupserver ]; then
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     chmod 777 backupserver
 fi
+# Server Status Script
+if [ ! -f serverstatus ]; then
+    echo -e "$YELLOW Server Status Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
+fi
 # Formatting File
 if [ ! -f formatting.ini ]; then
     echo -e "$YELLOW Formatting $RESET"
@@ -211,7 +216,7 @@ fi
 # Commands
 help () {
     echo -e; echo -e "$WHITE Use the following commands: $RESET"
-    echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|install|update|backup> $RESET"
+    echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|status|install|update|backup> $RESET"
 	echo -e; echo -e
 }
 
@@ -243,6 +248,11 @@ update () {
 backup () {
     clear
     ./backupserver
+}
+
+status () {
+	clear
+	./serverstatus
 }
 
 [ "$1" = "" ] && {

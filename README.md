@@ -1,7 +1,7 @@
 # ARK-Linux-Server-Script
 An advanced ark linux server script that allows you to do a number of things for your ark server without having to stress through managing a server. This script was made for personal use, but was released because of how usful it could be to some people. Some features incldude a server installer, updater, restarter, save backup script and more.
 
-# Features (1.0.9)
+# Features (1.1.7)
 - Server Starter/Stopper/Restarter
 - World save backup script
 - Server Installer/Updater
@@ -34,13 +34,10 @@ An advanced ark linux server script that allows you to do a number of things for
 - **And More always being added!**
 
 
-# Recently Changed/Updated (1.0.9)
-- IPTables Checker & Installer (Querry & Server Port).
-- Querry & Server Port Configuration.
-- Max Players Configuration.
-- Server Multipliers added to configuration.
-- Re-Formatted responses.
-- Configuration version checker/backup script.
+# Recently Changed/Updated (1.1.8)
+- Auto-Save Timer Added
+- AFK-Timer Added
+- Fixed Formatting Issues/Conflicts
 
 # Upcoming Features
 - Server automatic updater.
