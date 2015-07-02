@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.2.0"
+version="1.2.1"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -189,6 +189,7 @@ fi
 if [ ! -f serverstatus ]; then
     echo -e "$YELLOW Server Status Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
+	chmod 777 serverstatus
 fi
 # Formatting File
 if [ ! -f formatting.ini ]; then
