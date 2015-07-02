@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.2"
+version="1.0.3"
 
 source ../version.ini
 source ../configuration.ini
@@ -55,12 +55,12 @@ then
     sleep 0.3s; echo -e " Is Server Running:$GREEN YES $RESET"
     sleep 0.3s; echo -e " Executable:$YELLOW $arkExecute $RESET"
     echo -e; sleep 0.3s
-    sleep 0.3s; echo -e " Address: $address"
+    sleep 0.3s; echo -e " Address:$address"
     sleep 0.3s; echo -e " HostName:$GREEN $hostName $RESET"
-    sleep 0.3s; echo -e " Server Pass: $setServerPass"
-    sleep 0.3s; echo -e " Admin Pass: $setAdminPass"
+    sleep 0.3s; echo -e " Server Pass:$setServerPass"
+    sleep 0.3s; echo -e " Admin Pass:$setAdminPass"
     sleep 0.3s; echo -e " Max Players:$YELLOW $playerCount $RESET"
-    sleep 0.3s; echo -e " ArkServers: $arkServerList"
+    sleep 0.3s; echo -e " ArkServers:$arkServerList"
     echo -e; sleep 0.3s
     if [ $showServerSettings = "True" ]; then
         echo -e "#########[ Server Settings ]########"
