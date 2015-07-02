@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.8"
+version="1.1.9"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -131,17 +131,6 @@ if [ -z "$(iptables -nL | grep $queryPort)" ]; then
 else
     if [ $safetyNotif = True ]; then
         echo -e " IPTables (Querry Port):$GREEN OK $RESET"
-    fi
-fi
-
-if [ -z "$(iptables -nL | grep $serverPort)" ]; then
-    echo -e " IPTables (Server Port):$RED MISSING $RESET"
-    echo -e " Adding iptables requirments. (Server Port)"
-    iptables -I INPUT -p udp --dport $serverPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $serverPort -j ACCEPT
-else
-    if [ $safetyNotif = True ]; then
-        echo -e " IPTables (Server Port):$GREEN OK $RESET"
     fi
 fi
 
