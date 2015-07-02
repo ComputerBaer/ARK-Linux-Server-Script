@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Dont change this number.
-version="1.1.7"
+version="1.1.8"
 
 if [ -f version.ini ]; then
     rm version.ini
