@@ -82,6 +82,13 @@ else
 	setIpAddress="MultiHome=$ipAddress?"
 fi
 
+if [[ -z "$hostName" ]]; then
+	setHostName=""
+    hostName="$YELLOW WILL BE LOADED FROM GameUserSettings.ini"
+else
+	setHostName="SessionName=$hostName?"
+fi
+
 sleep 1s
 echo -e; echo -e "$YELLOW Running startup parameters. These parameter will be listed below now. $RESET"
 echo -e; echo -e "-----------------------------------------------------"; echo -e
@@ -111,8 +118,9 @@ echo -e "$YELLOW Now executing.... $RESET"
 executeString="
 $map?\
 listen?\
+Port=$gamePort?\
 QueryPort=$queryPort?\
-SessionName=$hostName?\
+$setHostName?\
 MaxPlayers=$playerCount?\
 $setIpAddress?\
 ServerAdminPassword=$adminPass?\
