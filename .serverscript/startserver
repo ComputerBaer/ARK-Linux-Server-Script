@@ -84,9 +84,9 @@ fi
 
 if [[ -z "$hostName" ]]; then
 	setHostName=""
-    hostName="$YELLOW WILL BE LOADED FROM GameUserSettings.ini"
+    	hostName="$YELLOW WILL BE LOADED FROM GameUserSettings.ini $RESET"
 else
-	setHostName="SessionName=$hostName?"
+	setHostName="SessionName=$hostName"
 fi
 
 sleep 1s
