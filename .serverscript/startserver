@@ -86,7 +86,7 @@ if [[ -z "$hostName" ]]; then
 	setHostName=""
     	hostName="$YELLOW WILL BE LOADED FROM GameUserSettings.ini $RESET"
 else
-	setHostName="SessionName=$hostName"
+	setHostName="SessionName=$hostName?"
 fi
 
 sleep 1s
@@ -120,9 +120,9 @@ $map?\
 listen?\
 Port=$gamePort?\
 QueryPort=$queryPort?\
-$setHostName?\
+$setHostName\
 MaxPlayers=$playerCount?\
-$setIpAddress?\
+$setIpAddress\
 ServerAdminPassword=$adminPass?\
 ServerPassword=$serverPass?\
 bEnablePvPGamma=$enablePvPGamma?\
