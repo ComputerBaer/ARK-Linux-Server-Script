@@ -123,6 +123,17 @@ if [ $safetyNotif = True ]; then
 	sleep 0.5s
 fi
 
+if [ -z "$(iptables -nL | grep $gamePort)" ]; then
+    echo -e " IPTables (Game Port):$RED MISSING $RESET"
+    echo -e " Adding IPTables requirements. (Game Port)"
+    iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
+else
+    if [ $safetyNotif = True ]; then
+        echo -e " IPTables (Game Port):$GREEN OK $RESET"
+    fi
+fi
+
 if [ -z "$(iptables -nL | grep $queryPort)" ]; then
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Query Port)"
