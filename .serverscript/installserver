@@ -26,7 +26,7 @@ cd ../
 # Create Directory
 echo -e "$YELLOW Creating the SteamCMD directory. $RESET"
 sleep 0.5s; mkdir steamcmd
-echo -e " Directory created, moving forward."
+echo -e " Directory created, moving on."
 cd steamcmd; sleep 1s
 
 # Install Lib32GCC1
@@ -42,7 +42,7 @@ tar -xvzf steamcmd_linux.tar.gz
 echo -e; sleep 0.5s
 
 # Install Server Files
-echo -e "$YELLOW SteamCMD Installed. Now installing game server. This may take a while. $RESET"
+echo -e "$YELLOW SteamCMD installed. Now installing game server. This may take a while. $RESET"
 ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
 
 echo -e; sleep 0.5s

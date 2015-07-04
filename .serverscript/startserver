@@ -25,19 +25,19 @@ echo -e " Checking if server session exists..."
 sleep 0.5s; cd ../
 if screen -list | grep -q "$sessionName"; then
     echo -e "$ERR The server is already running. The server session name is:$YELLOW $sessionname $RESET"
-    echo -e " Would you like me to stop this running server?"
+    echo -e " Would you like to stop this running server?"
     echo -e; sleep 0.5s
     echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET" ; read runningsession
     sleep 0.5s
     if [ $runningsession = Y ]; then
-		echo -e " Server is running, now stopping it."
+		echo -e " Server is running, now stopping."
 	screen -S $sessionName -X quit
 	echo -e " Session stopped. Removing PID's"
 	PID=`pgrep -f $arkExecute`
 	kill -9 $PID
-		echo -e " PID's Removed"
+		echo -e " PID's removed"
 		echo -e; sleep 0.5s
-		echo -e "$RED Server Stopped $RESET"
+		echo -e "$RED Server stopped $RESET"
     elif [ $runningsession = N ]; then
         echo -e; echo -e "$RED Exiting script."
         exit 0
@@ -46,7 +46,7 @@ if screen -list | grep -q "$sessionName"; then
 		echo -e; exit 0
     fi
 else
-	echo -e " Server isn't currently running."
+	echo -e " Server isn't running."
 	echo -e; sleep 0.5s
 fi
 
@@ -68,7 +68,7 @@ else
     cp ShooterGameServer $arkExecute
     sleep 0.5s
     if [ -f $arkExecute ]; then
-        echo -e " Executable renamed. Moving forward."
+        echo -e " Executable renamed. Moving on."
     else
         echo -e; echo -e "$ERR Unable to fix executable name."
         echo -e " Please change the file named$YELLOW ShooterGameServer$RESET to$GREEN $arkExecute $RESET"
@@ -90,7 +90,7 @@ else
 fi
 
 sleep 1s
-echo -e; echo -e "$YELLOW Running startup parameters. These parameter will be listed below now. $RESET"
+echo -e; echo -e "$YELLOW Running startup parameters. These parameters will be listed below. $RESET"
 echo -e; echo -e "-----------------------------------------------------"; echo -e
 echo -e " Executed File: $arkExecute"
 echo -e " Screen Name: $sessionName"
@@ -167,5 +167,5 @@ XPMultiplier=$XPMultiplier -server -log"
 
 screen -A -m -d -S $sessionName ./$arkExecute $executeString
 
-echo -e; echo -e "$GREEN Server is now starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
+echo -e; echo -e "$GREEN Server is starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
 echo -e; exit 0

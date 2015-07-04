@@ -23,17 +23,17 @@ fi
 echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
 sleep 0.5s
 if screen -list | grep -q "$sessionName"; then
-    echo -e " Server is running, now stopping it."
+    echo -e " Server is running, now stopping."
     screen -S $sessionName -X quit
     echo -e " Session stopped. Removing PID's"
     PID=`pgrep -f $arkExecute`
     kill -9 $PID
     sleep 0.5s
-    echo -e " PID's Removed"
+    echo -e " PID's removed"
     echo -e; sleep 0.5s
-    echo -e "$RED Server Stopped $RESET"
+    echo -e "$RED Server stopped $RESET"
 else
-    echo -e " Server is offline. Moving forward."
+    echo -e " Server is offline. Moving on."
 fi
 
 echo -e; sleep 0.5s
@@ -42,7 +42,7 @@ sleep 0.5s; cd ../
 if [ -d steamcmd ]; then
     echo -e " SteamCMD directory found."
 else
-    echo -e " $ERR Couldn't find the SteamCMD directory, Installing it now."
+    echo -e " $ERR Couldn't find the SteamCMD directory, installing now."
     sleep 0.5s; echo -e " Creating directory 'steamcmd'"
     mkdir steamcmd
     cd ../steamcmd
@@ -64,7 +64,7 @@ echo -e
 ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
 
 echo -e; sleep 0.5s
-echo -e "$GREEN Server Update Complete. $RESET"
+echo -e "$GREEN Server update complete. $RESET"
 echo -e; sleep 0.5s
 echo -e "$YELLOW Please restart the script to start the server. $RESET"
 exit 0
