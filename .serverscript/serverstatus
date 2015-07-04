@@ -67,7 +67,7 @@ then
         echo -e "#########[ Server Settings ]########"
         sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
         sleep 0.3s; echo -e " Hardcore Mode:$CYAN               $hardcore $RESET"
-        sleep 0.3s; echo -e " Global Voice Chat:$CYAN           $gloablVoice $RESET"
+        sleep 0.3s; echo -e " Global Voice Chat:$CYAN           $globalVoice $RESET"
         sleep 0.3s; echo -e " Proximity Chat:$CYAN              $proxChat $RESET"
         sleep 0.3s; echo -e " No Tribute DL:$CYAN               $noTributeDl $RESET"
         sleep 0.3s; echo -e " Allow Third Person:$CYAN          $thirdPerson $RESET"
