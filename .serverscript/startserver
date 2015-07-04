@@ -29,16 +29,16 @@ if screen -list | grep -q "$sessionName"; then
     echo -e; sleep 0.5s
     echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET" ; read runningsession
     sleep 0.5s
-    if [ $runningsession = Y ]; then
+    if [ $runningsession = Y ] || [ $runningsession = y ]; then
 		echo -e " Server is running, now stopping."
-	screen -S $sessionName -X quit
-	echo -e " Session stopped. Removing PID's"
-	PID=`pgrep -f $arkExecute`
-	kill -9 $PID
+        screen -S $sessionName -X quit
+        echo -e " Session stopped. Removing PID's"
+        PID=`pgrep -f $arkExecute`
+        kill -9 $PID
 		echo -e " PID's removed"
 		echo -e; sleep 0.5s
 		echo -e "$RED Server stopped $RESET"
-    elif [ $runningsession = N ]; then
+    elif [ $runningsession = N ] || [ $runningsession = n ]; then
         echo -e; echo -e "$RED Exiting script."
         exit 0
     else
