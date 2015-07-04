@@ -10,7 +10,7 @@ source formatting.ini
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $updateserver ]; then
-    echo -e " Script update avaibale! (Update Script)"
+    echo -e " Script update available! (Update Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -20,7 +20,7 @@ else
     sleep 1s
 fi
 
-echo -e; echo -e "$YELLOW Prepairing to stop the server. $RESET"
+echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
 sleep 0.5s
 if screen -list | grep -q "$sessionName"; then
     echo -e " Server is running, now stopping it."
@@ -42,7 +42,7 @@ sleep 0.5s; cd ../
 if [ -d steamcmd ]; then
     echo -e " SteamCMD directory found."
 else
-    echo -e " $ERR Couldnt find the SteamCMD directory, Installing it now."
+    echo -e " $ERR Couldn't find the SteamCMD directory, Installing it now."
     sleep 0.5s; echo -e " Creating directory 'steamcmd'"
     mkdir steamcmd
     cd ../steamcmd

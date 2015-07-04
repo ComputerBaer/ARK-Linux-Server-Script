@@ -10,7 +10,7 @@ source formatting.ini
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $startserver ]; then
-    echo -e " Script update avaibale! (Start Script)"
+    echo -e " Script update available! (Start Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -42,11 +42,11 @@ if screen -list | grep -q "$sessionName"; then
         echo -e; echo -e "$RED Exiting script."
         exit 0
     else
-		echo -e "$ERR You have entered an invaild response. Exiting"
+		echo -e "$ERR You have entered an invalid response. Exiting"
 		echo -e; exit 0
     fi
 else
-	echo -e " Server isnt currently running."
+	echo -e " Server isn't currently running."
 	echo -e; sleep 0.5s
 fi
 
@@ -112,7 +112,7 @@ fi
 echo -e
 echo -e "-----------------------------------------------------"; echo -e
 sleep 0.5s
-echo -e "$YELLOW To view server settings, use:$GREEN ./arkserver status $RESET"; echo -e
+echo -e "$YELLOW To view server settings, use:$GREEN ./arkserver.sh status $RESET"; echo -e
 echo -e "$YELLOW Now executing.... $RESET"
 
 executeString="
@@ -167,5 +167,5 @@ XPMultiplier=$XPMultiplier -server -log"
 
 screen -A -m -d -S $sessionName ./$arkExecute $executeString
 
-echo -e; echo -e "$GREEN Server is now starting up. To access the console, relauch the scrip and use: ./arkscript view $RESET"
+echo -e; echo -e "$GREEN Server is now starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
 echo -e; exit 0

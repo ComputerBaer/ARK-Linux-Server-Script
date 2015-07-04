@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
-# Dont change this number.
+# Don't change this number.
 version="1.2.1"
 
 if [ -f version.ini ]; then
@@ -26,7 +26,7 @@ source version.ini
 
 # Check Script Version
 if [ $version != $arkserver ]; then
-    echo -e " Script update avaibale!"
+    echo -e " Script update available!"
     echo -e; echo -e "$YELLOW Downloading shell file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh -o arkserver.sh -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -73,7 +73,7 @@ source configuration.ini
     fi
 
 else
-    echo -e "$ERR No configuration file found. Dowloading from github now."
+    echo -e "$ERR No configuration file found. Downloading from github now."
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#; echo -e
     echo -e "$GREEN Configuration file download was successful."
     echo -e " Please edit the config file before running the script again. $RESET"
@@ -125,12 +125,12 @@ fi
 
 if [ -z "$(iptables -nL | grep $queryPort)" ]; then
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
-    echo -e " Adding iptables requirments. (Query Port)"
+    echo -e " Adding iptables requirements. (Query Port)"
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
     if [ $safetyNotif = True ]; then
-        echo -e " IPTables (Querry Port):$GREEN OK $RESET"
+        echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
 fi
 

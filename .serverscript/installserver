@@ -10,7 +10,7 @@ source formatting.ini
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $stopserver ]; then
-    echo -e " Script update avaibale! (Install Script)"
+    echo -e " Script update available! (Install Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -47,4 +47,4 @@ echo -e "$YELLOW SteamCMD Installed. Now installing game server. This may take a
 
 echo -e; sleep 0.5s
 echo -e "$GREEN Complete. Exiting. $RESET"
-echo -e " You may now start the server with $GREEN ./arkserver start $RESET"
+echo -e " You may now start the server with $GREEN ./arkserver.sh start $RESET"

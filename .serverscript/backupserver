@@ -10,7 +10,7 @@ source formatting.ini
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $backupserver ]; then
-    echo -e " Script update avaibale! (Backup Script)"
+    echo -e " Script update available! (Backup Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -27,7 +27,7 @@ sleep 0.5s; cd ../
 if [ -d backups ]; then
 	echo -e " Backups directory already made. Moving forward."
 else
-	echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
+	echo -e "$ERR The backups directory doesn't exists, making it now. $RESET"
 	mkdir backups
 fi
 

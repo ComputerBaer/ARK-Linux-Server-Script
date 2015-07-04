@@ -10,7 +10,7 @@ source formatting.ini
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $stopserver ]; then
-    echo -e " Script update avaibale! (Stop Script)"
+    echo -e " Script update available! (Stop Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -20,9 +20,9 @@ else
     sleep 1s
 fi
 
-echo -e; echo -e "$YELLOW Prepairing to stop the server. $RESET"
+echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
+sleep 0.5s
 if screen -list | grep -q "$sessionName"; then
-    sleep 0.5s
     echo -e " Server is running, now stopping it."
     screen -S $sessionName -X quit
     echo -e " Session stopped. Removing PID's"
@@ -33,7 +33,6 @@ if screen -list | grep -q "$sessionName"; then
     echo -e; sleep 0.5s
     echo -e "$RED Server Stopped $RESET"
 else
-    sleep 0.5s
     echo -e "$ERR Could not find the server session. The server is not running. $RESET"
     exit 0
 fi
