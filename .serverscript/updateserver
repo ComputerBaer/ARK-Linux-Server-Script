@@ -63,6 +63,24 @@ echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
 echo -e
 ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
 
+cd ../$gameDir
+echo -e; sleep 0.5s
+echo -e "$YELLOW Making sure old executable is removed. $RESET"
+sleep 0.5s
+if [ -f $arkExecute ]; then
+    echo -e "$ERR Old executable found, removing it. $RESET"
+    rm $arkExecute
+    sleep 0.5s
+    if [ -f $arkExecute ]; then
+        echo -e; echo -e "$ERR Unable to delete old executable. $RESET"
+        echo -e " Please remove the file named$YELLOW $arkExecute$RESET."
+    else
+        echo -e " Old executable removed. Moving on."
+    fi
+else
+    echo -e " Old executable not found."
+fi
+
 echo -e; sleep 0.5s
 echo -e "$GREEN Server update complete. $RESET"
 echo -e; sleep 0.5s
