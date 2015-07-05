@@ -1,7 +1,7 @@
 # ARK-Linux-Server-Script
 An advanced ark linux server script that enables you to do a number of things for your ark server without having to stress through managing one. This script was made for personal use, but was released because of how useful it could be to some people. Some features include a server installer, updater, restarter, save backup script and more.
 
-# Features (1.1.8)
+# Features
 - Server Starter/Stopper/Restarter
 - World save backup script
 - Server Installer/Updater
@@ -38,7 +38,7 @@ An advanced ark linux server script that enables you to do a number of things fo
 - **And More always being added!**
 
 
-# Recently Changed/Updated (1.1.8)
+# Recently Changed/Updated
 - Auto-Save Timer Added
 - AFK-Timer Added
 - Fixed Formatting Issues/Conflicts
