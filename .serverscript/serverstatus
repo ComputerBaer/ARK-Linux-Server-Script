@@ -10,7 +10,7 @@ source formatting.ini
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $serverstatus ]; then
-    echo -e " Script update avaibale! (Status Script)"
+    echo -e " Script update available! (Status Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -21,7 +21,7 @@ else
 fi
 
 
-# Couple If Statments for Stats Info
+# Couple If Statements for Stats Info
 if [ -z $ipAddress ]; then
     address="$RED UNDEFINED $RESET (Default IP Address)"
 else
@@ -67,12 +67,12 @@ then
         echo -e "#########[ Server Settings ]########"
         sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
         sleep 0.3s; echo -e " Hardcore Mode:$CYAN               $hardcore $RESET"
-        sleep 0.3s; echo -e " Gloabl Voice Chat:$CYAN           $gloablVoice $RESET"
+        sleep 0.3s; echo -e " Global Voice Chat:$CYAN           $globalVoice $RESET"
         sleep 0.3s; echo -e " Proximity Chat:$CYAN              $proxChat $RESET"
         sleep 0.3s; echo -e " No Tribute DL:$CYAN               $noTributeDl $RESET"
         sleep 0.3s; echo -e " Allow Third Person:$CYAN          $thirdPerson $RESET"
         sleep 0.3s; echo -e " Notify Leaving:$CYAN              $notifyLeft $RESET"
-        sleep 0.3s; echo -e " Dont Ntofiy Join:$CYAN            $dontNotifyJoin $RESET"
+        sleep 0.3s; echo -e " Don't Notify Join:$CYAN           $dontNotifyJoin $RESET"
         sleep 0.3s; echo -e " PVE Enabled:$CYAN                 $pveServer $RESET"
         sleep 0.3s; echo -e " Enable Crosshairs:$CYAN           $crossHair $RESET"
         sleep 0.3s; echo -e " No HUD:$CYAN                      $noHud  $RESET"

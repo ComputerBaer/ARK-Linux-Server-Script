@@ -10,7 +10,7 @@ source formatting.ini
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $viewserver ]; then
-    echo -e " Script update avaibale! (Stop Script)"
+    echo -e " Script update available! (Stop Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -24,7 +24,7 @@ echo -e " Checking if server session exists..."
 sleep 0.5s
 if screen -list | grep -q "$sessionName"; then
     echo -e
-    echo -e "$GREEN Server Is Running! $RESET"
+    echo -e "$GREEN Server is running! $RESET"
     sleep 0.5s
     echo -e "$YELLOW To detach from the session, hold CTRL+A+D (in that order) $RESET"
     echo -e; sleep 0.5s
@@ -33,6 +33,6 @@ if screen -list | grep -q "$sessionName"; then
     sleep 10s
     screen -r $sessionName
 else
-  echo -e "$ERR Unable to find the server session. Script is assuming the server isnt running."
+  echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
   exit 0
 fi

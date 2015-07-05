@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
-# Dont change this number.
+# Don't change this number.
 version="1.2.1"
 
 if [ -f version.ini ]; then
@@ -26,7 +26,7 @@ source version.ini
 
 # Check Script Version
 if [ $version != $arkserver ]; then
-    echo -e " Script update avaibale!"
+    echo -e " Script update available!"
     echo -e; echo -e "$YELLOW Downloading shell file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh -o arkserver.sh -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -50,13 +50,13 @@ source configuration.ini
         echo -e "$ERR You have an outdated configuration file!"
         echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
         echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
-        echo -e "$YELLOW re edit the config file. Sorry for the flaw in this design of the script. $RESET"
+        echo -e "$YELLOW edit the config file again. Sorry for the flaw in this design of the script. $RESET"
         sleep 1s
         echo -e; mv configuration.ini configuration_backup.ini
         echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
         echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
-        echo -e "$GREEN Most options you can simply copy paste as most config updaters are additions/formatting. $RESET"
+        echo -e "$GREEN Most options you can simply copy and paste as most config updates are additions or formatting. $RESET"
         echo -e; exit 0
     fi
     
@@ -65,7 +65,7 @@ source configuration.ini
         echo -e =========================================================================
         echo -e
         echo -e "$ERR You have yet to edit the config file!"
-        echo -e " Please edit the config and alter the 'Safety Switch' to TRUE once done."
+        echo -e " Please do so and alter the 'Safety Switch' to TRUE once done."
         echo -e
         echo -e =========================================================================
         echo -e
@@ -73,7 +73,7 @@ source configuration.ini
     fi
 
 else
-    echo -e "$ERR No configuration file found. Dowloading from github now."
+    echo -e "$ERR No configuration file found. Downloading from github now."
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#; echo -e
     echo -e "$GREEN Configuration file download was successful."
     echo -e " Please edit the config file before running the script again. $RESET"
@@ -85,10 +85,10 @@ fi
 if [ -x /usr/bin/curl ]; then
     if [ $safetyNotif = True ]; then
 		sleep 0.5s
-        echo -e "$GREEN CURL Installed $RESET"
+        echo -e "$GREEN CURL installed $RESET"
     fi
 else
-    echo -e"$ERR Script detects that curl is not installed. Installing it now."
+    echo -e"$ERR Script detects that CURL is not installed. Installing now."
     sudo apt-get install curl
     echo "$YELLOW CURL now installed $RESET"
 fi
@@ -96,10 +96,10 @@ fi
 if [ -x /usr/bin/screen ]; then
     if [ $safetyNotif = True ]; then
 		sleep 0.5s
-        echo -e "$GREEN SCREEN Installed $RESET"
+        echo -e "$GREEN SCREEN installed $RESET"
     fi
 else
-    echo -e "$ERR Script detects that Screen is not installed. Installing it now."
+    echo -e "$ERR Script detects that SCREEN is not installed. Installing now."
     sudo apt-get install screen
     echo "$YELLOW SCREEN now installed $RESET"
 fi
@@ -107,10 +107,10 @@ fi
 if [ -x /usr/bin/git ]; then
     if [ $safetyNotif = True ]; then
 		sleep 0.5s
-        echo -e "$GREEN GIT Installed $RESET"
+        echo -e "$GREEN GIT installed $RESET"
     fi
 else
-    echo -e "$ERR Script detects that Git is not installed. Installing it now."
+    echo -e "$ERR Script detects that GIT is not installed. Installing now."
     apt-get install git
     echo "$YELLOW GIT now installed. $RESET"
 fi
@@ -123,14 +123,25 @@ if [ $safetyNotif = True ]; then
 	sleep 0.5s
 fi
 
+if [ -z "$(iptables -nL | grep $gamePort)" ]; then
+    echo -e " IPTables (Game Port):$RED MISSING $RESET"
+    echo -e " Adding IPTables requirements. (Game Port)"
+    iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
+else
+    if [ $safetyNotif = True ]; then
+        echo -e " IPTables (Game Port):$GREEN OK $RESET"
+    fi
+fi
+
 if [ -z "$(iptables -nL | grep $queryPort)" ]; then
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
-    echo -e " Adding iptables requirments. (Query Port)"
+    echo -e " Adding IPTables requirements. (Query Port)"
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
     if [ $safetyNotif = True ]; then
-        echo -e " IPTables (Querry Port):$GREEN OK $RESET"
+        echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
 fi
 
@@ -143,10 +154,10 @@ if [ $safetyNotif = True ]; then
 fi
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 if [ ! -d .serverscript ]; then
-    echo -e "$ERR Unable to find script directory. Making it now."
+    echo -e "$ERR Unable to find script directory. Creating it."
     mkdir .serverscript
     sleep 1s
-    echo -e; echo -e "$YELLOW Directory Created. $RESET"
+    echo -e; echo -e "$YELLOW Directory created. $RESET"
 fi
 cd .serverscript
 # Start Server Script

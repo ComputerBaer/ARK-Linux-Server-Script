@@ -10,7 +10,7 @@ source formatting.ini
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $backupserver ]; then
-    echo -e " Script update avaibale! (Backup Script)"
+    echo -e " Script update available! (Backup Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -25,9 +25,9 @@ fi
 echo -e "$YELLOW Checking if there is a backups directory. $RESET"
 sleep 0.5s; cd ../
 if [ -d backups ]; then
-	echo -e " Backups directory already made. Moving forward."
+	echo -e " Backups directory already made. Moving on."
 else
-	echo -e "$ERR The backups directory doesnt exists, making it now. $RESET"
+	echo -e "$ERR The backups directory doesn't exist, creating it. $RESET"
 	mkdir backups
 fi
 
@@ -42,19 +42,19 @@ elif [ $compFormat = "bz2" ]; then
 	echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
 else
 	echo -e "$ERR Invalid format detected in the configuration file!"
-	echo -e " Please fix the configuration.ini file 'Compression Format' section."
+	echo -e " Please fix the 'compFormat' option in the configuration.ini"
 	exit 0
 fi
 
 DATE=`date +"%m-%d-%y_%H.%M.%S"`
 
-echo -e; echo -e "$YELLOW Backing up save files now. $RESET"
+echo -e; echo -e "$YELLOW Trying to create backup for save files. $RESET"
 sleep 0.5s
 if [ -d ShooterGame/Saved/SavedArks/ ]; then
-	echo -e " Saves directory found, Copying files."
+	echo -e " Saves directory found, copying files."
 	cd ShooterGame/Saved/
 	cp -r SavedArks/ ../../backups
-	echo -e " Save files copied."
+	echo -e " Copied save files."
 	echo -e; cd ../../backups
 	
 	echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
@@ -64,8 +64,8 @@ if [ -d ShooterGame/Saved/SavedArks/ ]; then
 	echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
 	sleep 1s
 else
-	echo -e " $ERR No saves folder available found! (Maybe you never ran the server?)"
-	echo -e " Directory Checked: $YELLOW ShooterGame/Saved/ $RESET"
-	echo -e " Looking For: $YELLOW SavedArks/ $RESET"
+	echo -e " $ERR No saves folder found! (Maybe you never ran the server?)"
+	echo -e " Directory checked: $YELLOW ShooterGame/Saved/ $RESET"
+	echo -e " Looking for: $YELLOW SavedArks/ $RESET"
 	exit 0
 fi
