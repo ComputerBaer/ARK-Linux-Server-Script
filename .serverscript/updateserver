@@ -67,7 +67,7 @@ cd ../$gameDir
 echo -e; sleep 0.5s
 echo -e "$YELLOW Making sure old executable is removed. $RESET"
 sleep 0.5s
-if [ -f $arkExecute ]; then
+if [ -f $arkExecute ] && [ $arkExecute != "ShooterGameServer" ]; then
     echo -e "$ERR Old executable found, removing it. $RESET"
     rm $arkExecute
     sleep 0.5s
