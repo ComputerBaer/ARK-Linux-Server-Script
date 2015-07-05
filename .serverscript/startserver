@@ -65,13 +65,13 @@ if [ -f $arkExecute ]; then
 else
 	sleep 0.5s
     echo -e "$ERR Executable could not be found. Fixing it."
-    cp ShooterGameServer $arkExecute
+    cp $gameExecute $arkExecute
     sleep 0.5s
     if [ -f $arkExecute ]; then
         echo -e " Executable renamed. Moving on."
     else
         echo -e; echo -e "$ERR Unable to fix executable name."
-        echo -e " Please change the file named$YELLOW ShooterGameServer$RESET to$GREEN $arkExecute $RESET"
+        echo -e " Please change the file named$YELLOW $gameExecute$RESET to$GREEN $arkExecute $RESET"
         sleep 1s; exit 0
     fi
 fi
