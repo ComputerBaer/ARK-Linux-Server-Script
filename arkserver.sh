@@ -223,6 +223,13 @@ if [ ! -f serverstatus ]; then
     chmod 777 serverstatus
 fi
 
+# Parameter Script
+if [ ! -f parameters_check ]; then
+    echo -e "$YELLOW Parameter Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+    chmod 777 parameters_check
+fi
+
 # Formatting File
 if [ ! -f formatting.ini ]; then
     echo -e "$YELLOW Formatting $RESET"
