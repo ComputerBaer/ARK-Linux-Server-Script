@@ -82,6 +82,11 @@ fi
 
 
 # Hard dep's check.
+if [ $safetyNotify = True ]; then
+    sleep 0.5s
+    echo -e "$YELLOW Checking dependencies $RESET"
+fi
+
 if [ -x /usr/bin/curl ]; then
     if [ $safetyNotify = True ]; then
         sleep 0.5s
@@ -111,103 +116,120 @@ if [ -x /usr/bin/git ]; then
     fi
 else
     echo -e "$ERR Script detects that GIT is not installed. Installing now."
-    apt-get install git
+    sudo apt-get install git
     echo "$YELLOW GIT now installed. $RESET"
 fi
 
 
 # IPTables Check
 if [ $safetyNotify = True ]; then
-    echo -e; sleep 0.5s
+    sleep 0.5s; echo -e
     echo -e "$YELLOW Checking IPTables $RESET"
-    sleep 0.5s
 fi
 
 if [ -z "$(iptables -nL | grep $gamePort)" ]; then
+    sleep 0.5s
     echo -e " IPTables (Game Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Game Port)"
     iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
     iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
 else
     if [ $safetyNotify = True ]; then
+        sleep 0.5s
         echo -e " IPTables (Game Port):$GREEN OK $RESET"
     fi
 fi
 
 if [ -z "$(iptables -nL | grep $queryPort)" ]; then
+    sleep 0.5s
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Query Port)"
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
     if [ $safetyNotify = True ]; then
+        sleep 0.5s
         echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
 fi
 
 
-# Check if serverscript directory is already made.
+# Server Script Check
 if [ $safetyNotify = True ]; then
-    echo -e; sleep 0.5s
+    sleep 0.5s; echo -e
     echo -e "$YELLOW Checking script files. $RESET"
     sleep 1s
 fi
+
 #####################################[ SERVER SCRIPT SCAN ]#####################################
+
+# Check if serverscript directory is already made.
 if [ ! -d .serverscript ]; then
     echo -e "$ERR Unable to find script directory. Creating it."
     mkdir .serverscript
     sleep 1s
     echo -e; echo -e "$YELLOW Directory created. $RESET"
 fi
+
 cd .serverscript
+
 # Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
     chmod 777 startserver
 fi
+
 # Stop Server Script
 if [ ! -f stopserver ]; then
     echo -e "$YELLOW Stop Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
     chmod 777 stopserver
 fi
+
 # View Server Script
 if [ ! -f viewserver ]; then
     echo -e "$YELLOW View Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
     chmod 777 viewserver
 fi
+
 # Install Server Script
 if [ ! -f installserver ]; then
     echo -e "$YELLOW Install Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
     chmod 777 installserver
 fi
+
 # Update Server Script
 if [ ! -f updateserver ]; then
     echo -e "$YELLOW Update Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
     chmod 777 updateserver
 fi
+
 # Backup Server Script
 if [ ! -f backupserver ]; then
     echo -e "$YELLOW Backup Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     chmod 777 backupserver
 fi
+
 # Server Status Script
 if [ ! -f serverstatus ]; then
     echo -e "$YELLOW Server Status Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
     chmod 777 serverstatus
 fi
+
 # Formatting File
 if [ ! -f formatting.ini ]; then
     echo -e "$YELLOW Formatting $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
 fi
+
 #####################################[ SERVER SCRIPT SCAN ]#####################################
+
 if [ $safetyNotify = True ]; then
     echo -e " All scripts found."
     echo -e; sleep 0.5s
