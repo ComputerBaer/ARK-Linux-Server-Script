@@ -35,15 +35,15 @@ else
 fi
 
 if [ -z $serverPass ]; then
-	setServerPass="$RED NOT SET $RESET"
+    setServerPass="$RED NOT SET $RESET"
 else
-	setServerPass="$YELLOW $serverPass $RESET"
+    setServerPass="$YELLOW $serverPass $RESET"
 fi
 
 if [ -z $adminPass ]; then
-	setAdminPass="$RED NOT SET $RESET"
+    setAdminPass="$RED NOT SET $RESET"
 else
-	setServerPass="$YELLOW $adminPass $RESET"
+    setServerPass="$YELLOW $adminPass $RESET"
 fi
 
 # Show Information
@@ -55,15 +55,15 @@ then
     sleep 0.3s; echo -e " Is Server Running:$GREEN YES $RESET"
     sleep 0.3s; echo -e " Executable:$YELLOW $arkExecute $RESET"
     echo -e; sleep 0.3s
-    sleep 0.3s; echo -e " Address:	$address"
-    sleep 0.3s; echo -e " HostName:	$GREEN $hostName $RESET"
-    sleep 0.3s; echo -e " Server Pass:	$setServerPass"
-    sleep 0.3s; echo -e " Admin Pass:	$setAdminPass"
-    sleep 0.3s; echo -e " Max Players:	$YELLOW $playerCount $RESET"
-    sleep 0.3s; echo -e " ArkServers:	$arkServerList"
+    sleep 0.3s; echo -e " Address:        $address"
+    sleep 0.3s; echo -e " HostName:       $GREEN $hostName $RESET"
+    sleep 0.3s; echo -e " Server Pass:    $setServerPass"
+    sleep 0.3s; echo -e " Admin Pass:     $setAdminPass"
+    sleep 0.3s; echo -e " Max Players:    $YELLOW $playerCount $RESET"
+    sleep 0.3s; echo -e " ArkServers:     $arkServerList"
     sleep 0.3s
     if [ $showServerSettings = "True" ]; then
-    	echo -e
+        echo -e
         echo -e "#########[ Server Settings ]########"
         sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
         sleep 0.3s; echo -e " Hardcore Mode:$CYAN               $hardcore $RESET"

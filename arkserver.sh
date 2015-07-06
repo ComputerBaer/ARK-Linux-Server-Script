@@ -84,7 +84,7 @@ fi
 # Hard dep's check.
 if [ -x /usr/bin/curl ]; then
     if [ $safetyNotif = True ]; then
-		sleep 0.5s
+        sleep 0.5s
         echo -e "$GREEN CURL installed $RESET"
     fi
 else
@@ -95,7 +95,7 @@ fi
 
 if [ -x /usr/bin/screen ]; then
     if [ $safetyNotif = True ]; then
-		sleep 0.5s
+        sleep 0.5s
         echo -e "$GREEN SCREEN installed $RESET"
     fi
 else
@@ -106,7 +106,7 @@ fi
 
 if [ -x /usr/bin/git ]; then
     if [ $safetyNotif = True ]; then
-		sleep 0.5s
+        sleep 0.5s
         echo -e "$GREEN GIT installed $RESET"
     fi
 else
@@ -118,9 +118,9 @@ fi
 
 # IPTables Check
 if [ $safetyNotif = True ]; then
-	echo -e; sleep 0.5s
+    echo -e; sleep 0.5s
     echo -e "$YELLOW Checking IPTables $RESET"
-	sleep 0.5s
+    sleep 0.5s
 fi
 
 if [ -z "$(iptables -nL | grep $gamePort)" ]; then
@@ -148,7 +148,7 @@ fi
 
 # Check if serverscript directory is already made.
 if [ $safetyNotif = True ]; then
-	echo -e; sleep 0.5s
+    echo -e; sleep 0.5s
     echo -e "$YELLOW Checking script files. $RESET"
     sleep 1s
 fi
@@ -200,7 +200,7 @@ fi
 if [ ! -f serverstatus ]; then
     echo -e "$YELLOW Server Status Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
-	chmod 777 serverstatus
+    chmod 777 serverstatus
 fi
 # Formatting File
 if [ ! -f formatting.ini ]; then
@@ -210,7 +210,7 @@ fi
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 if [ $safetyNotif = True ]; then
     echo -e " All scripts found."
-	echo -e; sleep 0.5s
+    echo -e; sleep 0.5s
 fi
 
 
@@ -218,7 +218,7 @@ fi
 help () {
     echo -e; echo -e "$WHITE Use the following commands: $RESET"
     echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|status|install|update|backup> $RESET"
-	echo -e; echo -e
+    echo -e; echo -e
 }
 
 start () {
@@ -252,8 +252,8 @@ backup () {
 }
 
 status () {
-	clear
-	./serverstatus
+    clear
+    ./serverstatus
 }
 
 [ "$1" = "" ] && {
