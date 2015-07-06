@@ -1,0 +1,363 @@
+#!/bin/bash
+
+# Version Checker 
+versionP="1.0.0"
+
+source ../version.ini
+source ../configuration.ini
+source formatting.ini
+
+# Compare Versions
+echo -e; echo -e "$YELLOW Checking version with github. $RESET"
+if [ $versionP != $parameters ]; then
+    echo -e " Script update avaibale! (Parameters Check Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    exit 0
+else
+    echo -e " Up to date!"; echo -e
+    sleep 1s
+fi
+
+echo -e "$YELLOW Checking parameters. This can cleanup the command starup a bit. Please wait. $RESET"; echo -e
+# Brace your anus for a cluster fuck of copy paste code. ;)
+# Taming Speed
+if [ $TamingSpeedMultiplier = "1" ]; then
+  TamingSpeed=""
+else
+  TamingSpeed="TamingSpeedMultiplier=$TamingSpeedMultiplier?"
+fi
+
+# Harvest Ammount
+if [ $HarvestAmountMultiplier = "1" ]; then
+  HarvestAmount=""
+else
+  HarvestAmount="HarvestAmountMultiplier=$HarvestAmountMultiplier?"
+fi
+
+# Player Water Drain
+if [ $PlayerCharacterWaterDrainMultiplier = "1" ]; then
+  PlayerWaterDrain=""
+else
+  PlayerWaterDrain="PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier?"
+fi
+
+# Player Food Drain
+if [ $PlayerCharacterFoodDrainMultiplier = "1" ]; then
+  PlayerFoodDrain=""
+else
+  PlayerFoodDrain="PlayerCharacterFoodDrainMultiplier=$PlayerCharacterFoodDrainMultiplier?"
+fi
+
+# Dino Food Drain
+if [ $DinoCharacterFoodDrainMultiplier = "1" ]; then
+  DinoFoodDrain=""
+else
+  DinoFoodDrain="DinoCharacterFoodDrainMultiplier=$DinoCharacterFoodDrainMultiplier?"
+fi
+
+# Player Stanima
+if [ $PlayerCharacterStaminaDrainMultiplier = "1" ]; then
+  PlayerStanima=""
+else
+  PlayerStanima="PlayerCharacterStaminaDrainMultiplier=$PlayerCharacterStaminaDrainMultiplier?"
+fi
+
+# Dino Stanima
+if [ $DinoCharacterStaminaDrainMultiplier = "1" ]; then
+  DinoStanima=""
+else
+  DinoStanima="DinoCharacterStaminaDrainMultiplier=$DinoCharacterStaminaDrainMultiplier?"
+fi
+
+# Player Health Recovery
+if [ $PlayerCharacterHealthRecoveryMultiplier = "1" ]; then
+  PlayerHealthRecovery=""
+else
+  PlayerHealthRecovery="PlayerCharacterHealthRecoveryMultiplier=$PlayerCharacterHealthRecoveryMultiplier?"
+fi
+
+# Dino Health Recovery
+if [ $DinoCharacterHealthRecoveryMultiplier = "1" ]; then
+  DinoHealthRecovery=""
+else
+  DinoHealthRecovery="DinoCharacterHealthRecoveryMultiplier=$DinoCharacterHealthRecoveryMultiplier?"
+fi
+
+# Dino Count Multiplier
+if [ $DinoCountMultiplier = "1" ]; then
+  DinoCount=""
+else
+  DinoCount="DinoCountMultiplier=$DinoCountMultiplier?"
+fi
+
+# Harvest Health
+if [ $HarvestHealthMultiplier = "1" ]; then
+  HarvestHealth=""
+else
+  HarvestHealth="HarvestHealthMultiplier=$HarvestHealthMultiplier?"
+fi
+
+# PvE Structure Decay Timer
+if [ $PvEStructureDecayDestructionPeriod = "0" ]; then
+  PvEStructureDecayPeriod=""
+else
+  PvEStructureDecayPeriod="PvEStructureDecayDestructionPeriod=$PvEStructureDecayDestructionPeriod?"
+fi
+
+# Max Structures In Range
+if [ $MaxStructuresInRange = "1300" ]; then
+  MaxStructuresRange=""
+else
+  MaxStructuresRange="MaxStructuresInRange=$MaxStructuresInRange?"
+fi
+
+# Day Cycle Speed Scale
+if [ $DayCycleSpeedScale = "1" ]; then
+  DayCycleSpeed=""
+else
+  DayCycleSpeed="DayCycleSpeedScale=$DayCycleSpeedScale?"
+fi
+
+# Night Time Speed Scale
+if [ $NightTimeSpeedScale = "1" ]; then
+  NightTimeSpeed=""
+else
+  NightTimeSpeed="NightTimeSpeedScale=$NightTimeSpeedScale?"
+fi
+
+# Day Time Speed Scale
+if [ $DayTimeSpeedScale = "1" ]; then
+  DayTimeSpeed=""
+else
+  DayTimeSpeed="DayTimeSpeedScale=$DayTimeSpeedScale?"
+fi
+
+# Dino Damage Multiplier
+if [ $DinoDamageMultiplier = "1" ]; then
+  DinoDamage=""
+else
+  DinoDamage="DinoDamageMultiplier=$DinoDamageMultiplier?"
+fi
+
+# Tamed Dino Damage Multiplier
+if [ $TamedDinoDamageMultiplier = "1" ]; then
+  TamedDinoDamage=""
+else
+  TamedDinoDamage="TamedDinoDamageMultiplier=$TamedDinoDamageMultiplier?"
+fi
+
+# Player Damage Multiplier
+if [ $PlayerDamageMultiplier = "1" ]; then
+  PlayerDamage=""
+else
+  PlayerDamage="PlayerDamageMultiplier=$PlayerDamageMultiplier?"
+fi
+
+# Structure Damage Multiplier
+if [ $StructureDamageMultiplier = "1" ]; then
+  StructureDamage=""
+else
+  StructureDamage="StructureDamageMultiplier=$StructureDamageMultiplier?"
+fi
+
+# Player Resistence Multiplier
+if [ $PlayerResistanceMultiplier = "1" ]; then
+  PlayerResistance=""
+else
+  PlayerResistance="PlayerResistanceMultiplier=$PlayerResistanceMultiplier?"
+fi
+
+# Dino Resistance
+if [ $DinoResistanceMultiplier = "1" ]; then
+  DinoResistance=""
+else
+  DinoResistence="DinoResistanceMultiplier=$DinoResistanceMultiplier?"
+fi
+
+# Tamed Dino Resistance
+if [ $TamedDinoResistanceMultiplier = "1" ]; then
+  TamedDinoResistance=""
+else
+  TamedDinoResistance="TamedDinoResistanceMultiplier=$TamedDinoResistanceMultiplier?"
+fi
+
+# Strucutre Resistance Multiplier
+if [ $StructureResistanceMultiplier = "1" ]; then
+  StructureResistance=""
+else
+  StructureResistance="StructureResistanceMultiplier=$StructureResistanceMultiplier?"
+fi
+
+# EXP Multiplier
+if [ $XPMultiplier = "1" ]; then
+  ExpierenceMulti=""
+else
+  ExpierenceMulti="XPMultiplier=$XPMultiplier?"
+fi
+
+# Dificulty Multiplier
+if [ $DifficultyOffset = "0" ]; then
+  DifficultyMulti=""
+else
+  DifficultyMulti="DifficultyOffset=$DifficultyOffset?"
+fi
+
+# AFK Timer
+if [ $afkTimer = "24000" ]; then
+  KickIdle=""
+else
+  KickIdle="KickIdlePlayersPeriod=$afkTimer?"
+fi
+
+# Auto Save Timer
+if [ $autoSave = "10" ]; then
+  AutoSaveTimer=""
+else
+  AutoSaveTimer="AutoSavePeriodMinutes=$autoSave?"
+fi
+
+
+
+# Show Players on Map
+if [ $showPlayers = "False" ]; then
+  ShowPlayersMap=""
+else
+  ShowPlayersMap="ShowMapPlayerLocation=True?"
+fi
+
+# Hardcore Mode
+if [ $hardcore = "False" ]; then
+  SetHardcore=""
+else
+  SetHardcore="ServerHardcore=True?"
+fi
+
+# Global Voice
+if [ $globalVoice = "False" ]; then
+  UseGlobalVoice=""
+else
+  UseGlobalVoice="GlobalVoiceChat=True?"
+fi
+
+# Proximity Chat
+if [ $proxChat = "False" ]; then
+  UseProxChat=""
+else
+  UseProxChat="ProximityChat=True?"
+fi
+
+# No Tribute Downloads
+if [ $noTributeDl = "False" ]; then
+  AllowTributeDownloads=""
+else
+  AllowTributeDownloads="NoTributeDownloads=True?"
+fi
+
+# Third Person
+if [ $thirdPerson = "False" ]; then
+  UseThirdPerson=""
+else
+  UseThirdPerson="AllowThirdPersonPlayer=True?"
+fi
+
+# Always Notify Player Left
+if [ $notifyLeft = "False" ]; then
+  NotifyPlayerLeft=""
+else
+  NotifyPlayerLeft="AlwaysNotifyPlayerLeft=True?"
+fi
+
+# Dont Notify Player Join
+if [ $notifyJoin = "False" ]; then
+  NotifyPlayerJoin=""
+else
+  NotifyPlayerJoin="DontAlwaysNotifyPlayerJoined=False?"
+fi
+
+# PvE Server
+if [ $pveServer = "False" ]; then
+  SetPvEServer=""
+else
+  SetPvEServer="ServerPVE=True?"
+fi
+
+# Crosshair
+if [ $crossHair = "False" ]; then
+  EnableCrosshair=""
+else
+  EnableCrosshair="ServerCrosshair=True?"
+fi
+
+# Force No Hude
+if [ $noHud = "False" ]; then
+  ForceNoHud=""
+else
+  ForceNoHud="ServerForceNoHUD=True?"
+fi
+
+# PvP Gamma
+if [ $enablePvPGamma = "False" ]; then
+  PvPGamma=""
+else
+  PvPGamma="bEnablePvPGamma=True?"
+fi
+
+sleep 0.5s; echo -e "$YELLOW Check complete, starting server compiling. $RESET"; echo -e
+
+executeString="
+    $map?\
+    listen?\
+    "$setHostName"\
+    "$setIpAddress"\
+    Port=$gamePort?\
+    QueryPort=$queryPort?\
+    MaxPlayers=$playerCount?\
+    ServerAdminPassword=$adminPass?\
+    ServerPassword=$serverPass?\
+    "$ShowPlayersMap"\
+    "$SetHardcore"\
+    "$UseGlobalVoice"\
+    "$UseProxChat"\
+    "$AllowTributeDownloads"\
+    "$UseThirdPerson"\
+    "$NotifyPlayerLeft"\
+    "$NotifyPlayerJoin"\
+    "$SetPvEServer"\
+    "$EnableCrosshair"\
+    "$ForceNoHud"\
+    "$PvPGamma"\
+    "$KickIdle"\
+    "$AutoSaveTimer"\
+    "$DifficultyMulti"\
+    "$TamingSpeed"\
+    "$HarvestAmount"\
+    "$PlayerWaterDrain"\
+    "$PlayerFoodDrain"\
+    "$DinoFoodDrain"\
+    "$PlayerStanima"\
+    "$DinoStanima"\
+    "$PlayerHealthRecovery"\
+    "$DinoHealthRecovery"\
+    "$DinoCount"\
+    "$HarvestHealth"\
+    "$PvEStructureDecayPeriod"\
+    "$MaxStructuresRange"\
+    "$DayCycleSpeed"\
+    "$NightTimeSpeed"\
+    "$DayTimeSpeed"\
+    "$DinoDamage"\
+    "$TamedDinoDamage"\
+    "$PlayerDamage"\
+    "$StructureDamage"\
+    "$PlayerResistance"\
+    "$DinoResistance"\
+    "$TamedDinoResistance"\
+    "$StructureResistance"\
+    "$ExpierenceMulti" \
+    -server -log"
+
+echo -e "$YELLOW Executing commandline in screen session named: $sessionName $RESET"
+# Run Server
+screen -A -m -d -S $sessionName ./$arkExecute $executeString
