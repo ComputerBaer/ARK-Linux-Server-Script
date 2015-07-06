@@ -35,12 +35,13 @@ else
     echo -e " Up to date!"; echo -e
 fi
 
+shopt -s nocasematch
 
 # Check for config file.
 if [ -f configuration.ini ]; then
     source configuration.ini
 
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 1s
         echo -e "$YELLOW Configuration file found. $RESET"; echo -e
     fi
@@ -61,7 +62,7 @@ if [ -f configuration.ini ]; then
     fi
     
     # Saftey Switch Notification
-    if [ $safetySwitch = False ]; then
+    if [[ ! $safetySwitch =~ true ]]; then
         echo -e =========================================================================
         echo -e
         echo -e "$ERR You have yet to edit the config file!"
@@ -82,13 +83,13 @@ fi
 
 
 # Hard dep's check.
-if [ $safetyNotify = True ]; then
+if [[ $safetyNotify =~ true ]]; then
     sleep 0.5s
     echo -e "$YELLOW Checking dependencies $RESET"
 fi
 
 if [ -x /usr/bin/curl ]; then
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN CURL installed $RESET"
     fi
@@ -99,7 +100,7 @@ else
 fi
 
 if [ -x /usr/bin/screen ]; then
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN SCREEN installed $RESET"
     fi
@@ -110,7 +111,7 @@ else
 fi
 
 if [ -x /usr/bin/git ]; then
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN GIT installed $RESET"
     fi
@@ -122,7 +123,7 @@ fi
 
 
 # IPTables Check
-if [ $safetyNotify = True ]; then
+if [[ $safetyNotify =~ true ]]; then
     sleep 0.5s; echo -e
     echo -e "$YELLOW Checking IPTables $RESET"
 fi
@@ -134,7 +135,7 @@ if [ -z "$(iptables -nL | grep $gamePort)" ]; then
     iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
     iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
 else
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (Game Port):$GREEN OK $RESET"
     fi
@@ -147,7 +148,7 @@ if [ -z "$(iptables -nL | grep $queryPort)" ]; then
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
-    if [ $safetyNotify = True ]; then
+    if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
@@ -155,7 +156,7 @@ fi
 
 
 # Server Script Check
-if [ $safetyNotify = True ]; then
+if [[ $safetyNotify =~ true ]]; then
     sleep 0.5s; echo -e
     echo -e "$YELLOW Checking script files. $RESET"
     sleep 1s
@@ -230,7 +231,7 @@ fi
 
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 
-if [ $safetyNotify = True ]; then
+if [[ $safetyNotify =~ true ]]; then
     echo -e " All scripts found."
     echo -e; sleep 0.5s
 fi

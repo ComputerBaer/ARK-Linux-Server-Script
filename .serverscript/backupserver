@@ -20,6 +20,7 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
 
 # Check for backups directory.
 echo -e "$YELLOW Checking if there is a backups directory. $RESET"
@@ -34,11 +35,11 @@ fi
 echo -e; sleep 0.5s
 echo -e "$YELLOW Checking compression format. $RESET"
 sleep 0.5s
-if [ $compFormat = "gz" ]; then
+if [[ $compFormat =~ gz ]]; then
     fileExt="tgz"
     tarParam="-z"
     echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
-elif [ $compFormat = "bz2" ]; then
+elif [[ $compFormat =~ bz2 ]]; then
     fileExt="tar.bz2"
     tarParam="-j"
     echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"

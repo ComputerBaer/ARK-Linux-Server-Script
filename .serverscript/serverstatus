@@ -20,6 +20,8 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
+
 # Couple If Statements for Stats Info
 echo -e "$YELLOW Collecting status of your Ark server... $RESET"
 
@@ -74,7 +76,7 @@ sleep 0.3s; echo -e " Admin Pass:           $setAdminPass"
 sleep 0.3s; echo -e " Max Players:          $YELLOW $playerCount $RESET"
 sleep 0.3s; echo -e " ArkServers:           $arkServerList"
 
-if [ $showServerSettings = "True" ]; then
+if [[ $showServerSettings =~ true ]]; then
     sleep 0.3s; echo -e
     sleep 0.3s; echo -e "############[$CYAN Server Settings$RESET ]###########"
     sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
@@ -95,7 +97,7 @@ if [ $showServerSettings = "True" ]; then
     sleep 0.3s; echo -e " Current Map:$CYAN                 $map $RESET"
 fi
 
-if [ $showServerMutipliers = "True" ]; then
+if [[ $showServerMutipliers =~ true ]]; then
     sleep 0.3s; echo -e
     sleep 0.3s; echo -e "##########[$CYAN Server Multipliers$RESET ]##########"
     sleep 0.3s; echo -e " TamingSpeed:$CYAN                 $TamingSpeedMultiplier $RESET"
