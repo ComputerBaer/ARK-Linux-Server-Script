@@ -35,10 +35,12 @@ echo -e; sleep 0.5s
 echo -e "$YELLOW Checking compression format. $RESET"
 sleep 0.5s
 if [ $compFormat = "gz" ]; then
-    compressionFormat=""
+    fileExt="tgz"
+    tarParam="-z"
     echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
 elif [ $compFormat = "bz2" ]; then
-    compressionFormat=".bz2"
+    fileExt="tar.bz2"
+    tarParam="-j"
     echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
 else
     echo -e "$ERR Invalid format detected in the configuration file!"
@@ -58,8 +60,8 @@ if [ -d ShooterGame/Saved/SavedArks/ ]; then
     echo -e; cd ../../backups
     
     echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
-    FILE="Backup_$DATE.tar$compressionFormat"
-    tar -zcf $FILE SavedArks/
+    FILE="Backup_$DATE.$fileExt"
+    tar $tarParam -cf $FILE SavedArks/
     rm -rf SavedArks
     echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
     sleep 1s
