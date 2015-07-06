@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.0.2"
+versionP="1.0.3"
 
 source ../version.ini
 source ../configuration.ini
@@ -15,7 +15,7 @@ if [ $versionP != $parameters ]; then
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
-    echo -e "Paran Script Up to date!"; echo -e
+    echo -e " Param Script Up to date!"; echo -e
     sleep 1s
 fi
 
@@ -308,7 +308,7 @@ else
   PvPGamma="bEnablePvPGamma=True?"
 fi
 
-sleep 1s; "Check complete, starting server compiling."
+sleep 1s; echo -e " Check complete, starting server compiling."
 
 executeString="
 $map?\
@@ -362,7 +362,7 @@ ServerAdminPassword=$adminPass?\
 "$ExpierenceMulti" \
 -server -log"
 
-echo -e; echo -e "Executing commandline in screen session named:$YELLOW $sessionName $RESET"
+echo -e; echo -e " Executing commandline in screen session named:$YELLOW $sessionName $RESET"
 # Run Server
 cd ../
 cd $gameDir
