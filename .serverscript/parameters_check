@@ -1,26 +1,25 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.0.0"
+versionP="1.0.1"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
 # Compare Versions
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $versionP != $parameters ]; then
-    echo -e " Script update avaibale! (Parameters Check Script)"
+    echo -e "$ERR Script update avaibale! (Parameters Check Script) $RESET"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
     exit 0
 else
-    echo -e " Up to date!"; echo -e
+    echo -e "Paran Script Up to date!"; echo -e
     sleep 1s
 fi
 
-echo -e "$YELLOW Checking parameters. This can cleanup the command starup a bit. Please wait. $RESET"; echo -e
+echo -e "$YELLOW Checking parameters. $RESET"; echo -e
 # Brace your anus for a cluster fuck of copy paste code. ;)
 # Taming Speed
 if [ $TamingSpeedMultiplier = "1" ]; then
@@ -198,14 +197,21 @@ else
 fi
 
 # Dificulty Multiplier
-if [ $DifficultyOffset = "0" ]; then
+if [ $difficulty = "0" ]; then
   DifficultyMulti=""
 else
   DifficultyMulti="DifficultyOffset=$DifficultyOffset?"
 fi
 
+# Server Password
+if [ -z $serverPass ]; then
+  ServerPassword=""
+else
+  ServerPassword="ServerPassword=$serverPass?"
+fi
+
 # AFK Timer
-if [ $afkTimer = "24000" ]; then
+if [ $afkTimer = "2400" ]; then
   KickIdle=""
 else
   KickIdle="KickIdlePlayersPeriod=$afkTimer?"
@@ -217,8 +223,6 @@ if [ $autoSave = "10" ]; then
 else
   AutoSaveTimer="AutoSavePeriodMinutes=$autoSave?"
 fi
-
-
 
 # Show Players on Map
 if [ $showPlayers = "False" ]; then
@@ -304,60 +308,62 @@ else
   PvPGamma="bEnablePvPGamma=True?"
 fi
 
-sleep 0.5s; echo -e "$YELLOW Check complete, starting server compiling. $RESET"; echo -e
+sleep 1s; "Check complete, starting server compiling."
 
 executeString="
-    $map?\
-    listen?\
-    "$setHostName"\
-    "$setIpAddress"\
-    Port=$gamePort?\
-    QueryPort=$queryPort?\
-    MaxPlayers=$playerCount?\
-    ServerAdminPassword=$adminPass?\
-    ServerPassword=$serverPass?\
-    "$ShowPlayersMap"\
-    "$SetHardcore"\
-    "$UseGlobalVoice"\
-    "$UseProxChat"\
-    "$AllowTributeDownloads"\
-    "$UseThirdPerson"\
-    "$NotifyPlayerLeft"\
-    "$NotifyPlayerJoin"\
-    "$SetPvEServer"\
-    "$EnableCrosshair"\
-    "$ForceNoHud"\
-    "$PvPGamma"\
-    "$KickIdle"\
-    "$AutoSaveTimer"\
-    "$DifficultyMulti"\
-    "$TamingSpeed"\
-    "$HarvestAmount"\
-    "$PlayerWaterDrain"\
-    "$PlayerFoodDrain"\
-    "$DinoFoodDrain"\
-    "$PlayerStanima"\
-    "$DinoStanima"\
-    "$PlayerHealthRecovery"\
-    "$DinoHealthRecovery"\
-    "$DinoCount"\
-    "$HarvestHealth"\
-    "$PvEStructureDecayPeriod"\
-    "$MaxStructuresRange"\
-    "$DayCycleSpeed"\
-    "$NightTimeSpeed"\
-    "$DayTimeSpeed"\
-    "$DinoDamage"\
-    "$TamedDinoDamage"\
-    "$PlayerDamage"\
-    "$StructureDamage"\
-    "$PlayerResistance"\
-    "$DinoResistance"\
-    "$TamedDinoResistance"\
-    "$StructureResistance"\
-    "$ExpierenceMulti" \
-    -server -log"
+$map?\
+listen?\
+"$setHostName"\
+"$setIpAddress"\
+Port=$gamePort?\
+QueryPort=$queryPort?\
+MaxPlayers=$playerCount?\
+ServerAdminPassword=$adminPass?\
+"$ServerPassword"\
+"$ShowPlayersMap"\
+"$SetHardcore"\
+"$UseGlobalVoice"\
+"$UseProxChat"\
+"$AllowTributeDownloads"\
+"$UseThirdPerson"\
+"$NotifyPlayerLeft"\
+"$NotifyPlayerJoin"\
+"$SetPvEServer"\
+"$EnableCrosshair"\
+"$ForceNoHud"\
+"$PvPGamma"\
+"$KickIdle"\
+"$AutoSaveTimer"\
+"$DifficultyMulti"\
+"$TamingSpeed"\
+"$HarvestAmount"\
+"$PlayerWaterDrain"\
+"$PlayerFoodDrain"\
+"$DinoFoodDrain"\
+"$PlayerStanima"\
+"$DinoStanima"\
+"$PlayerHealthRecovery"\
+"$DinoHealthRecovery"\
+"$DinoCount"\
+"$HarvestHealth"\
+"$PvEStructureDecayPeriod"\
+"$MaxStructuresRange"\
+"$DayCycleSpeed"\
+"$NightTimeSpeed"\
+"$DayTimeSpeed"\
+"$DinoDamage"\
+"$TamedDinoDamage"\
+"$PlayerDamage"\
+"$StructureDamage"\
+"$PlayerResistance"\
+"$DinoResistance"\
+"$TamedDinoResistance"\
+"$StructureResistance"\
+"$ExpierenceMulti" \
+-server -log"
 
-echo -e "$YELLOW Executing commandline in screen session named: $sessionName $RESET"
+echo -e; echo -e "Executing commandline in screen session named:$YELLOW $sessionName $RESET"
 # Run Server
+cd ../
+cd $gameDir
 screen -A -m -d -S $sessionName ./$arkExecute $executeString
