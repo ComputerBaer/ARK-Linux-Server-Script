@@ -39,10 +39,7 @@ An advanced ark linux server script that enables you to do a number of things fo
 
 
 # Recently Changed/Updated
-- Auto-Save Timer Added
-- AFK-Timer Added
-- Fixed Formatting Issues/Conflicts
-- Enabled setting IP address.
+- MAJOR Optimization of the script.
 
 # Upcoming Features
 - Server automatic updater.
