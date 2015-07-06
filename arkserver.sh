@@ -38,9 +38,9 @@ fi
 
 # Check for config file.
 if [ -f configuration.ini ]; then
-source configuration.ini
+    source configuration.ini
 
-    if [ -f $safetyNotify = True ]; then
+    if [ $safetyNotify = True ]; then
         sleep 1s
         echo -e "$YELLOW Configuration file found. $RESET"; echo -e
     fi
@@ -83,7 +83,7 @@ fi
 
 # Hard dep's check.
 if [ -x /usr/bin/curl ]; then
-    if [ $safetyNotif = True ]; then
+    if [ $safetyNotify = True ]; then
         sleep 0.5s
         echo -e "$GREEN CURL installed $RESET"
     fi
@@ -94,7 +94,7 @@ else
 fi
 
 if [ -x /usr/bin/screen ]; then
-    if [ $safetyNotif = True ]; then
+    if [ $safetyNotify = True ]; then
         sleep 0.5s
         echo -e "$GREEN SCREEN installed $RESET"
     fi
@@ -105,7 +105,7 @@ else
 fi
 
 if [ -x /usr/bin/git ]; then
-    if [ $safetyNotif = True ]; then
+    if [ $safetyNotify = True ]; then
         sleep 0.5s
         echo -e "$GREEN GIT installed $RESET"
     fi
@@ -117,7 +117,7 @@ fi
 
 
 # IPTables Check
-if [ $safetyNotif = True ]; then
+if [ $safetyNotify = True ]; then
     echo -e; sleep 0.5s
     echo -e "$YELLOW Checking IPTables $RESET"
     sleep 0.5s
@@ -129,7 +129,7 @@ if [ -z "$(iptables -nL | grep $gamePort)" ]; then
     iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
     iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
 else
-    if [ $safetyNotif = True ]; then
+    if [ $safetyNotify = True ]; then
         echo -e " IPTables (Game Port):$GREEN OK $RESET"
     fi
 fi
@@ -140,14 +140,14 @@ if [ -z "$(iptables -nL | grep $queryPort)" ]; then
     iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
     iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
 else
-    if [ $safetyNotif = True ]; then
+    if [ $safetyNotify = True ]; then
         echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
 fi
 
 
 # Check if serverscript directory is already made.
-if [ $safetyNotif = True ]; then
+if [ $safetyNotify = True ]; then
     echo -e; sleep 0.5s
     echo -e "$YELLOW Checking script files. $RESET"
     sleep 1s
@@ -208,7 +208,7 @@ if [ ! -f formatting.ini ]; then
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
 fi
 #####################################[ SERVER SCRIPT SCAN ]#####################################
-if [ $safetyNotif = True ]; then
+if [ $safetyNotify = True ]; then
     echo -e " All scripts found."
     echo -e; sleep 0.5s
 fi
