@@ -20,6 +20,7 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
 
 echo -e " Checking if server session exists..."
 sleep 0.5s; cd ../
@@ -29,25 +30,25 @@ if screen -list | grep -q "$sessionName"; then
     echo -e; sleep 0.5s
     echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET" ; read runningsession
     sleep 0.5s
-    if [ $runningsession = Y ] || [ $runningsession = y ]; then
-		echo -e " Server is running, now stopping."
+    if [[ $runningsession =~ Y ]]; then
+        echo -e " Server is running, now stopping."
         screen -S $sessionName -X quit
         echo -e " Session stopped. Removing PID's"
         PID=`pgrep -f $arkExecute`
         kill -9 $PID
-		echo -e " PID's removed"
-		echo -e; sleep 0.5s
-		echo -e "$RED Server stopped $RESET"
-    elif [ $runningsession = N ] || [ $runningsession = n ]; then
+        echo -e " PID's removed"
+        echo -e; sleep 0.5s
+        echo -e "$RED Server stopped $RESET"
+    elif [[ $runningsession =~ N ]]; then
         echo -e; echo -e "$RED Exiting script."
         exit 0
     else
-		echo -e "$ERR You have entered an invalid response. Exiting"
-		echo -e; exit 0
+        echo -e "$ERR You have entered an invalid response. Exiting"
+        echo -e; exit 0
     fi
 else
-	echo -e " Server isn't running."
-	echo -e; sleep 0.5s
+    echo -e " Server isn't running."
+    echo -e; sleep 0.5s
 fi
 
 
@@ -63,30 +64,30 @@ if [ -f $arkExecute ]; then
     sleep 0.5s
     echo -e " Executable found."
 else
-	sleep 0.5s
+    sleep 0.5s
     echo -e "$ERR Executable could not be found. Fixing it."
-    cp ShooterGameServer $arkExecute
+    cp $gameExecute $arkExecute
     sleep 0.5s
     if [ -f $arkExecute ]; then
         echo -e " Executable renamed. Moving on."
     else
         echo -e; echo -e "$ERR Unable to fix executable name."
-        echo -e " Please change the file named$YELLOW ShooterGameServer$RESET to$GREEN $arkExecute $RESET"
+        echo -e " Please change the file named$YELLOW $gameExecute$RESET to$GREEN $arkExecute $RESET"
         sleep 1s; exit 0
     fi
 fi
 
 if [[ -z "$ipAddress" ]]; then
-	setIpAddress=""
+    setIpAddress=""
 else
-	setIpAddress="MultiHome=$ipAddress?"
+    setIpAddress="MultiHome=$ipAddress?"
 fi
 
 if [[ -z "$hostName" ]]; then
-	setHostName=""
+    setHostName=""
     hostName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
 else
-	setHostName="SessionName=$hostName?"
+    setHostName="SessionName=$hostName?"
 fi
 
 sleep 1s

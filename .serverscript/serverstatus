@@ -20,98 +20,110 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
 
 # Couple If Statements for Stats Info
-if [ -z $ipAddress ]; then
-    address="$RED UNDEFINED $RESET (Default IP Address)"
+echo -e "$YELLOW Collecting status of your Ark server... $RESET"
+
+if ps ax | grep -v grep | grep $arkExecute > /dev/null; then
+    setRunning="$GREEN YES $RESET"
 else
-    address="$YELLOW $ipAddress $RESET"
+    setRunning="$RED NO $RESET"
 fi
 
-if [ -z $arkServers  ]; then
+if [ -z $ipAddress ]; then
+    setAddress="$RED UNDEFINED $RESET (Default IP Address)"
+else
+    setAddress="$YELLOW $ipAddress $RESET"
+fi
+
+if [ -z $hostName ]; then
+    setHostName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
+else
+    setHostName="$GREEN $hostName $RESET"
+fi
+
+if [ -z $arkServers ]; then
     arkServerList="$RED DISABLED $RESET"
 else
     arkServerList="$YELLOW $arkServers $RESET"
 fi
 
 if [ -z $serverPass ]; then
-	setServerPass="$RED NOT SET $RESET"
+    setServerPass="$RED NOT SET $RESET"
 else
-	setServerPass="$YELLOW $serverPass $RESET"
+    setServerPass="$YELLOW $serverPass $RESET"
 fi
 
 if [ -z $adminPass ]; then
-	setAdminPass="$RED NOT SET $RESET"
+    setAdminPass="$RED NOT SET $RESET"
 else
-	setServerPass="$YELLOW $adminPass $RESET"
+    setAdminPass="$YELLOW $adminPass $RESET"
 fi
 
 # Show Information
-echo -e "$YELLOW Collecting status of your Ark server... $RESET"
-sleep 0.5s; cd ../
-if ps ax | grep -v grep | grep "$arkExecute" > /dev/null
-then
-    sleep 0.5s
-    sleep 0.3s; echo -e " Is Server Running:$GREEN YES $RESET"
-    sleep 0.3s; echo -e " Executable:$YELLOW $arkExecute $RESET"
-    echo -e; sleep 0.3s
-    sleep 0.3s; echo -e " Address:	$address"
-    sleep 0.3s; echo -e " HostName:	$GREEN $hostName $RESET"
-    sleep 0.3s; echo -e " Server Pass:	$setServerPass"
-    sleep 0.3s; echo -e " Admin Pass:	$setAdminPass"
-    sleep 0.3s; echo -e " Max Players:	$YELLOW $playerCount $RESET"
-    sleep 0.3s; echo -e " ArkServers:	$arkServerList"
-    sleep 0.3s
-    if [ $showServerSettings = "True" ]; then
-    	echo -e
-        echo -e "#########[ Server Settings ]########"
-        sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
-        sleep 0.3s; echo -e " Hardcore Mode:$CYAN               $hardcore $RESET"
-        sleep 0.3s; echo -e " Global Voice Chat:$CYAN           $globalVoice $RESET"
-        sleep 0.3s; echo -e " Proximity Chat:$CYAN              $proxChat $RESET"
-        sleep 0.3s; echo -e " No Tribute DL:$CYAN               $noTributeDl $RESET"
-        sleep 0.3s; echo -e " Allow Third Person:$CYAN          $thirdPerson $RESET"
-        sleep 0.3s; echo -e " Notify Leaving:$CYAN              $notifyLeft $RESET"
-        sleep 0.3s; echo -e " Don't Notify Join:$CYAN           $dontNotifyJoin $RESET"
-        sleep 0.3s; echo -e " PVE Enabled:$CYAN                 $pveServer $RESET"
-        sleep 0.3s; echo -e " Enable Crosshairs:$CYAN           $crossHair $RESET"
-        sleep 0.3s; echo -e " No HUD:$CYAN                      $noHud  $RESET"
-        sleep 0.3s; echo -e " Enable PvP Gamma:$CYAN            $enablePvPGamma $RESET"
-        sleep 0.3s; echo -e " AFK Timer:$CYAN                   $afkTimer Seconds $RESET"
-        sleep 0.3s; echo -e " Auto Save:$CYAN                   $autoSave Minutes $RESET"
-        sleep 0.3s; echo -e " Difficulty Multiplier:$CYAN       $difficulty $RESET"
-        sleep 0.3s; echo -e " Current Map:$CYAN                 $map $RESET"
-    fi
-    if [ $showServerMutipliers = "True" ]; then
-        sleep 0.3s; echo -e "#######[ Server Multipliers ]#######"
-        sleep 0.3s; echo -e " TamingSpeed:$CYAN                 $TamingSpeedMultiplier $RESET"
-        sleep 0.3s; echo -e " HarvestAmount:$CYAN               $HarvestAmountMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerWaterDrain:$CYAN            $PlayerCharacterWaterDrainMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerFoodDrain:$CYAN             $PlayerCharacterFoodDrainMultiplier $RESET"
-        sleep 0.3s; echo -e " DinoFoodDrain:$CYAN               $DinoCharacterFoodDrainMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerStaminaDrain:$CYAN          $PlayerCharacterStaminaDrainMultiplier $RESET"
-        sleep 0.3s; echo -e " DinoStaminaDrain:$CYAN            $DinoCharacterStaminaDrainMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerHealthRecovery:$CYAN        $PlayerCharacterHealthRecoveryMultiplier $RESET"
-        sleep 0.3s; echo -e " DinoHealthRecovery:$CYAN          $DinoCharacterHealthRecoveryMultiplier $RESET"
-        sleep 0.3s; echo -e " DinoCount:$CYAN                   $DinoCountMultiplier $RESET"
-        sleep 0.3s; echo -e " HarvestHealth:$CYAN               $HarvestHealthMultiplier $RESET"
-        sleep 0.3s; echo -e " PvEStructureDecayPeriod:$CYAN     $PvEStructureDecayDestructionPeriod $RESET"
-        echo -e; sleep 0.3s
-        sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange $RESET"
-        sleep 0.3s; echo -e " DayCycleSpeedScale:$CYAN          $DayCycleSpeedScale $RESET"
-        sleep 0.3s; echo -e " NightTimeSpeedScale:$CYAN         $NightTimeSpeedScale $RESET"
-        sleep 0.3s; echo -e " DayTimeSpeedScale:$CYAN           $DayTimeSpeedScale $RESET"
-        sleep 0.3s; echo -e " DinoDamage:$CYAN                  $DinoDamageMultiplier $RESET"
-        sleep 0.3s; echo -e " TamedDinoDamage:$CYAN             $TamedDinoDamageMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerDamage:$CYAN                $PlayerDamageMultiplier $RESET"
-        sleep 0.3s; echo -e " StructureDamage:$CYAN             $StructureDamageMultiplier $RESET"
-        sleep 0.3s; echo -e " PlayerResistance:$CYAN            $PlayerResistanceMultiplier $RESET"
-        sleep 0.3s; echo -e " DinoResistance:$CYAN              $DinoResistanceMultiplier $RESET"
-        sleep 0.3s; echo -e " TamedDinoResistance:$CYAN         $TamedDinoResistanceMultiplier $RESET"
-        sleep 0.3s; echo -e " StructureResistance:$CYAN         $StructureResistanceMultiplier $RESET"
-        sleep 0.3s; echo -e " XPMultiplier:$CYAN                $XPMultiplier $RESET"
-    fi
-else
-    echo -e "$ERR Server is not running!"
-    exit 0
+sleep 0.5s; echo -e
+sleep 0.3s; echo -e " Is Server Running:    $setRunning"
+sleep 0.3s; echo -e " Executable:           $YELLOW $arkExecute $RESET"
+sleep 0.3s; echo -e " Game Port:            $YELLOW $gamePort $RESET"
+sleep 0.3s; echo -e " Query Port:           $YELLOW $queryPort $RESET"
+sleep 0.3s; echo -e " Screen Name:          $YELLOW $sessionName $RESET"
+sleep 0.3s; echo -e
+sleep 0.3s; echo -e " Address:              $setAddress"
+sleep 0.3s; echo -e " HostName:             $setHostName"
+sleep 0.3s; echo -e " Server Pass:          $setServerPass"
+sleep 0.3s; echo -e " Admin Pass:           $setAdminPass"
+sleep 0.3s; echo -e " Max Players:          $YELLOW $playerCount $RESET"
+sleep 0.3s; echo -e " ArkServers:           $arkServerList"
+
+if [[ $showServerSettings =~ true ]]; then
+    sleep 0.3s; echo -e
+    sleep 0.3s; echo -e "############[$CYAN Server Settings$RESET ]###########"
+    sleep 0.3s; echo -e " Show Players on Map:$CYAN         $showPlayers $RESET"
+    sleep 0.3s; echo -e " Hardcore Mode:$CYAN               $hardcore $RESET"
+    sleep 0.3s; echo -e " Global Voice Chat:$CYAN           $globalVoice $RESET"
+    sleep 0.3s; echo -e " Proximity Chat:$CYAN              $proxChat $RESET"
+    sleep 0.3s; echo -e " No Tribute DL:$CYAN               $noTributeDl $RESET"
+    sleep 0.3s; echo -e " Allow Third Person:$CYAN          $thirdPerson $RESET"
+    sleep 0.3s; echo -e " Notify Leaving:$CYAN              $notifyLeft $RESET"
+    sleep 0.3s; echo -e " Don't Notify Join:$CYAN           $dontNotifyJoin $RESET"
+    sleep 0.3s; echo -e " PVE Enabled:$CYAN                 $pveServer $RESET"
+    sleep 0.3s; echo -e " Enable Crosshairs:$CYAN           $crossHair $RESET"
+    sleep 0.3s; echo -e " No HUD:$CYAN                      $noHud  $RESET"
+    sleep 0.3s; echo -e " Enable PvP Gamma:$CYAN            $enablePvPGamma $RESET"
+    sleep 0.3s; echo -e " AFK Timer:$CYAN                   $afkTimer Seconds $RESET"
+    sleep 0.3s; echo -e " Auto Save:$CYAN                   $autoSave Minutes $RESET"
+    sleep 0.3s; echo -e " Difficulty Multiplier:$CYAN       $difficulty $RESET"
+    sleep 0.3s; echo -e " Current Map:$CYAN                 $map $RESET"
+fi
+
+if [[ $showServerMutipliers =~ true ]]; then
+    sleep 0.3s; echo -e
+    sleep 0.3s; echo -e "##########[$CYAN Server Multipliers$RESET ]##########"
+    sleep 0.3s; echo -e " TamingSpeed:$CYAN                 $TamingSpeedMultiplier $RESET"
+    sleep 0.3s; echo -e " HarvestAmount:$CYAN               $HarvestAmountMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerWaterDrain:$CYAN            $PlayerCharacterWaterDrainMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerFoodDrain:$CYAN             $PlayerCharacterFoodDrainMultiplier $RESET"
+    sleep 0.3s; echo -e " DinoFoodDrain:$CYAN               $DinoCharacterFoodDrainMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerStaminaDrain:$CYAN          $PlayerCharacterStaminaDrainMultiplier $RESET"
+    sleep 0.3s; echo -e " DinoStaminaDrain:$CYAN            $DinoCharacterStaminaDrainMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerHealthRecovery:$CYAN        $PlayerCharacterHealthRecoveryMultiplier $RESET"
+    sleep 0.3s; echo -e " DinoHealthRecovery:$CYAN          $DinoCharacterHealthRecoveryMultiplier $RESET"
+    sleep 0.3s; echo -e " DinoCount:$CYAN                   $DinoCountMultiplier $RESET"
+    sleep 0.3s; echo -e " HarvestHealth:$CYAN               $HarvestHealthMultiplier $RESET"
+    sleep 0.3s; echo -e " PvEStructureDecayPeriod:$CYAN     $PvEStructureDecayDestructionPeriod $RESET"
+    sleep 0.3s; echo -e
+    sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange $RESET"
+    sleep 0.3s; echo -e " DayCycleSpeedScale:$CYAN          $DayCycleSpeedScale $RESET"
+    sleep 0.3s; echo -e " NightTimeSpeedScale:$CYAN         $NightTimeSpeedScale $RESET"
+    sleep 0.3s; echo -e " DayTimeSpeedScale:$CYAN           $DayTimeSpeedScale $RESET"
+    sleep 0.3s; echo -e " DinoDamage:$CYAN                  $DinoDamageMultiplier $RESET"
+    sleep 0.3s; echo -e " TamedDinoDamage:$CYAN             $TamedDinoDamageMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerDamage:$CYAN                $PlayerDamageMultiplier $RESET"
+    sleep 0.3s; echo -e " StructureDamage:$CYAN             $StructureDamageMultiplier $RESET"
+    sleep 0.3s; echo -e " PlayerResistance:$CYAN            $PlayerResistanceMultiplier $RESET"
+    sleep 0.3s; echo -e " DinoResistance:$CYAN              $DinoResistanceMultiplier $RESET"
+    sleep 0.3s; echo -e " TamedDinoResistance:$CYAN         $TamedDinoResistanceMultiplier $RESET"
+    sleep 0.3s; echo -e " StructureResistance:$CYAN         $StructureResistanceMultiplier $RESET"
+    sleep 0.3s; echo -e " XPMultiplier:$CYAN                $XPMultiplier $RESET"
 fi
