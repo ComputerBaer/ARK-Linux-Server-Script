@@ -116,57 +116,8 @@ sleep 0.5s
 echo -e "$YELLOW To view server settings, use:$GREEN ./arkserver.sh status $RESET"; echo -e
 echo -e "$YELLOW Now executing.... $RESET"
 
-executeString="
-$map?\
-listen?\
-"$setHostName"\
-Port=$gamePort?\
-QueryPort=$queryPort?\
-"$setIpAddress"\
-MaxPlayers=$playerCount?\
-ServerAdminPassword=$adminPass?\
-ServerPassword=$serverPass?\
-bEnablePvPGamma=$enablePvPGamma?\
-ShowMapPlayerLocation=$showPlayers?\
-ServerHardcore=$hardcore?\
-GlobalVoiceChat=$globalVoice?\
-ProximityChat=$proxChat?\
-NoTributeDownloads=$noTributeDl?\
-AllowThirdPersonPlayer=$thirdPerson?\
-AlwaysNotifyPlayerLeft=$notifyLeft?\
-DontAlwaysNotifyPlayerJoined=$dontNotifyJoin?\
-ServerPVE=$pveServer?ServerCrosshair=$crossHair?\
-ServerForceNoHUD=$noHud?\
-DifficultyOffset=$difficulty?\
-KickIdlePlayersPeriod=$afkTimer?\
-AutoSavePeriodMinutes=$autoSave?\
-TamingSpeedMultiplier=$TamingSpeedMultiplier?\
-HarvestAmountMultiplier=$HarvestAmountMultiplier?\
-PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier?\
-PlayerCharacterFoodDrainMultiplier=$PlayerCharacterFoodDrainMultiplier?\
-DinoCharacterFoodDrainMultiplier=$DinoCharacterFoodDrainMultiplier?\
-PlayerCharacterStaminaDrainMultiplier=$PlayerCharacterStaminaDrainMultiplier?\
-DinoCharacterStaminaDrainMultiplier=$DinoCharacterStaminaDrainMultiplier?\
-PlayerCharacterHealthRecoveryMultiplier=$PlayerCharacterHealthRecoveryMultiplier?\
-DinoCharacterHealthRecoveryMultiplier=$DinoCharacterHealthRecoveryMultiplier?\
-DinoCountMultiplier=$DinoCountMultiplier?\
-HarvestHealthMultiplier=$HarvestHealthMultiplier?\
-PvEStructureDecayDestructionPeriod=$PvEStructureDecayDestructionPeriod?\
-MaxStructuresInRange=$MaxStructuresInRange?\
-DayCycleSpeedScale=$DayCycleSpeedScale?\
-NightTimeSpeedScale=$NightTimeSpeedScale?\
-DayTimeSpeedScale=$DayTimeSpeedScale?\
-DinoDamageMultiplier=$DinoDamageMultiplier?\
-TamedDinoDamageMultiplier=$TamedDinoDamageMultiplier?\
-PlayerDamageMultiplier=$PlayerDamageMultiplier?\
-StructureDamageMultiplier=$StructureDamageMultiplier?\
-PlayerResistanceMultiplier=$PlayerResistanceMultiplier?\
-DinoResistanceMultiplier=$DinoResistanceMultiplier?\
-TamedDinoResistanceMultiplier=$TamedDinoResistanceMultiplier?\
-StructureResistanceMultiplier=$StructureResistanceMultiplier?\
-XPMultiplier=$XPMultiplier -server -log"
-
-screen -A -m -d -S $sessionName ./$arkExecute $executeString
+cd ../../../.serverscript
+./parameters_check
 
 echo -e; echo -e "$GREEN Server is starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
 echo -e; exit 0
