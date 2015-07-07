@@ -209,6 +209,13 @@ if [ ! -f updateserver ]; then
     chmod 777 updateserver
 fi
 
+# Update Check Script
+if [ ! -f update_check ]; then
+    echo -e "$YELLOW Update Check Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
+    chmod 777 update_check
+fi
+
 # Backup Server Script
 if [ ! -f backupserver ]; then
     echo -e "$YELLOW Backup Script $RESET"
@@ -274,6 +281,11 @@ install () {
 update () {
     clear
     ./updateserver
+}
+
+updatecheck () {
+    clear
+    ./update_check
 }
 
 backup () {

@@ -21,3 +21,12 @@ else
     sleep 1s
 fi
 
+ 
+cd ../steamcmd
+newVersion=$(./steamcmd.sh +login anonymous +app_info_print 376030 +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
+
+if [ $newVersion -gt $currentVersion ]; then
+    echo "Update found!"
+else
+    echo "Up to date!"
+fi
