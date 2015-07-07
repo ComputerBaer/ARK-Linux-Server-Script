@@ -21,9 +21,13 @@ else
     sleep 1s
 fi
 
- 
+# 
 cd ../steamcmd
-newVersion=$(./steamcmd.sh +login anonymous +app_info_print 376030 +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
+newVersion=$(./steamcmd.sh +login anonymous +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
+
+#
+echo -e "Current Version:   $currentVersion"
+echo -e "New Version:       $newVersion"
 
 if [ $newVersion -gt $currentVersion ]; then
     echo "Update found!"
@@ -31,5 +35,6 @@ else
     echo "Up to date!"
 fi
 
+# 
 cd ..
 echo "currentVersion=$newVersion" > version_game.ini
