@@ -23,7 +23,7 @@ fi
 
 # 
 cd ../steamcmd
-newVersion=$(./steamcmd.sh +login anonymous +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
+newVersion=$(./steamcmd.sh +login anonymous +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
 
 #
 echo -e "Current Version:   $currentVersion"
