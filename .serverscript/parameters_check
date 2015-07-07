@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.0.3"
+versionP="1.0.4"
 
 source ../version.ini
 source ../configuration.ini
@@ -9,7 +9,7 @@ source formatting.ini
 
 # Compare Versions
 if [ $versionP != $parameters ]; then
-    echo -e "$ERR Script update avaibale! (Parameters Check Script) $RESET"
+    echo -e "$ERR Script update available! (Parameters Check Script) $RESET"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
     echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
@@ -18,6 +18,8 @@ else
     echo -e " Param Script Up to date!"; echo -e
     sleep 1s
 fi
+
+shopt -s nocasematch
 
 echo -e "$YELLOW Checking parameters. $RESET"; echo -e
 # Brace your anus for a cluster fuck of copy paste code. ;)
@@ -225,87 +227,87 @@ else
 fi
 
 # Show Players on Map
-if [ $showPlayers = "False" ]; then
-  ShowPlayersMap=""
+if [[ $showPlayers =~ true ]]; then
+    ShowPlayersMap="ShowMapPlayerLocation=True?"
 else
-  ShowPlayersMap="ShowMapPlayerLocation=True?"
+    ShowPlayersMap=""
 fi
 
 # Hardcore Mode
-if [ $hardcore = "False" ]; then
-  SetHardcore=""
+if [[ $hardcore =~ true ]]; then
+    SetHardcore="ServerHardcore=True?"
 else
-  SetHardcore="ServerHardcore=True?"
+    SetHardcore=""
 fi
 
 # Global Voice
-if [ $globalVoice = "False" ]; then
-  UseGlobalVoice=""
+if [[ $globalVoice =~ true ]]; then
+    UseGlobalVoice="GlobalVoiceChat=True?"
 else
-  UseGlobalVoice="GlobalVoiceChat=True?"
+    UseGlobalVoice=""
 fi
 
 # Proximity Chat
-if [ $proxChat = "False" ]; then
-  UseProxChat=""
+if [[ $proxChat =~ true ]]; then
+    UseProxChat="ProximityChat=True?"
 else
-  UseProxChat="ProximityChat=True?"
+    UseProxChat=""
 fi
 
 # No Tribute Downloads
-if [ $noTributeDl = "False" ]; then
-  AllowTributeDownloads=""
+if [[ $noTributeDl =~ true ]]; then
+    AllowTributeDownloads="NoTributeDownloads=True?"
 else
-  AllowTributeDownloads="NoTributeDownloads=True?"
+    AllowTributeDownloads=""
 fi
 
 # Third Person
-if [ $thirdPerson = "False" ]; then
-  UseThirdPerson=""
+if [[ $thirdPerson =~ true ]]; then
+    UseThirdPerson="AllowThirdPersonPlayer=True?"
 else
-  UseThirdPerson="AllowThirdPersonPlayer=True?"
+    UseThirdPerson=""
 fi
 
 # Always Notify Player Left
-if [ $notifyLeft = "False" ]; then
-  NotifyPlayerLeft=""
+if [[ $notifyLeft =~ true ]]; then
+    NotifyPlayerLeft="AlwaysNotifyPlayerLeft=True?"
 else
-  NotifyPlayerLeft="AlwaysNotifyPlayerLeft=True?"
+    NotifyPlayerLeft=""
 fi
 
 # Dont Notify Player Join
-if [ $notifyJoin = "False" ]; then
-  NotifyPlayerJoin=""
+if [[ $notifyJoin =~ true ]]; then
+    NotifyPlayerJoin=""
 else
-  NotifyPlayerJoin="DontAlwaysNotifyPlayerJoined=False?"
+    NotifyPlayerJoin="DontAlwaysNotifyPlayerJoined=True?"
 fi
 
 # PvE Server
-if [ $pveServer = "False" ]; then
-  SetPvEServer=""
+if [[ $pveServer =~ true ]]; then
+    SetPvEServer="ServerPVE=True?"
 else
-  SetPvEServer="ServerPVE=True?"
+    SetPvEServer=""
 fi
 
 # Crosshair
-if [ $crossHair = "False" ]; then
-  EnableCrosshair=""
+if [[ $crossHair =~ true ]]; then
+    EnableCrosshair="ServerCrosshair=True?"
 else
-  EnableCrosshair="ServerCrosshair=True?"
+    EnableCrosshair=""
 fi
 
 # Force No Hude
-if [ $noHud = "False" ]; then
-  ForceNoHud=""
+if [[ $noHud =~ true ]]; then
+    ForceNoHud="ServerForceNoHUD=True?"
 else
-  ForceNoHud="ServerForceNoHUD=True?"
+    ForceNoHud=""
 fi
 
 # PvP Gamma
-if [ $enablePvPGamma = "False" ]; then
-  PvPGamma=""
+if [[ $enablePvPGamma =~ true ]]; then
+    PvPGamma="bEnablePvPGamma=True?"
 else
-  PvPGamma="bEnablePvPGamma=True?"
+    PvPGamma=""
 fi
 
 sleep 1s; echo -e " Check complete, starting server compiling."
