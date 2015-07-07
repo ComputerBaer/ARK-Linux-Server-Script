@@ -54,4 +54,4 @@ wget https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/ar
 
 # Contributors
 - Zendrex
-- ComputerBaer (Added port params and features for hostname)
+- ComputerBaer
