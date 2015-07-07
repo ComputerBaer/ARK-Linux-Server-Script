@@ -30,3 +30,6 @@ if [ $newVersion -gt $currentVersion ]; then
 else
     echo "Up to date!"
 fi
+
+cd ..
+echo "currentVersion=$newVersion" > version_game.ini
