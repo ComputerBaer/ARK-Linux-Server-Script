@@ -21,20 +21,44 @@ else
     sleep 1s
 fi
 
-# 
+# Get new ARK-Version from Steam Network
+echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
+echo -ne " "
+
 cd ../steamcmd
-newVersion=$(./steamcmd.sh +login anonymous +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*')
+./steamcmd.sh +login anonymous +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
+STEAM_PROC_ID=$!
 
-#
-echo -e "Current Version:   $currentVersion"
-echo -e "New Version:       $newVersion"
+while :; do
+    if kill -0 $STEAM_PROC_ID 2>/dev/null; then
+        echo -ne "."
+    else
+        echo -e
+        echo -e "$YELLOW Request completed! $RESET"
+        break
+    fi
+    sleep 0.5
+done
 
+newVersion=$(cat ark_tmp_version)
+rm ark_tmp_version
+
+# Comparing version numbers
+sleep 0.5; echo -e
+echo -e "$YELLOW Comparing ARK-Server version numbers. $RESET"
+
+echo -e " Current Version:$CYAN   $currentVersion $RESET"
+echo -e " New Version:$CYAN       $newVersion $RESET"
+
+sleep 0.5; echo -e
 if [ $newVersion -gt $currentVersion ]; then
-    echo "Update found!"
+    echo -e "$RED ARK-Server update found! $RESET"
 else
-    echo "Up to date!"
+    echo -e "$GREEN ARK-Server is up to date! $RESET"
 fi
 
-# 
+# Write new Version to file
 cd ..
 echo "currentVersion=$newVersion" > version_game.ini
+
+echo -e; exit 0
