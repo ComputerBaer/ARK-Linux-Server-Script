@@ -174,6 +174,13 @@ fi
 
 cd .serverscript
 
+# Functions Script
+if [ ! -f _functions ]; then
+    echo -e "$YELLOW Functions Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+    chmod 777 _functions
+fi
+
 # Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
