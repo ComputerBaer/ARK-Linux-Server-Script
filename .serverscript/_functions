@@ -75,9 +75,13 @@ function installSteam
 # runSteam 1 - Update + Version Check
 function runSteam
 {
-    installSteam
+    cd $SCRIPT_DIR/..
     
-    cd $SCRIPT_DIR/../$STEAM_DIR
+    # Check Steam Installation
+    if [ ! -d $STEAM_DIR ]; then
+        installSteam
+    fi
+    cd $STEAM_DIR
     
     # Run Steam
     if [ $1 == 0 ]; then
