@@ -40,6 +40,26 @@ echo -e " New Version:$CYAN       $newVersion $RESET"
 sleep 0.5; echo -e
 if [ $newVersion -gt $currentVersion ]; then
     echo -e "$RED ARK-Server update found! $RESET"
+    sleep 1
+    
+    echo -e " Would you like to update the server?"
+    echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET"
+    read input
+    echo -e; sleep 0.5s
+    if [[ $input =~ Y ]]; then
+        echo -e "$GREEN Starting update script."
+        sleep 1
+        
+        cd $SCRIPT_DIR
+        clear
+        ./updateserver
+    elif [[ $input =~ N ]]; then
+        echo -e "$RED Exiting script."
+        echo -e; exit 0
+    else
+        echo -e "$ERR You have entered an invalid response. Exiting"
+        echo -e; exit 0
+    fi
 else
     echo -e "$GREEN ARK-Server is up to date! $RESET"
 fi
