@@ -8,6 +8,8 @@ source ../version_game.ini
 source ../configuration.ini
 source formatting.ini
 
+source _functions
+
 # Compare Script Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $updatecheck ]; then
@@ -21,27 +23,12 @@ else
     sleep 1s
 fi
 
+installSteam
+
 # Get new ARK-Version from Steam Network
 echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
-echo -ne " "
-
-cd ../steamcmd
-./steamcmd.sh +login anonymous +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
-STEAM_PROC_ID=$!
-
-while :; do
-    if kill -0 $STEAM_PROC_ID 2>/dev/null; then
-        echo -ne "."
-    else
-        echo -e
-        echo -e "$YELLOW Request completed! $RESET"
-        break
-    fi
-    sleep 0.5
-done
-
-newVersion=$(cat ark_tmp_version)
-rm ark_tmp_version
+runSteam 0
+echo -e "$YELLOW Request completed! $RESET"
 
 # Comparing version numbers
 sleep 0.5; echo -e
@@ -56,9 +43,5 @@ if [ $newVersion -gt $currentVersion ]; then
 else
     echo -e "$GREEN ARK-Server is up to date! $RESET"
 fi
-
-# Write new Version to file
-cd ..
-echo "currentVersion=$newVersion" > version_game.ini
 
 echo -e; exit 0

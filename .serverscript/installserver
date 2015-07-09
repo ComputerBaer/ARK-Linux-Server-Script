@@ -4,8 +4,11 @@
 version="1.1.8"
 
 source ../version.ini
+source ../version_game.ini
 source ../configuration.ini
 source formatting.ini
+
+source _functions
 
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
@@ -20,30 +23,11 @@ else
     sleep 1s
 fi
 
-
-cd ../
-# Remove old steamcmd directory.
-# Create Directory
-echo -e "$YELLOW Creating the SteamCMD directory. $RESET"
-sleep 0.5s; mkdir steamcmd
-echo -e " Directory created, moving on."
-cd steamcmd; sleep 1s
-
-# Install Lib32GCC1
-echo -e; echo -e "$YELLOW Installing linux steam dependencies. $RESET"
-sudo apt-get install lib32gcc1
-echo -e " Lib32gcc1 is installed."
-sleep 0.5s
-
-# Install SteamCMD
-echo -e; echo -e "$YELLOW Installing SteamCMD $RESET"
-curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
-tar -xvzf steamcmd_linux.tar.gz
-echo -e; sleep 0.5s
+installSteam
 
 # Install Server Files
 echo -e "$YELLOW SteamCMD installed. Now installing game server. This may take a while. $RESET"
-./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
+runSteam 1
 
 echo -e; sleep 0.5s
 echo -e "$GREEN Complete. Exiting. $RESET"

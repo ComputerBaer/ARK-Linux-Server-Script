@@ -4,8 +4,11 @@
 version="1.1.9"
 
 source ../version.ini
+source ../version_game.ini
 source ../configuration.ini
 source formatting.ini
+
+source _functions
 
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
@@ -37,31 +40,13 @@ else
 fi
 
 echo -e; sleep 0.5s
-echo -e "$YELLOW Locating SteamCMD directory. $RESET"
-sleep 0.5s; cd ../
-if [ -d steamcmd ]; then
-    echo -e " SteamCMD directory found."
-else
-    echo -e " $ERR Couldn't find the SteamCMD directory, installing now."
-    sleep 0.5s; echo -e " Creating directory 'steamcmd'"
-    mkdir steamcmd
-    cd ../steamcmd
-    
-    sleep 0.5s; echo -e " Installing linux steam dependencies."
-    sudo apt-get install lib32gcc1
-    echo -e "$YELLOW Lib32gcc1 is installed. $RESET"
-    
-    sleep 0.5s; echo -e " Downloading steamcmd zip."
-    curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
-    tar -xvzf steamcmd_linux.tar.gz
-    cd ../
-fi
+
+installSteam
 
 cd steamcmd
 echo -e; sleep 0.5s
 echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
-echo -e
-./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit
+runSteam 1
 
 cd ../$gameDir
 echo -e; sleep 0.5s
