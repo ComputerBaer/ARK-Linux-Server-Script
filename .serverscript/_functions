@@ -31,11 +31,12 @@ function installSteam
     cd $SCRIPT_DIR/..
     
     # Check Steam Directory
-    sleep 0.5; echo -e
+    sleep 0.5s; echo -e
     echo -e "$YELLOW Locating SteamCMD directory. $RESET"
     sleep 0.5s
     if [ -d $STEAM_DIR ]; then
         echo -e " SteamCMD directory found."
+        sleep 0.5s; echo -e
         return 0
     fi
     echo -e " $ERR Couldn't find the SteamCMD directory, installing now."
@@ -59,14 +60,16 @@ function installSteam
     # Install Steam
     echo -e; echo -e "$YELLOW Installing SteamCMD. $RESET"
     #curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
+    echo -ne " Downloading"
     curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -s &
     waitBackgroundTask $!
     #tar -xvzf steamcmd_linux.tar.gz
+    echo -ne " Extracting"
     tar -xzf steamcmd_linux.tar.gz &
     waitBackgroundTask $!
     rm steamcmd_linux.tar.gz
-    echo -e " SteamCMD installed."
-    sleep 0.5s
+    echo -e "$GREEN SteamCMD installed."
+    sleep 0.5s; echo -e
     
     cd $SCRIPT_DIR
 }
@@ -81,7 +84,7 @@ function runSteam
     if [ ! -d $STEAM_DIR ]; then
         installSteam
     fi
-    cd $STEAM_DIR
+    cd $SCRIPT_DIR/../$STEAM_DIR
     
     # Run Steam
     if [ $1 == 0 ]; then
@@ -114,7 +117,7 @@ function waitBackgroundTask
         else
             break
         fi
-        sleep 0.5
+        sleep 0.5s
     done
     
     echo -e

@@ -26,9 +26,8 @@ fi
 installSteam
 
 # Install Server Files
-echo -e "$YELLOW SteamCMD installed. Now installing game server. This may take a while. $RESET"
+echo -e "$YELLOW Now installing game server. This may take a while. $RESET"
 runSteam 1
 
-echo -e; sleep 0.5s
 echo -e "$GREEN Complete. Exiting. $RESET"
 echo -e " You may now start the server with $GREEN ./arkserver.sh start $RESET"

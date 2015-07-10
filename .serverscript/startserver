@@ -22,7 +22,7 @@ fi
 
 shopt -s nocasematch
 
-echo -e " Checking if server session exists..."
+echo -e "$YELLOW Checking if server session exists..."
 sleep 0.5s; cd ../
 if screen -list | grep -q "$sessionName"; then
     echo -e "$ERR The server is already running. The server session name is:$YELLOW $sessionname $RESET"
