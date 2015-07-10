@@ -12,7 +12,7 @@ source _functions
 
 # Version Checker
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $stopserver ]; then
+if [ $version != $installserver ]; then
     echo -e " Script update available! (Install Script)"
     echo -e; echo -e "$YELLOW Downloading script file. $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
