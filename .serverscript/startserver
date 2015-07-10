@@ -52,7 +52,7 @@ else
 fi
 
 # Game Server Version Check
-if [ $checkUpdates = "True" ]; then
+if [[ $checkUpdates =~ true ]]; then
     cd .serverscript
     echo -e "$YELLOW Checking for Game Server Updates $RESET"
     echo -e " Running update check script."; sleep 1s
