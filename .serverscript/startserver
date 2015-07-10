@@ -61,6 +61,7 @@ if [[ $checkUpdates =~ true ]]; then
     ./update_check
     sleep 0.5s
     echo -e "--------------------------------------------------"
+    cd ..
 fi
 
 # ULIMIT CHANGE
