@@ -23,6 +23,8 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
+
 installSteam
 
 # Get new ARK-Version from Steam Network
