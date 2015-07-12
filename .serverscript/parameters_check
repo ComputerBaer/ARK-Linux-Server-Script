@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.0.4"
+versionP="1.0.5"
 
 source ../version.ini
 source ../configuration.ini
@@ -23,6 +23,20 @@ shopt -s nocasematch
 
 echo -e "$YELLOW Checking parameters. $RESET"; echo -e
 # Brace your anus for a cluster fuck of copy paste code. ;)
+# IP Address
+if [[ -z "$ipAddress" ]]; then
+  setIpAddress=""
+else
+  setIpAddress="MultiHome=$ipAddress?"
+fi
+
+# HostName
+if [[ -z "$hostName" ]]; then
+  setHostName=""
+else
+  setHostName="SessionName=$hostName?"
+fi
+
 # Taming Speed
 if [ $TamingSpeedMultiplier = "1" ]; then
   TamingSpeed=""
