@@ -40,10 +40,10 @@ if screen -list | grep -q "$sessionName"; then
         echo -e; sleep 0.5s
         echo -e "$RED Server stopped $RESET"
     elif [[ $runningsession =~ N ]]; then
-        echo -e; echo -e "$RED Exiting script."
+        echo -e; echo -e "$RED Exiting script. $RESET"
         exit 0
     else
-        echo -e "$ERR You have entered an invalid response. Exiting"
+        echo -e "$ERR You have entered an invalid response. Exiting $RESET"
         echo -e; exit 0
     fi
 else

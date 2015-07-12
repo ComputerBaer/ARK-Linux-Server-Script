@@ -49,17 +49,17 @@ if [ $newVersion -gt $currentVersion ]; then
     read input
     echo -e; sleep 0.5s
     if [[ $input =~ Y ]]; then
-        echo -e "$GREEN Starting update script."
+        echo -e "$GREEN Starting update script. $RESET"
         sleep 1
         
         cd $SCRIPT_DIR
         clear
         ./updateserver
     elif [[ $input =~ N ]]; then
-        echo -e "$RED Exiting script."
+        echo -e "$RED Exiting script. $RESET"
         echo -e; exit 0
     else
-        echo -e "$ERR You have entered an invalid response. Exiting"
+        echo -e "$ERR You have entered an invalid response. Exiting $RESET"
         echo -e; exit 0
     fi
 else
