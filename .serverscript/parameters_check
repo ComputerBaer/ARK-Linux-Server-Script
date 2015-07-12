@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.0.5"
+versionP="1.0.6"
 
 source ../version.ini
 source ../configuration.ini
@@ -35,6 +35,13 @@ if [[ -z "$hostName" ]]; then
   setHostName=""
 else
   setHostName="SessionName=$hostName?"
+fi
+
+# RCON Enabled
+if [[ $rconEnabled =~ true ]] && [[ ! -z $adminPass ]]; then
+  setRconEnabled="RCONEnabled=True?"
+else
+  setRconEnabled=""
 fi
 
 # Taming Speed
@@ -333,6 +340,8 @@ listen?\
 "$setIpAddress"\
 Port=$gamePort?\
 QueryPort=$queryPort?\
+"$setRconEnabled"\
+RCONPort=$rconPort?\
 MaxPlayers=$playerCount?\
 ServerAdminPassword=$adminPass?\
 "$ServerPassword"\

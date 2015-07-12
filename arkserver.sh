@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Don't change this number.
-version="1.2.4"
+version="1.2.5"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -151,6 +151,19 @@ else
     if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (Query Port):$GREEN OK $RESET"
+    fi
+fi
+
+if [ -z "$(iptables -nL | grep $rconPort)" ]; then
+    sleep 0.5s
+    echo -e " IPTables (RCON Port):$RED MISSING $RESET"
+    echo -e " Adding IPTables requirements. (RCON Port)"
+    iptables -I INPUT -p udp --dport $rconPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $rconPort -j ACCEPT
+else
+    if [[ $safetyNotify =~ true ]]; then
+        sleep 0.5s
+        echo -e " IPTables (RCON Port):$GREEN OK $RESET"
     fi
 fi
 
