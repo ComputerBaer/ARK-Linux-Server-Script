@@ -4,7 +4,6 @@
 version="1.2.0"
 
 source ../version.ini
-source ../version_game.ini
 source ../configuration.ini
 source formatting.ini
 

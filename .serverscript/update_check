@@ -4,7 +4,6 @@
 version="1.0.0"
 
 source ../version.ini
-source ../version_game.ini
 source ../configuration.ini
 source formatting.ini
 
@@ -26,6 +25,14 @@ fi
 shopt -s nocasematch
 
 installSteam
+
+# Get current ARK-Version from appmanifest
+if [ ! -f $STEAM_APPS_DIR/appmanifest_$gameid.acf ]; then
+    echo -e "$RED ARK-Server is not installed! $RESET"
+    echo -e; exit 0
+fi
+
+currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$gameid.acf | parseSteamAcf "AppState.buildid"`
 
 # Get new ARK-Version from Steam Network
 echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
