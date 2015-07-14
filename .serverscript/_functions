@@ -98,7 +98,7 @@ function runSteam
     if [ $1 == 0 ]; then
         ./steamcmd.sh +login anonymous +app_info_print $gameid +quit | parseSteamAcf "$gameid.depots.branches.public.buildid" > ark_tmp_version &
     elif [ $1 == 1 ]; then
-        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit &
+        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit > /dev/null &
     fi
     waitBackgroundTask $!
     
