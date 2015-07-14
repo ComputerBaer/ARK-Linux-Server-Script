@@ -22,14 +22,15 @@ fi
 
 # Global Variables 
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
+BASE_DIR=$(dirname $SCRIPT_DIR)
 
-STEAM_DIR="steamcmd"
+STEAM_DIR="$BASE_DIR/steamcmd"
 STEAM_APPCHACHE="$HOME/Steam/appcache"
 
 
 function installSteam
 {
-    cd $SCRIPT_DIR/..
+    cd $BASE_DIR
     
     # Check Steam Directory
     sleep 0.5s; echo -e
@@ -79,13 +80,13 @@ function installSteam
 # runSteam 1 - Update + Version Check
 function runSteam
 {
-    cd $SCRIPT_DIR/..
+    cd $BASE_DIR
     
     # Check Steam Installation
     if [ ! -d $STEAM_DIR ]; then
         installSteam
     fi
-    cd $SCRIPT_DIR/../$STEAM_DIR
+    cd $STEAM_DIR
     
     # Clear Steam AppCache
     if [ -d $STEAM_APPCHACHE ]; then
