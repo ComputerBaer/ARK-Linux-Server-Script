@@ -24,6 +24,7 @@ fi
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
 
 STEAM_DIR="steamcmd"
+STEAM_APPCHACHE="~/Steam/appcache"
 
 
 function installSteam
@@ -86,11 +87,16 @@ function runSteam
     fi
     cd $SCRIPT_DIR/../$STEAM_DIR
     
+    # Clear Steam AppCache
+    if [ -d $STEAM_APPCHACHE ]; then
+        rm -r $STEAM_APPCHACHE
+    fi
+    
     # Run Steam
     if [ $1 == 0 ]; then
-        ./steamcmd.sh +login anonymous +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
+        ./steamcmd.sh +login anonymous +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
     elif [ $1 == 1 ]; then
-        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +app_info_update 1 +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
+        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +app_info_print $gameid +quit | grep -o 'change number : \<[0-9]*\>' | grep -o '[0-9]*' > ark_tmp_version &
     fi
     waitBackgroundTask $!
     
