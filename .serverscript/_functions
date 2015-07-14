@@ -24,7 +24,7 @@ fi
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
 
 STEAM_DIR="steamcmd"
-STEAM_APPCHACHE="~/Steam/appcache"
+STEAM_APPCHACHE="$HOME/Steam/appcache"
 
 
 function installSteam
