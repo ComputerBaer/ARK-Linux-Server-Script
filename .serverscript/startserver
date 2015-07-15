@@ -89,17 +89,8 @@ else
     fi
 fi
 
-if [[ -z "$ipAddress" ]]; then
-    setIpAddress=""
-else
-    setIpAddress="MultiHome=$ipAddress?"
-fi
-
 if [[ -z "$hostName" ]]; then
-    setHostName=""
     hostName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
-else
-    setHostName="SessionName=$hostName?"
 fi
 
 sleep 1s

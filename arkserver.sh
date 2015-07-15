@@ -154,6 +154,19 @@ else
     fi
 fi
 
+if [ -z "$(iptables -nL | grep $rconPort)" ]; then
+    sleep 0.5s
+    echo -e " IPTables (RCON Port):$RED MISSING $RESET"
+    echo -e " Adding IPTables requirements. (RCON Port)"
+    iptables -I INPUT -p udp --dport $rconPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $rconPort -j ACCEPT
+else
+    if [[ $safetyNotify =~ true ]]; then
+        sleep 0.5s
+        echo -e " IPTables (RCON Port):$GREEN OK $RESET"
+    fi
+fi
+
 
 # Server Script Check
 if [[ $safetyNotify =~ true ]]; then

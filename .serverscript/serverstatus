@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.5"
+version="1.0.7"
 
 source ../version.ini
 source ../configuration.ini
@@ -86,7 +86,7 @@ if [[ $showServerSettings =~ true ]]; then
     sleep 0.3s; echo -e " No Tribute DL:$CYAN               $noTributeDl $RESET"
     sleep 0.3s; echo -e " Allow Third Person:$CYAN          $thirdPerson $RESET"
     sleep 0.3s; echo -e " Notify Leaving:$CYAN              $notifyLeft $RESET"
-    sleep 0.3s; echo -e " Don't Notify Join:$CYAN           $dontNotifyJoin $RESET"
+    sleep 0.3s; echo -e " Notify Joined:$CYAN               $notifyJoin $RESET"
     sleep 0.3s; echo -e " PVE Enabled:$CYAN                 $pveServer $RESET"
     sleep 0.3s; echo -e " Enable Crosshairs:$CYAN           $crossHair $RESET"
     sleep 0.3s; echo -e " No HUD:$CYAN                      $noHud  $RESET"
