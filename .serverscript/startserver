@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.3.2"
+version="1.3.3"
 
 source ../version.ini
 source ../configuration.ini
@@ -22,7 +22,7 @@ fi
 
 shopt -s nocasematch
 
-echo -e " Checking if server session exists..."
+echo -e "$YELLOW Checking if server session exists..."
 sleep 0.5s; cd ../
 if screen -list | grep -q "$sessionName"; then
     echo -e "$ERR The server is already running. The server session name is:$YELLOW $sessionname $RESET"
@@ -40,10 +40,10 @@ if screen -list | grep -q "$sessionName"; then
         echo -e; sleep 0.5s
         echo -e "$RED Server stopped $RESET"
     elif [[ $runningsession =~ N ]]; then
-        echo -e; echo -e "$RED Exiting script."
+        echo -e; echo -e "$RED Exiting script. $RESET"
         exit 0
     else
-        echo -e "$ERR You have entered an invalid response. Exiting"
+        echo -e "$ERR You have entered an invalid response. Exiting $RESET"
         echo -e; exit 0
     fi
 else
@@ -51,6 +51,18 @@ else
     echo -e; sleep 0.5s
 fi
 
+# Game Server Version Check
+if [[ $checkUpdates =~ true ]]; then
+    cd .serverscript
+    echo -e "$YELLOW Checking for Game Server Updates $RESET"
+    echo -e " Running update check script."; sleep 1s
+    echo -e "--------------------------------------------------"
+    sleep 0.5s
+    ./update_check
+    sleep 0.5s
+    echo -e "--------------------------------------------------"
+    cd ..
+fi
 
 # ULIMIT CHANGE
 echo -e "$YELLOW Setting ULIMIT to 100000 $RESET"

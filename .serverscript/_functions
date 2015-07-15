@@ -1,0 +1,172 @@
+#!/bin/bash
+
+# Version Checker 
+versionFunc="1.0.0"
+
+source ../version.ini
+source ../configuration.ini
+source formatting.ini
+
+# Version Checker
+echo -e; echo -e "$YELLOW Checking version with github. $RESET"
+if [ $versionFunc != $functions ]; then
+    echo -e " Script update available! (Functions Script)"
+    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
+    exit 0
+else
+    echo -e " Up to date!"; echo -e
+    sleep 1s
+fi
+
+# Global Variables 
+SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
+BASE_DIR=$(dirname $SCRIPT_DIR)
+
+STEAM_DIR="$BASE_DIR/steamcmd"
+STEAM_APPS_DIR="$BASE_DIR/steamapps"
+STEAM_APPCHACHE="$HOME/Steam/appcache"
+
+
+function installSteam
+{
+    cd $BASE_DIR
+    
+    # Check Steam Directory
+    sleep 0.5s; echo -e
+    echo -e "$YELLOW Locating SteamCMD directory. $RESET"
+    sleep 0.5s
+    if [ -d $STEAM_DIR ]; then
+        echo -e " SteamCMD directory found."
+        sleep 0.5s; echo -e
+        return 0
+    fi
+    echo -e " $ERR Couldn't find the SteamCMD directory, installing now."
+    sleep 0.5s;
+    
+    # Create Steam Directory
+    echo -e; echo -e "$YELLOW Creating the SteamCMD directory. $RESET"
+    sleep 0.5s
+    mkdir $STEAM_DIR
+    cd $STEAM_DIR
+    echo -e " Directory created, moving on."
+    sleep 0.5s
+    
+    # Install Steam Dependencies
+    echo -e; echo -e "$YELLOW Installing SteamCMD dependencies. $RESET"
+    sleep 0.5s
+    sudo apt-get install lib32gcc1
+    echo -e " Dependencies installed."
+    sleep 0.5s
+    
+    # Install Steam
+    echo -e; echo -e "$YELLOW Installing SteamCMD. $RESET"
+    #curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -#
+    echo -ne " Downloading"
+    curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -o steamcmd_linux.tar.gz -s &
+    waitBackgroundTask $!
+    #tar -xvzf steamcmd_linux.tar.gz
+    echo -ne " Extracting"
+    tar -xzf steamcmd_linux.tar.gz &
+    waitBackgroundTask $!
+    rm steamcmd_linux.tar.gz
+    echo -e "$GREEN SteamCMD installed."
+    sleep 0.5s; echo -e
+    
+    cd $SCRIPT_DIR
+}
+
+# runSteam 0 - Version Check
+# runSteam 1 - Update + Version Check
+function runSteam
+{
+    cd $BASE_DIR
+    
+    # Check Steam Installation
+    if [ ! -d $STEAM_DIR ]; then
+        installSteam
+    fi
+    cd $STEAM_DIR
+    
+    # Clear Steam AppCache
+    if [ -d $STEAM_APPCHACHE ]; then
+        rm -r $STEAM_APPCHACHE
+    fi
+    
+    # Run Steam
+    if [ $1 == 0 ]; then
+        ./steamcmd.sh +login anonymous +app_info_print $gameid +quit | parseSteamAcf "$gameid.depots.branches.public.buildid" > ark_tmp_version &
+    elif [ $1 == 1 ]; then
+        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit > /dev/null &
+    fi
+    waitBackgroundTask $!
+    
+    # Version Check
+    if [ -f ark_tmp_version ]; then
+        newVersion=$(cat ark_tmp_version)
+        rm ark_tmp_version
+    fi
+    
+    cd $SCRIPT_DIR
+}
+
+function waitBackgroundTask
+{
+    PROC_ID=$1
+    
+    echo -ne " "
+    while :; do
+        if kill -0 $PROC_ID 2>/dev/null; then
+            echo -ne "."
+        else
+            break
+        fi
+        sleep 0.5s
+    done
+    
+    echo -e
+}
+
+function parseSteamAcf
+{
+    local path=$1
+    if [ -z $path ]; then
+        return
+    fi
+    
+    local splitPos=`expr index "$path" .`
+    local newPath=""
+    local searchName="\"$path\""
+    if [ $splitPos -gt 0 ]; then
+        newPath=${path:$splitPos}
+        searchName=${path:0:$splitPos-1}
+        searchName="\"$searchName\""
+    fi
+    
+    local count=0
+    while read name val; do
+        if [ -z $name ]; then
+            continue
+        fi
+        
+        if [ $name == $searchName ] && [ $count -lt 2 ]; then
+            if [ -z $newPath ]; then
+                local length=${#val}
+                echo ${val:1:$length-2}
+            else
+                parseSteamAcf $newPath
+            fi
+            return
+        elif [ $name == "{" ]; then
+            count=$((count+1))
+        elif [ $name == "}" ]; then
+            count=$((count-1))
+            if [ $count -eq 0 ]; then
+                break
+            fi
+        fi
+    done
+    
+    echo "NOT FOUND! ERROR?"
+}

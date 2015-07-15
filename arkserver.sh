@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Don't change this number.
-version="1.2.5"
+version="1.2.6"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -187,6 +187,13 @@ fi
 
 cd .serverscript
 
+# Functions Script
+if [ ! -f _functions ]; then
+    echo -e "$YELLOW Functions Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+    chmod 777 _functions
+fi
+
 # Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
@@ -220,6 +227,13 @@ if [ ! -f updateserver ]; then
     echo -e "$YELLOW Update Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
     chmod 777 updateserver
+fi
+
+# Update Check Script
+if [ ! -f update_check ]; then
+    echo -e "$YELLOW Update Check Script $RESET"
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
+    chmod 777 update_check
 fi
 
 # Backup Server Script
@@ -260,7 +274,7 @@ fi
 # Commands
 help () {
     echo -e; echo -e "$WHITE Use the following commands: $RESET"
-    echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|status|install|update|backup> $RESET"
+    echo -e; echo -e "$CYAN ./arkserver.sh <start|stop|view|status|install|update|updatecheck|backup> $RESET"
     echo -e; echo -e
 }
 
@@ -287,6 +301,11 @@ install () {
 update () {
     clear
     ./updateserver
+}
+
+updatecheck () {
+    clear
+    ./update_check
 }
 
 backup () {
