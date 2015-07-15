@@ -150,13 +150,14 @@ function parseSteamAcf
             continue
         fi
         
-        if [ $name == $searchName ]; then
-            if [ -z $newPath ] && [ $count == 1 ]; then
+        if [ $name == $searchName ] && [ $count -lt 2 ]; then
+            if [ -z $newPath ]; then
                 local length=${#val}
                 echo ${val:1:$length-2}
             else
                 parseSteamAcf $newPath
             fi
+            return
         elif [ $name == "{" ]; then
             count=$((count+1))
         elif [ $name == "}" ]; then
@@ -166,4 +167,6 @@ function parseSteamAcf
             fi
         fi
     done
+    
+    echo "NOT FOUND! ERROR?"
 }
