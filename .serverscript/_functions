@@ -183,10 +183,10 @@ function checkInteger
     
     if [[ $num =~ $regex ]]; then
         # Is valid Integer
-        return $num
+        echo $num
     else
         # Is invalid Integer
-        return $default
+        echo $default
     fi
 }
 
@@ -200,10 +200,10 @@ function checkDouble
     
     if [[ $num =~ $regex ]]; then
         # Is valid Double
-        return $num
+        echo $num
     else
         # Is invalid Double
-        return $default
+        echo $default
     fi
 }
 
@@ -215,9 +215,9 @@ function checkBoolean
     
     if [[ $bool =~ true ]] || [[ $bool =~ false ]]; then
         # Is valid Boolean
-        return $bool
+        echo $bool
     else
         # Is invalid Boolean
-        return $default
+        echo $default
     fi
 }
