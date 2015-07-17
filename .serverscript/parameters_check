@@ -223,7 +223,7 @@ fi
 if [ $difficulty = "0" ]; then
   DifficultyMulti=""
 else
-  DifficultyMulti="DifficultyOffset=$DifficultyOffset?"
+  DifficultyMulti="DifficultyOffset=$difficulty?"
 fi
 
 # Server Password
