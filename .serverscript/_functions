@@ -215,9 +215,9 @@ function checkBoolean
     
     if [[ $bool =~ true ]] || [[ $bool =~ false ]]; then
         # Is valid Boolean
-        echo $bool
+        echo ${bool,,}
     else
         # Is invalid Boolean
-        echo $default
+        echo ${default,,}
     fi
 }
