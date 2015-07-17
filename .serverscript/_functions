@@ -221,3 +221,18 @@ function checkBoolean
         echo ${default,,}
     fi
 }
+
+# invertBoolean <bool>
+function invertBoolean
+{
+    local bool=$1
+    
+    if [[ $bool =~ true ]]; then
+        echo "false"
+    elif [[ $bool =~ false ]]; then
+        echo "true"
+    else
+        # Is invalid Boolean
+        echo ${default,,}
+    fi
+}

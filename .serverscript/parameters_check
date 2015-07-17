@@ -40,21 +40,22 @@ executeString="${executeString}?listen"
 ## Boolean Parameters ##
 ########################
 
-# Always Notify Player Joined
-notifyJoin=$(checkBoolean $notifyJoin true)
-executeString="${executeString}?alwaysNotifyPlayerJoined=${notifyJoin}"
+# Dont Always Notify Player Joined
+notifyJoin=$(checkBoolean $notifyJoin false)
+notifyJoin=$(invertBoolean $notifyJoin) # Variable is NotifyJoin, Parameter is DontNotifyJoin
+executeString="${executeString}?DontAlwaysNotifyPlayerJoined=${notifyJoin}"
 
 # Always Notify Player Left
 notifyLeft=$(checkBoolean $notifyLeft false)
-executeString="${executeString}?alwaysNotifyPlayerLeft=${notifyLeft}"
+executeString="${executeString}?AlwaysNotifyPlayerLeft=${notifyLeft}"
 
 # Allow Third Person Player
 thirdPerson=$(checkBoolean $thirdPerson false)
-executeString="${executeString}?allowThirdPersonPlayer=${thirdPerson}"
+executeString="${executeString}?AllowThirdPersonPlayer=${thirdPerson}"
 
 # Global Voice Chat
 globalVoice=$(checkBoolean $globalVoice false)
-executeString="${executeString}?globalVoiceChat=${globalVoice}"
+executeString="${executeString}?GlobalVoiceChat=${globalVoice}"
 
 # Show Map Player Location
 showPlayers=$(checkBoolean $showPlayers false)
@@ -62,23 +63,23 @@ executeString="${executeString}?ShowMapPlayerLocation=${showPlayers}"
 
 # No Tribute Downloads
 noTributeDl=$(checkBoolean $noTributeDl false)
-executeString="${executeString}?noTributeDownloads=${noTributeDl}"
+executeString="${executeString}?NoTributeDownloads=${noTributeDl}"
 
 # Proximity Chat
 proxChat=$(checkBoolean $proxChat false)
-executeString="${executeString}?proximityChat=${proxChat}"
+executeString="${executeString}?ProximityChat=${proxChat}"
 
 # Server PvE
 pveServer=$(checkBoolean $pveServer false)
-executeString="${executeString}?serverPVE=${pveServer}"
+executeString="${executeString}?ServerPVE=${pveServer}"
 
 # Server Hardcore
 hardcore=$(checkBoolean $hardcore false)
-executeString="${executeString}?serverHardcore=${hardcore}"
+executeString="${executeString}?ServerHardcore=${hardcore}"
 
 # Server Force No Hud
 noHud=$(checkBoolean $noHud false)
-executeString="${executeString}?serverForceNoHud=${noHud}"
+executeString="${executeString}?ServerForceNoHUD=${noHud}"
 
 # Server Crosshair
 crossHair=$(checkBoolean $crossHair false)
