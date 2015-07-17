@@ -20,6 +20,8 @@ else
     sleep 1s
 fi
 
+shopt -s nocasematch
+
 # Global Variables 
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
 BASE_DIR=$(dirname $SCRIPT_DIR)
@@ -169,4 +171,53 @@ function parseSteamAcf
     done
     
     echo "NOT FOUND! ERROR?"
+}
+
+# checkInteger <num> <default>
+function checkInteger
+{
+    local num=$1
+    local default=$2
+    local regex='^[0-9]+$' # Positive Numbers
+    #local regex='^-?[0-9]+$' # Positive and negative Numbers
+    
+    if [[ $num =~ $regex ]]; then
+        # Is valid Integer
+        return $num
+    else
+        # Is invalid Integer
+        return $default
+    fi
+}
+
+# checkDouble <num> <default>
+function checkDouble
+{
+    local num=$1
+    local default=$2
+    local regex='^[0-9]+([.][0-9]+)?$' # Positive Numbers
+    #local regex='^-?[0-9]+([.][0-9]+)?$' # Positive and negative Numbers
+    
+    if [[ $num =~ $regex ]]; then
+        # Is valid Double
+        return $num
+    else
+        # Is invalid Double
+        return $default
+    fi
+}
+
+# checkBoolean <bool> <default>
+function checkBoolean
+{
+    local bool=$1
+    local default=$2
+    
+    if [[ $bool =~ true ]] || [[ $bool =~ false ]]; then
+        # Is valid Boolean
+        return $bool
+    else
+        # Is invalid Boolean
+        return $default
+    fi
 }
