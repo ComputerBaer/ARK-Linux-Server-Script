@@ -7,6 +7,8 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
+source _functions
+
 # Compare Versions
 if [ $versionP != $parameters ]; then
     echo -e "$ERR Script update available! (Parameters Check Script) $RESET"
@@ -19,373 +21,255 @@ else
     sleep 1s
 fi
 
-shopt -s nocasematch
-
 echo -e "$YELLOW Checking parameters. $RESET"; echo -e
-# Brace your anus for a cluster fuck of copy paste code. ;)
-# IP Address
-if [[ -z "$ipAddress" ]]; then
-  setIpAddress=""
+
+# Parameters String
+executeString=""
+
+# Map Name (must be the first option !!!)
+if [[ -z $map ]]; then
+    executeString="${executeString}TheIsland"
 else
-  setIpAddress="MultiHome=$ipAddress?"
+    executeString="${executeString}${map}"
 fi
 
-# HostName
-if [[ -z "$hostName" ]]; then
-  setHostName=""
-else
-  setHostName="SessionName=$hostName?"
-fi
+# Server
+executeString="${executeString}?listen"
 
-# RCON Enabled
-if [[ $rconEnabled =~ true ]] && [[ ! -z $adminPass ]]; then
-  setRconEnabled="RCONEnabled=True?"
-else
-  setRconEnabled=""
-fi
+########################
+## Boolean Parameters ##
+########################
 
-# Taming Speed
-if [ $TamingSpeedMultiplier = "1" ]; then
-  TamingSpeed=""
-else
-  TamingSpeed="TamingSpeedMultiplier=$TamingSpeedMultiplier?"
-fi
-
-# Harvest Ammount
-if [ $HarvestAmountMultiplier = "1" ]; then
-  HarvestAmount=""
-else
-  HarvestAmount="HarvestAmountMultiplier=$HarvestAmountMultiplier?"
-fi
-
-# Player Water Drain
-if [ $PlayerCharacterWaterDrainMultiplier = "1" ]; then
-  PlayerWaterDrain=""
-else
-  PlayerWaterDrain="PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier?"
-fi
-
-# Player Food Drain
-if [ $PlayerCharacterFoodDrainMultiplier = "1" ]; then
-  PlayerFoodDrain=""
-else
-  PlayerFoodDrain="PlayerCharacterFoodDrainMultiplier=$PlayerCharacterFoodDrainMultiplier?"
-fi
-
-# Dino Food Drain
-if [ $DinoCharacterFoodDrainMultiplier = "1" ]; then
-  DinoFoodDrain=""
-else
-  DinoFoodDrain="DinoCharacterFoodDrainMultiplier=$DinoCharacterFoodDrainMultiplier?"
-fi
-
-# Player Stanima
-if [ $PlayerCharacterStaminaDrainMultiplier = "1" ]; then
-  PlayerStanima=""
-else
-  PlayerStanima="PlayerCharacterStaminaDrainMultiplier=$PlayerCharacterStaminaDrainMultiplier?"
-fi
-
-# Dino Stanima
-if [ $DinoCharacterStaminaDrainMultiplier = "1" ]; then
-  DinoStanima=""
-else
-  DinoStanima="DinoCharacterStaminaDrainMultiplier=$DinoCharacterStaminaDrainMultiplier?"
-fi
-
-# Player Health Recovery
-if [ $PlayerCharacterHealthRecoveryMultiplier = "1" ]; then
-  PlayerHealthRecovery=""
-else
-  PlayerHealthRecovery="PlayerCharacterHealthRecoveryMultiplier=$PlayerCharacterHealthRecoveryMultiplier?"
-fi
-
-# Dino Health Recovery
-if [ $DinoCharacterHealthRecoveryMultiplier = "1" ]; then
-  DinoHealthRecovery=""
-else
-  DinoHealthRecovery="DinoCharacterHealthRecoveryMultiplier=$DinoCharacterHealthRecoveryMultiplier?"
-fi
-
-# Dino Count Multiplier
-if [ $DinoCountMultiplier = "1" ]; then
-  DinoCount=""
-else
-  DinoCount="DinoCountMultiplier=$DinoCountMultiplier?"
-fi
-
-# Harvest Health
-if [ $HarvestHealthMultiplier = "1" ]; then
-  HarvestHealth=""
-else
-  HarvestHealth="HarvestHealthMultiplier=$HarvestHealthMultiplier?"
-fi
-
-# PvE Structure Decay Timer
-if [ $PvEStructureDecayDestructionPeriod = "0" ]; then
-  PvEStructureDecayPeriod=""
-else
-  PvEStructureDecayPeriod="PvEStructureDecayDestructionPeriod=$PvEStructureDecayDestructionPeriod?"
-fi
-
-# Max Structures In Range
-if [ $MaxStructuresInRange = "1300" ]; then
-  MaxStructuresRange=""
-else
-  MaxStructuresRange="MaxStructuresInRange=$MaxStructuresInRange?"
-fi
-
-# Day Cycle Speed Scale
-if [ $DayCycleSpeedScale = "1" ]; then
-  DayCycleSpeed=""
-else
-  DayCycleSpeed="DayCycleSpeedScale=$DayCycleSpeedScale?"
-fi
-
-# Night Time Speed Scale
-if [ $NightTimeSpeedScale = "1" ]; then
-  NightTimeSpeed=""
-else
-  NightTimeSpeed="NightTimeSpeedScale=$NightTimeSpeedScale?"
-fi
-
-# Day Time Speed Scale
-if [ $DayTimeSpeedScale = "1" ]; then
-  DayTimeSpeed=""
-else
-  DayTimeSpeed="DayTimeSpeedScale=$DayTimeSpeedScale?"
-fi
-
-# Dino Damage Multiplier
-if [ $DinoDamageMultiplier = "1" ]; then
-  DinoDamage=""
-else
-  DinoDamage="DinoDamageMultiplier=$DinoDamageMultiplier?"
-fi
-
-# Tamed Dino Damage Multiplier
-if [ $TamedDinoDamageMultiplier = "1" ]; then
-  TamedDinoDamage=""
-else
-  TamedDinoDamage="TamedDinoDamageMultiplier=$TamedDinoDamageMultiplier?"
-fi
-
-# Player Damage Multiplier
-if [ $PlayerDamageMultiplier = "1" ]; then
-  PlayerDamage=""
-else
-  PlayerDamage="PlayerDamageMultiplier=$PlayerDamageMultiplier?"
-fi
-
-# Structure Damage Multiplier
-if [ $StructureDamageMultiplier = "1" ]; then
-  StructureDamage=""
-else
-  StructureDamage="StructureDamageMultiplier=$StructureDamageMultiplier?"
-fi
-
-# Player Resistence Multiplier
-if [ $PlayerResistanceMultiplier = "1" ]; then
-  PlayerResistance=""
-else
-  PlayerResistance="PlayerResistanceMultiplier=$PlayerResistanceMultiplier?"
-fi
-
-# Dino Resistance
-if [ $DinoResistanceMultiplier = "1" ]; then
-  DinoResistance=""
-else
-  DinoResistence="DinoResistanceMultiplier=$DinoResistanceMultiplier?"
-fi
-
-# Tamed Dino Resistance
-if [ $TamedDinoResistanceMultiplier = "1" ]; then
-  TamedDinoResistance=""
-else
-  TamedDinoResistance="TamedDinoResistanceMultiplier=$TamedDinoResistanceMultiplier?"
-fi
-
-# Strucutre Resistance Multiplier
-if [ $StructureResistanceMultiplier = "1" ]; then
-  StructureResistance=""
-else
-  StructureResistance="StructureResistanceMultiplier=$StructureResistanceMultiplier?"
-fi
-
-# EXP Multiplier
-if [ $XPMultiplier = "1" ]; then
-  ExpierenceMulti=""
-else
-  ExpierenceMulti="XPMultiplier=$XPMultiplier?"
-fi
-
-# Dificulty Multiplier
-if [ $difficulty = "0" ]; then
-  DifficultyMulti=""
-else
-  DifficultyMulti="DifficultyOffset=$difficulty?"
-fi
-
-# Server Password
-if [ -z $serverPass ]; then
-  ServerPassword=""
-else
-  ServerPassword="ServerPassword=$serverPass?"
-fi
-
-# AFK Timer
-if [ $afkTimer = "2400" ]; then
-  KickIdle=""
-else
-  KickIdle="KickIdlePlayersPeriod=$afkTimer?"
-fi
-
-# Auto Save Timer
-if [ $autoSave = "10" ]; then
-  AutoSaveTimer=""
-else
-  AutoSaveTimer="AutoSavePeriodMinutes=$autoSave?"
-fi
-
-# Show Players on Map
-if [[ $showPlayers =~ true ]]; then
-    ShowPlayersMap="ShowMapPlayerLocation=True?"
-else
-    ShowPlayersMap=""
-fi
-
-# Hardcore Mode
-if [[ $hardcore =~ true ]]; then
-    SetHardcore="ServerHardcore=True?"
-else
-    SetHardcore=""
-fi
-
-# Global Voice
-if [[ $globalVoice =~ true ]]; then
-    UseGlobalVoice="GlobalVoiceChat=True?"
-else
-    UseGlobalVoice=""
-fi
-
-# Proximity Chat
-if [[ $proxChat =~ true ]]; then
-    UseProxChat="ProximityChat=True?"
-else
-    UseProxChat=""
-fi
-
-# No Tribute Downloads
-if [[ $noTributeDl =~ true ]]; then
-    AllowTributeDownloads="NoTributeDownloads=True?"
-else
-    AllowTributeDownloads=""
-fi
-
-# Third Person
-if [[ $thirdPerson =~ true ]]; then
-    UseThirdPerson="AllowThirdPersonPlayer=True?"
-else
-    UseThirdPerson=""
-fi
+# Always Notify Player Joined
+notifyJoin=$(checkBoolean $notifyJoin true)
+executeString="${executeString}?alwaysNotifyPlayerJoined=${notifyJoin}"
 
 # Always Notify Player Left
-if [[ $notifyLeft =~ true ]]; then
-    NotifyPlayerLeft="AlwaysNotifyPlayerLeft=True?"
-else
-    NotifyPlayerLeft=""
-fi
+notifyLeft=$(checkBoolean $notifyLeft false)
+executeString="${executeString}?alwaysNotifyPlayerLeft=${notifyLeft}"
 
-# Dont Notify Player Join
-if [[ $notifyJoin =~ true ]]; then
-    NotifyPlayerJoin=""
-else
-    NotifyPlayerJoin="DontAlwaysNotifyPlayerJoined=True?"
-fi
+# Allow Third Person Player
+thirdPerson=$(checkBoolean $thirdPerson false)
+executeString="${executeString}?allowThirdPersonPlayer=${thirdPerson}"
 
-# PvE Server
-if [[ $pveServer =~ true ]]; then
-    SetPvEServer="ServerPVE=True?"
-else
-    SetPvEServer=""
-fi
+# Global Voice Chat
+globalVoice=$(checkBoolean $globalVoice false)
+executeString="${executeString}?globalVoiceChat=${globalVoice}"
 
-# Crosshair
-if [[ $crossHair =~ true ]]; then
-    EnableCrosshair="ServerCrosshair=True?"
-else
-    EnableCrosshair=""
-fi
+# Show Map Player Location
+showPlayers=$(checkBoolean $showPlayers false)
+executeString="${executeString}?ShowMapPlayerLocation=${showPlayers}"
 
-# Force No Hude
-if [[ $noHud =~ true ]]; then
-    ForceNoHud="ServerForceNoHUD=True?"
-else
-    ForceNoHud=""
-fi
+# No Tribute Downloads
+noTributeDl=$(checkBoolean $noTributeDl false)
+executeString="${executeString}?noTributeDownloads=${noTributeDl}"
 
-# PvP Gamma
-if [[ $enablePvPGamma =~ true ]]; then
-    PvPGamma="bEnablePvPGamma=True?"
-else
-    PvPGamma=""
+# Proximity Chat
+proxChat=$(checkBoolean $proxChat false)
+executeString="${executeString}?proximityChat=${proxChat}"
+
+# Server PvE
+pveServer=$(checkBoolean $pveServer false)
+executeString="${executeString}?serverPVE=${pveServer}"
+
+# Server Hardcore
+hardcore=$(checkBoolean $hardcore false)
+executeString="${executeString}?serverHardcore=${hardcore}"
+
+# Server Force No Hud
+noHud=$(checkBoolean $noHud false)
+executeString="${executeString}?serverForceNoHud=${noHud}"
+
+# Server Crosshair
+crossHair=$(checkBoolean $crossHair false)
+executeString="${executeString}?ServerCrosshair=${crossHair}"
+
+# Enable PvP Gamma
+enablePvPGamma=$(checkBoolean $enablePvPGamma false)
+executeString="${executeString}?bEnablePvPGamma=${enablePvPGamma}"
+
+# Disable Structure Decay PvE (NEW)
+disableStructureDecayPvE=$(checkBoolean $disableStructureDecayPvE false)
+executeString="${executeString}?bDisableStructureDecayPvE=${disableStructureDecayPvE}"
+
+# Allow Flyer Carry PvE (NEW)
+allowFlyerCarryPvE=$(checkBoolean $allowFlyerCarryPvE false)
+executeString="${executeString}?bAllowFlyerCarryPvE=${allowFlyerCarryPvE}"
+
+# RCON Enabled
+if [[ -z $adminPass ]]; then
+    rconEnabled="false"
 fi
+rconEnabled=$(checkBoolean $rconEnabled false)
+executeString="${executeString}?RCONEnabled=${rconEnabled}"
+
+########################
+## Integer Parameters ##
+########################
+
+# Max Structures In Range
+MaxStructuresInRange=$(checkInteger $MaxStructuresInRange 1300)
+executeString="${executeString}?MaxStructuresInRange=${MaxStructuresInRange}"
+
+# PvE Structure Decay Destruction Period
+PvEStructureDecayDestructionPeriod=$(checkInteger $PvEStructureDecayDestructionPeriod 0)
+executeString="${executeString}?PvEStructureDecayDestructionPeriod=${PvEStructureDecayDestructionPeriod}"
+
+# Max Players
+playerCount=$(checkInteger $playerCount 70)
+executeString="${executeString}?MaxPlayers=${playerCount}"
+
+# Kick Idle Players Period (AFK Timer)
+afkTimer=$(checkInteger $afkTimer 2400)
+executeString="${executeString}?KickIdlePlayersPeriod=${afkTimer}"
+
+# Auto Save Period Minutes
+autoSave=$(checkInteger $autoSave 15)
+executeString="${executeString}?AutoSavePeriodMinutes=${autoSave}"
+
+# Port
+gamePort=$(checkInteger $gamePort 7777)
+executeString="${executeString}?Port=${gamePort}"
+
+# Query Port
+queryPort=$(checkInteger $queryPort 27015)
+executeString="${executeString}?QueryPort=${queryPort}"
+
+# RCON Port
+rconPort=$(checkInteger $rconPort 32330)
+executeString="${executeString}?RCONPort=${rconPort}"
+
+########################
+## String Parameters  ##
+########################
+
+# Server Password
+executeString="${executeString}?ServerPassword=${serverPass}"
+
+# Server Admin Password
+executeString="${executeString}?ServerAdminPassword=${adminPass}"
+
+# Session Name
+executeString="${executeString}?SessionName=${hostName}"
+
+# Multi Home (IP Address)
+executeString="${executeString}?MultiHome=${ipAddress}"
+
+########################
+## Double Parameters  ##
+########################
+
+# Day Cycle Speed Scale
+DayCycleSpeedScale=$(checkDouble $DayCycleSpeedScale 1.0)
+executeString="${executeString}?DayCycleSpeedScale=${DayCycleSpeedScale}"
+
+# Night Time Speed Scale
+NightTimeSpeedScale=$(checkDouble $NightTimeSpeedScale 1.0)
+executeString="${executeString}?NightTimeSpeedScale=${NightTimeSpeedScale}"
+
+# Day Time Speed Scale
+DayTimeSpeedScale=$(checkDouble $DayTimeSpeedScale 1.0)
+executeString="${executeString}?DayTimeSpeedScale=${DayTimeSpeedScale}"
+
+# Dino Damage Multiplier
+DinoDamageMultiplier=$(checkDouble $DinoDamageMultiplier 1.0)
+executeString="${executeString}?DinoDamageMultiplier=${DinoDamageMultiplier}"
+
+# Tamed Dino Damage Multiplier
+TamedDinoDamageMultiplier=$(checkDouble $TamedDinoDamageMultiplier 1.0)
+executeString="${executeString}?TamedDinoDamageMultiplier=${TamedDinoDamageMultiplier}"
+
+# Player Damage Multiplier
+PlayerDamageMultiplier=$(checkDouble $PlayerDamageMultiplier 1.0)
+executeString="${executeString}?PlayerDamageMultiplier=${PlayerDamageMultiplier}"
+
+# Structure Damage Multiplier
+StructureDamageMultiplier=$(checkDouble $StructureDamageMultiplier 1.0)
+executeString="${executeString}?StructureDamageMultiplier=${StructureDamageMultiplier}"
+
+# Player Resistance Multiplier
+PlayerResistanceMultiplier=$(checkDouble $PlayerResistanceMultiplier 1.0)
+executeString="${executeString}?PlayerResistanceMultiplier=${PlayerResistanceMultiplier}"
+
+# Dino Resistance Multiplier
+DinoResistanceMultiplier=$(checkDouble $DinoResistanceMultiplier 1.0)
+executeString="${executeString}?DinoResistanceMultiplier=${DinoResistanceMultiplier}"
+
+# Tamed Dino Resistance Multiplier
+TamedDinoResistanceMultiplier=$(checkDouble $TamedDinoResistanceMultiplier 1.0)
+executeString="${executeString}?TamedDinoResistanceMultiplier=${TamedDinoResistanceMultiplier}"
+
+# Structure Resistance Multiplier
+StructureResistanceMultiplier=$(checkDouble $StructureResistanceMultiplier 1.0)
+executeString="${executeString}?StructureResistanceMultiplier=${StructureResistanceMultiplier}"
+
+# XP Multiplier
+XPMultiplier=$(checkDouble $XPMultiplier 1.0)
+executeString="${executeString}?XPMultiplier=${XPMultiplier}"
+
+# PvE Structure Decay Period Multiplier (NEW)
+PvEStructureDecayPeriodMultiplier=$(checkDouble $PvEStructureDecayPeriodMultiplier 1.0)
+executeString="${executeString}?PvEStructureDecayPeriodMultiplier=${PvEStructureDecayPeriodMultiplier}"
+
+# Taming Speed Multiplier
+TamingSpeedMultiplier=$(checkDouble $TamingSpeedMultiplier 1.0)
+executeString="${executeString}?TamingSpeedMultiplier=${TamingSpeedMultiplier}"
+
+# Harvest Amount Multiplier
+HarvestAmountMultiplier=$(checkDouble $HarvestAmountMultiplier 1.0)
+executeString="${executeString}?HarvestAmountMultiplier=${HarvestAmountMultiplier}"
+
+# Harvest Health Multiplier
+HarvestHealthMultiplier=$(checkDouble $HarvestHealthMultiplier 1.0)
+executeString="${executeString}?HarvestHealthMultiplier=${HarvestHealthMultiplier}"
+
+# Resources Respawn Period Multiplier (NEW)
+ResourcesRespawnPeriodMultiplier=$(checkDouble $ResourcesRespawnPeriodMultiplier 1.0)
+executeString="${executeString}?ResourcesRespawnPeriodMultiplier=${ResourcesRespawnPeriodMultiplier}"
+
+# Player Character Water Drain Multiplier
+PlayerCharacterWaterDrainMultiplier=$(checkDouble $PlayerCharacterWaterDrainMultiplier 1.0)
+executeString="${executeString}?PlayerCharacterWaterDrainMultiplier=${PlayerCharacterWaterDrainMultiplier}"
+
+# Player Character Food Drain Multiplier
+PlayerCharacterFoodDrainMultiplier=$(checkDouble $PlayerCharacterFoodDrainMultiplier 1.0)
+executeString="${executeString}?PlayerCharacterFoodDrainMultiplier=${PlayerCharacterFoodDrainMultiplier}"
+
+# Player Character Stamina Drain Multiplier
+PlayerCharacterStaminaDrainMultiplier=$(checkDouble $PlayerCharacterStaminaDrainMultiplier 1.0)
+executeString="${executeString}?PlayerCharacterStaminaDrainMultiplier=${PlayerCharacterStaminaDrainMultiplier}"
+
+# Player Character Health Recovery Multiplier
+PlayerCharacterHealthRecoveryMultiplier=$(checkDouble $PlayerCharacterHealthRecoveryMultiplier 1.0)
+executeString="${executeString}?PlayerCharacterHealthRecoveryMultiplier=${PlayerCharacterHealthRecoveryMultiplier}"
+
+# Dino Character Food Drain Multiplier
+DinoCharacterFoodDrainMultiplier=$(checkDouble $DinoCharacterFoodDrainMultiplier 1.0)
+executeString="${executeString}?DinoCharacterFoodDrainMultiplier=${DinoCharacterFoodDrainMultiplier}"
+
+# Dino Character Stamina Drain Multiplier
+DinoCharacterStaminaDrainMultiplier=$(checkDouble $DinoCharacterStaminaDrainMultiplier 1.0)
+executeString="${executeString}?DinoCharacterStaminaDrainMultiplier=${DinoCharacterStaminaDrainMultiplier}"
+
+# Dino Character Health Recovery Multiplier
+DinoCharacterHealthRecoveryMultiplier=$(checkDouble $DinoCharacterHealthRecoveryMultiplier 1.0)
+executeString="${executeString}?DinoCharacterHealthRecoveryMultiplier=${DinoCharacterHealthRecoveryMultiplier}"
+
+# Dino Count Multiplier
+DinoCountMultiplier=$(checkDouble $DinoCountMultiplier 1.0)
+executeString="${executeString}?DinoCountMultiplier=${DinoCountMultiplier}"
+
+# Difficulty Offset
+difficulty=$(checkDouble $difficulty 0.2)
+executeString="${executeString}?DifficultyOffset=${difficulty}"
+
+
+# Server
+executeString="${executeString} -server -log"
+
 
 sleep 1s; echo -e " Check complete, starting server compiling."
 
-executeString="
-$map?\
-listen?\
-"$setHostName"\
-"$setIpAddress"\
-Port=$gamePort?\
-QueryPort=$queryPort?\
-"$setRconEnabled"\
-RCONPort=$rconPort?\
-MaxPlayers=$playerCount?\
-ServerAdminPassword=$adminPass?\
-"$ServerPassword"\
-"$ShowPlayersMap"\
-"$SetHardcore"\
-"$UseGlobalVoice"\
-"$UseProxChat"\
-"$AllowTributeDownloads"\
-"$UseThirdPerson"\
-"$NotifyPlayerLeft"\
-"$NotifyPlayerJoin"\
-"$SetPvEServer"\
-"$EnableCrosshair"\
-"$ForceNoHud"\
-"$PvPGamma"\
-"$KickIdle"\
-"$AutoSaveTimer"\
-"$DifficultyMulti"\
-"$TamingSpeed"\
-"$HarvestAmount"\
-"$PlayerWaterDrain"\
-"$PlayerFoodDrain"\
-"$DinoFoodDrain"\
-"$PlayerStanima"\
-"$DinoStanima"\
-"$PlayerHealthRecovery"\
-"$DinoHealthRecovery"\
-"$DinoCount"\
-"$HarvestHealth"\
-"$PvEStructureDecayPeriod"\
-"$MaxStructuresRange"\
-"$DayCycleSpeed"\
-"$NightTimeSpeed"\
-"$DayTimeSpeed"\
-"$DinoDamage"\
-"$TamedDinoDamage"\
-"$PlayerDamage"\
-"$StructureDamage"\
-"$PlayerResistance"\
-"$DinoResistance"\
-"$TamedDinoResistance"\
-"$StructureResistance"\
-"$ExpierenceMulti" \
--server -log"
 
 echo -e; echo -e " Executing commandline in screen session named:$YELLOW $sessionName $RESET"
 # Run Server
