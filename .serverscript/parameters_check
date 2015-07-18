@@ -87,15 +87,15 @@ executeString="${executeString}?ServerCrosshair=${crossHair}"
 
 # Enable PvP Gamma
 enablePvPGamma=$(checkBoolean $enablePvPGamma false)
-executeString="${executeString}?bEnablePvPGamma=${enablePvPGamma}"
+executeString="${executeString}?EnablePvPGamma=${enablePvPGamma}"
 
 # Disable Structure Decay PvE (NEW)
 disableStructureDecayPvE=$(checkBoolean $disableStructureDecayPvE false)
-executeString="${executeString}?bDisableStructureDecayPvE=${disableStructureDecayPvE}"
+executeString="${executeString}?DisableStructureDecayPvE=${disableStructureDecayPvE}"
 
 # Allow Flyer Carry PvE (NEW)
 allowFlyerCarryPvE=$(checkBoolean $allowFlyerCarryPvE false)
-executeString="${executeString}?bAllowFlyerCarryPvE=${allowFlyerCarryPvE}"
+executeString="${executeString}?AllowFlyerCarryPvE=${allowFlyerCarryPvE}"
 
 # RCON Enabled
 if [[ -z $adminPass ]]; then
