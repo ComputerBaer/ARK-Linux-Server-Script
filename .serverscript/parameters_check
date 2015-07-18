@@ -97,6 +97,10 @@ executeString="${executeString}?DisableStructureDecayPvE=${disableStructureDecay
 allowFlyerCarryPvE=$(checkBoolean $allowFlyerCarryPvE false)
 executeString="${executeString}?AllowFlyerCarryPvE=${allowFlyerCarryPvE}"
 
+# Clamp Resource Harvest Damage (NEW)
+ClampResourceHarvestDamage=$(checkBoolean $ClampResourceHarvestDamage false)
+executeString="${executeString}?ClampResourceHarvestDamage=${ClampResourceHarvestDamage}"
+
 # RCON Enabled
 if [[ -z $adminPass ]]; then
     rconEnabled="false"
