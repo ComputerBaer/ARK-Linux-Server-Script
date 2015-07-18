@@ -232,7 +232,7 @@ function invertBoolean
     elif [[ $bool =~ false ]]; then
         echo "true"
     else
-        # Is invalid Boolean
-        echo ${default,,}
+        # Is invalid Boolean, return Input
+        echo $bool
     fi
 }
