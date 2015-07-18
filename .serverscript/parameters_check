@@ -112,7 +112,7 @@ executeString="${executeString}?RCONEnabled=${rconEnabled}"
 MaxStructuresInRange=$(checkInteger $MaxStructuresInRange 1300)
 executeString="${executeString}?MaxStructuresInRange=${MaxStructuresInRange}"
 
-# PvE Structure Decay Destruction Period
+# PvE Structure Decay Destruction Period ( Not in GameUserSettings.ini ? )
 PvEStructureDecayDestructionPeriod=$(checkInteger $PvEStructureDecayDestructionPeriod 0)
 executeString="${executeString}?PvEStructureDecayDestructionPeriod=${PvEStructureDecayDestructionPeriod}"
 
@@ -176,7 +176,7 @@ executeString="${executeString}?DayTimeSpeedScale=${DayTimeSpeedScale}"
 DinoDamageMultiplier=$(checkDouble $DinoDamageMultiplier 1.0)
 executeString="${executeString}?DinoDamageMultiplier=${DinoDamageMultiplier}"
 
-# Tamed Dino Damage Multiplier
+# Tamed Dino Damage Multiplier ( Not in GameUserSettings.ini ? )
 TamedDinoDamageMultiplier=$(checkDouble $TamedDinoDamageMultiplier 1.0)
 executeString="${executeString}?TamedDinoDamageMultiplier=${TamedDinoDamageMultiplier}"
 
@@ -196,7 +196,7 @@ executeString="${executeString}?PlayerResistanceMultiplier=${PlayerResistanceMul
 DinoResistanceMultiplier=$(checkDouble $DinoResistanceMultiplier 1.0)
 executeString="${executeString}?DinoResistanceMultiplier=${DinoResistanceMultiplier}"
 
-# Tamed Dino Resistance Multiplier
+# Tamed Dino Resistance Multiplier ( Not in GameUserSettings.ini ? )
 TamedDinoResistanceMultiplier=$(checkDouble $TamedDinoResistanceMultiplier 1.0)
 executeString="${executeString}?TamedDinoResistanceMultiplier=${TamedDinoResistanceMultiplier}"
 
