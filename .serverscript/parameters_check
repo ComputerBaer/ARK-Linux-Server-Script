@@ -176,6 +176,10 @@ executeString="${executeString}?DayTimeSpeedScale=${DayTimeSpeedScale}"
 DinoDamageMultiplier=$(checkDouble $DinoDamageMultiplier 1.0)
 executeString="${executeString}?DinoDamageMultiplier=${DinoDamageMultiplier}"
 
+# Tamed Dino Damage Multiplier
+TamedDinoDamageMultiplier=$(checkDouble $TamedDinoDamageMultiplier 1.0)
+executeString="${executeString}?TamedDinoDamageMultiplier=${TamedDinoDamageMultiplier}"
+
 # Player Damage Multiplier
 PlayerDamageMultiplier=$(checkDouble $PlayerDamageMultiplier 1.0)
 executeString="${executeString}?PlayerDamageMultiplier=${PlayerDamageMultiplier}"
@@ -191,6 +195,10 @@ executeString="${executeString}?PlayerResistanceMultiplier=${PlayerResistanceMul
 # Dino Resistance Multiplier
 DinoResistanceMultiplier=$(checkDouble $DinoResistanceMultiplier 1.0)
 executeString="${executeString}?DinoResistanceMultiplier=${DinoResistanceMultiplier}"
+
+# Tamed Dino Resistance Multiplier
+TamedDinoResistanceMultiplier=$(checkDouble $TamedDinoResistanceMultiplier 1.0)
+executeString="${executeString}?TamedDinoResistanceMultiplier=${TamedDinoResistanceMultiplier}"
 
 # Structure Resistance Multiplier
 StructureResistanceMultiplier=$(checkDouble $StructureResistanceMultiplier 1.0)
