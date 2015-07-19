@@ -38,56 +38,80 @@ if [ $scriptUpdater = "true" ]; then
         echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
         exit 0
     fi
+    cd .serverscript
+    # Script Functions Script
+    source _functions
+    if [ $functionVer_Current != $functions ]; then
+        echo -e " Script update available! (Functions Script)"
+        echo -e; echo -e "$YELLOW Downloading script file. $RESET"
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+    fi
+    # Parameters Check
+    if [ $parameters_Current != $parameters ]; then
+        echo -e " Script update available! (Parameters Check Script)"
+        echo -e; echo -e "$YELLOW Downloading script file. $RESET"
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+    fi
     # Backup Server Script
+    source backupserver
     if [ $backupserver_Current != $backupserver ]; then
         echo -e " Script update available! (Backup Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
     fi
     # Install Server Script
+    source installserver
     if [ $installserver_Current != $installserver ]; then
         echo -e " Script update available! (Install Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
     fi
     # Server Status Script
+    source serverstatus
     if [ $serverstatus_Current != $serverstatus ]; then
         echo -e " Script update available! (Status Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
     fi
     # Server Start Script
+    source startserver
     if [ $startserver_Current != $startserver ]; then
         echo -e " Script update available! (Start Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
     fi
     # Server Stop Script
+    source stopserver
     if [ $stopserver_Current != $stopserver ]; then
         echo -e " Script update available! (Stop Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
     fi
     # Update Check Script
+    source update_check
     if [ $updatecheck_Current != $updatecheck ]; then
         echo -e " Script update available! (Update Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
     fi
     # Server Updater Script
+    source updateserver
     if [ $updateserver_Current != $updateserver ]; then
         echo -e " Script update available! (Server Updater Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
     fi
     # Server Viewer Script
+    source viewserver
     if [ $viewserver_Current != $viewserver ]; then
         echo -e " Script update available! (View Server Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
     fi
+    cd ../
     if [ -f configuration.ini ]; then
         # Config Version Checker
+        source configuration.ini
         if [ $ConfigVersion != $liveConfig ]; then
             echo -e "$ERR You have an outdated configuration file!"
             echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
