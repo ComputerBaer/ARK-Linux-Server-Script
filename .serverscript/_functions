@@ -22,9 +22,13 @@ fi
 
 shopt -s nocasematch
 
-# Global Variables 
+# Global Variables
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
 BASE_DIR=$(dirname $SCRIPT_DIR)
+
+GAME_APPID=376030
+GAME_DIR="$BASE_DIR/ShooterGame/Binaries/Linux"
+GAME_EXECUTABLE="ShooterGameServer"
 
 STEAM_DIR="$BASE_DIR/steamcmd"
 STEAM_APPS_DIR="$BASE_DIR/steamapps"
