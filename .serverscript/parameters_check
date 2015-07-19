@@ -1,25 +1,13 @@
 #!/bin/bash
 
 # Version Checker 
-versionP="1.1.0"
+parameters_Current="1.1.0"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
 source _functions
-
-# Compare Versions
-if [ $versionP != $parameters ]; then
-    echo -e "$ERR Script update available! (Parameters Check Script) $RESET"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Param Script Up to date!"; echo -e
-    sleep 1s
-fi
 
 echo -e "$YELLOW Checking parameters. $RESET"; echo -e
 
