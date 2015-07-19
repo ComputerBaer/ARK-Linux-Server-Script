@@ -102,9 +102,9 @@ function runSteam
     
     # Run Steam
     if [ $1 == 0 ]; then
-        ./steamcmd.sh +login anonymous +app_info_print $gameid +quit | parseSteamAcf "$gameid.depots.branches.public.buildid" > ark_tmp_version &
+        ./steamcmd.sh +login anonymous +app_info_print $GAME_APPID +quit | parseSteamAcf "${GAME_APPID}.depots.branches.public.buildid" > ark_tmp_version &
     elif [ $1 == 1 ]; then
-        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit > /dev/null &
+        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $GAME_APPID validate +quit > /dev/null &
     fi
     waitBackgroundTask $!
     

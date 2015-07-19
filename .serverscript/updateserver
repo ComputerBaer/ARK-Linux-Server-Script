@@ -24,11 +24,11 @@ fi
 
 echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
 sleep 0.5s
-if screen -list | grep -q "$sessionName"; then
+if screen -list | grep -q $ScreenName; then
     echo -e " Server is running, now stopping."
-    screen -S $sessionName -X quit
+    screen -S $ScreenName -X quit
     echo -e " Session stopped. Removing PID's"
-    PID=`pgrep -f $arkExecute`
+    PID=`pgrep -f $ArkExecute`
     kill -9 $PID
     sleep 0.5s
     echo -e " PID's removed"
@@ -42,22 +42,22 @@ echo -e; sleep 0.5s
 
 installSteam
 
-cd steamcmd
+cd $STEAM_DIR
 echo -e; sleep 0.5s
 echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
 runSteam 1
 
-cd ../$gameDir
+cd $GAME_DIR
 echo -e; sleep 0.5s
 echo -e "$YELLOW Making sure old executable is removed. $RESET"
 sleep 0.5s
-if [ -f $arkExecute ] && [ $arkExecute != $gameExecute ]; then
+if [ -f $ArkExecute ] && [ $ArkExecute != $GAME_EXECUTABLE ]; then
     echo -e "$ERR Old executable found, removing it. $RESET"
-    rm $arkExecute
+    rm $ArkExecute
     sleep 0.5s
-    if [ -f $arkExecute ]; then
+    if [ -f $ArkExecute ]; then
         echo -e; echo -e "$ERR Unable to delete old executable. $RESET"
-        echo -e " Please remove the file named$YELLOW $arkExecute$RESET."
+        echo -e " Please remove the file named$YELLOW $ArkExecute$RESET."
     else
         echo -e " Old executable removed. Moving on."
     fi

@@ -27,12 +27,12 @@ shopt -s nocasematch
 installSteam
 
 # Get current ARK-Version from appmanifest
-if [ ! -f $STEAM_APPS_DIR/appmanifest_$gameid.acf ]; then
+if [ ! -f $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf ]; then
     echo -e "$RED ARK-Server is not installed! $RESET"
     echo -e; exit 0
 fi
 
-currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$gameid.acf | parseSteamAcf "AppState.buildid"`
+currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf | parseSteamAcf "AppState.buildid"`
 
 # Get new ARK-Version from Steam Network
 echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
@@ -51,6 +51,17 @@ if [ $newVersion -gt $currentVersion ]; then
     echo -e "$RED ARK-Server update found! $RESET"
     sleep 1
     
+    if [[ $AutomaticallyInstallUpdates =~ true ]]; then
+        echo -e "$GREEN Starting update script. $RESET"
+        sleep 1
+        
+        cd $SCRIPT_DIR
+        clear
+        ./updateserver
+        
+        echo -e; exit 0
+    fi
+    
     echo -e " Would you like to update the server?"
     echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET"
     read input
@@ -62,6 +73,8 @@ if [ $newVersion -gt $currentVersion ]; then
         cd $SCRIPT_DIR
         clear
         ./updateserver
+        
+        echo -e; exit 0
     elif [[ $input =~ N ]]; then
         echo -e "$RED Exiting script. $RESET"
         echo -e; exit 0

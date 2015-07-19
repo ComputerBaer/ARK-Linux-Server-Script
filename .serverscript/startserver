@@ -7,6 +7,8 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
+source _functions
+
 # Compare Versions
 echo -e; echo -e "$YELLOW Checking version with github. $RESET"
 if [ $version != $startserver ]; then
@@ -24,17 +26,17 @@ shopt -s nocasematch
 
 echo -e "$YELLOW Checking if server session exists..."
 sleep 0.5s; cd ../
-if screen -list | grep -q "$sessionName"; then
-    echo -e "$ERR The server is already running. The server session name is:$YELLOW $sessionname $RESET"
+if screen -list | grep -q $ScreenName; then
+    echo -e "$ERR The server is already running. The server session name is:$YELLOW $ScreenName $RESET"
     echo -e " Would you like to stop this running server?"
     echo -e; sleep 0.5s
     echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET" ; read runningsession
     sleep 0.5s
     if [[ $runningsession =~ Y ]]; then
         echo -e " Server is running, now stopping."
-        screen -S $sessionName -X quit
+        screen -S $ScreenName -X quit
         echo -e " Session stopped. Removing PID's"
-        PID=`pgrep -f $arkExecute`
+        PID=`pgrep -f $ArkExecute`
         kill -9 $PID
         echo -e " PID's removed"
         echo -e; sleep 0.5s
@@ -52,7 +54,7 @@ else
 fi
 
 # Game Server Version Check
-if [[ $checkUpdates =~ true ]]; then
+if [[ $CheckUpdates =~ true ]]; then
     cd .serverscript
     echo -e "$YELLOW Checking for Game Server Updates $RESET"
     echo -e " Running update check script."; sleep 1s
@@ -68,49 +70,49 @@ fi
 echo -e "$YELLOW Setting ULIMIT to 100000 $RESET"
 ulimit -n 100000
 echo -e " ULIMIT set to 100000"
-cd $gameDir
+cd $GAME_DIR
 
 echo -e; sleep 0.5s
 echo -e "$YELLOW Making sure executable is properly named. $RESET"
-if [ -f $arkExecute ]; then
+if [ -f $ArkExecute ]; then
     sleep 0.5s
     echo -e " Executable found."
 else
     sleep 0.5s
     echo -e "$ERR Executable could not be found. Fixing it."
-    cp $gameExecute $arkExecute
+    cp $GAME_EXECUTABLE $ArkExecute
     sleep 0.5s
-    if [ -f $arkExecute ]; then
+    if [ -f $ArkExecute ]; then
         echo -e " Executable renamed. Moving on."
     else
         echo -e; echo -e "$ERR Unable to fix executable name."
-        echo -e " Please change the file named$YELLOW $gameExecute$RESET to$GREEN $arkExecute $RESET"
+        echo -e " Please change the file named$YELLOW ${GAME_EXECUTABLE}$RESET to$GREEN $ArkExecute $RESET"
         sleep 1s; exit 0
     fi
 fi
 
-if [[ -z "$hostName" ]]; then
-    hostName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
+if [[ -z $SessionName ]]; then
+    SessionName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
 fi
 
 sleep 1s
 echo -e; echo -e "$YELLOW Running startup parameters. These parameters will be listed below. $RESET"
 echo -e; echo -e "-----------------------------------------------------"; echo -e
-echo -e " Executed File: $arkExecute"
-echo -e " Screen Name: $sessionName"
-echo -e " HostName: \e[1;32m$hostName\e[1;33m$arkServersName $RESET"
-echo -e " AdminPass: \e[1;33m$adminPass $RESET"
+echo -e " Executed File: $ArkExecute"
+echo -e " Screen Name: $ScreenName"
+echo -e " HostName: $GREEN$SessionName $RESET"
+echo -e " AdminPass: \e[1;33m$ServerAdminPassword $RESET"
 
-if [ -z $serverPass ]; then
-    echo -e " ServerPass \e[1;31mNO PASSWORD $RESET"
+if [ -z $ServerPassword ]; then
+    echo -e " ServerPass $RED NO PASSWORD $RESET"
 else
-    echo -e " ServerPass \e[1;31m$serverPass $RESET"
+    echo -e " ServerPass $YELLOW$ServerPassword $RESET"
 fi
     
-if [ -z $arkServersName ]; then
-    echo -e " ArkServers \e[1;31mDISABLED $RESET" 
+if [ -z $ArkServers ]; then
+    echo -e " ArkServers $RED DISABLED $RESET" 
 else    
-    echo -e " ArkServers \e[1;31m$arkServers $RESET"   
+    echo -e " ArkServers $YELLOW$ArkServers $RESET"   
 fi
 
 echo -e
@@ -119,7 +121,7 @@ sleep 0.5s
 echo -e "$YELLOW To view server settings, use:$GREEN ./arkserver.sh status $RESET"; echo -e
 echo -e "$YELLOW Now executing.... $RESET"
 
-cd ../../../.serverscript
+cd $SCRIPT_DIR
 ./parameters_check
 
 exit 0

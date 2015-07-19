@@ -22,11 +22,11 @@ fi
 
 echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
 sleep 0.5s
-if screen -list | grep -q "$sessionName"; then
+if screen -list | grep -q $ScreenName; then
     echo -e " Server is running, now stopping."
-    screen -S $sessionName -X quit
+    screen -S $ScreenName -X quit
     echo -e " Session stopped. Removing PID's"
-    PID=`pgrep -f $arkExecute`
+    PID=`pgrep -f $ArkExecute`
     kill -9 $PID
     sleep 0.5s
     echo -e " PID's removed"

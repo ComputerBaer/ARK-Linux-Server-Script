@@ -288,11 +288,10 @@ executeString="${executeString} -server -log"
 sleep 1s; echo -e " Check complete, starting server compiling."
 
 
-echo -e; echo -e " Executing commandline in screen session named:$YELLOW $sessionName $RESET"
+echo -e; echo -e " Executing commandline in screen session named:$YELLOW $ScreenName $RESET"
 # Run Server
-cd ../
-cd $gameDir
-screen -A -m -d -S $sessionName ./$arkExecute $executeString
+cd $GAME_DIR
+screen -A -m -d -S $ScreenName ./$ArkExecute $executeString
 
 echo -e; echo -e "$GREEN Server is starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
 echo -e; exit 0
