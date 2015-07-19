@@ -101,6 +101,18 @@ executeString="${executeString}?AllowFlyerCarryPvE=${allowFlyerCarryPvE}"
 ClampResourceHarvestDamage=$(checkBoolean $ClampResourceHarvestDamage false)
 executeString="${executeString}?ClampResourceHarvestDamage=${ClampResourceHarvestDamage}"
 
+# Prevent Download Survivors (NEW)
+PreventDownloadSurvivors=$(checkBoolean $PreventDownloadSurvivors false)
+executeString="${executeString}?PreventDownloadSurvivors=${PreventDownloadSurvivors}"
+
+# Prevent Download Items (NEW)
+PreventDownloadItems=$(checkBoolean $PreventDownloadItems false)
+executeString="${executeString}?PreventDownloadItems=${PreventDownloadItems}"
+
+# Prevent Download Dinos (NEW)
+PreventDownloadDinos=$(checkBoolean $PreventDownloadDinos false)
+executeString="${executeString}?PreventDownloadDinos=${PreventDownloadDinos}"
+
 # RCON Enabled
 if [[ -z $adminPass ]]; then
     rconEnabled="false"
