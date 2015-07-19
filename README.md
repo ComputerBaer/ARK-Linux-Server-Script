@@ -39,12 +39,10 @@ An advanced ark linux server script that enables you to do a number of things fo
 
 
 # Recently Changed/Updated
-- MAJOR Optimization of the script.
+- Server automatic updater & checker.
 
 # Upcoming Features
-- Server automatic updater.
-  - Update checker
-  - update installer
+- Ability to disable script updates. (Because some people do?)
 
 # How To Install
 Open SSH, direct to your GameServer folder. Then run the following command:
