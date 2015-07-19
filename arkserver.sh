@@ -10,16 +10,8 @@ RESET='\e[0m'
 # Messages
 ERR='\e[1;31m ERROR\e[0m'
 
-# Versions (DONT CHANGE THESE)
+# Version (DO NOT CHANGE THIS)
 arkserver_Current="1.2.7"
-backupserver_Current=""
-installserver_Current=""
-serverstatus_Current=""
-startserver_Current=""
-stopserver_Current=""
-updatecheck_Current=""
-updateserver_Current=""
-viewserver_Current=""
 
 # Check Script Version
 if [ $scriptUpdater = "true" ]; then
