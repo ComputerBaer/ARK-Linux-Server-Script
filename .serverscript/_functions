@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionFunc="1.0.0"
+versionFunc="1.1.0"
 
 source ../version.ini
 source ../configuration.ini
