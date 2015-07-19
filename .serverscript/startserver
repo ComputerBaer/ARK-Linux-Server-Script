@@ -1,26 +1,13 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.3.4"
+startserver_Current="1.3.4"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
 source _functions
-
-# Compare Versions
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $startserver ]; then
-    echo -e " Script update available! (Start Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
 
 shopt -s nocasematch
 
