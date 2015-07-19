@@ -41,84 +41,84 @@ executeString="${executeString}?listen"
 ########################
 
 # Dont Always Notify Player Joined
-notifyJoin=$(checkBoolean $notifyJoin false)
-notifyJoin=$(invertBoolean $notifyJoin) # Variable is NotifyJoin, Parameter is DontNotifyJoin
-executeString="${executeString}?DontAlwaysNotifyPlayerJoined=${notifyJoin}"
+AlwaysNotifyPlayerJoined=$(checkBoolean $AlwaysNotifyPlayerJoined false)
+AlwaysNotifyPlayerJoined=$(invertBoolean $AlwaysNotifyPlayerJoined) # Variable is NotifyJoin, Parameter is DontNotifyJoin
+executeString="${executeString}?DontAlwaysNotifyPlayerJoined=${AlwaysNotifyPlayerJoined}"
 
 # Always Notify Player Left
-notifyLeft=$(checkBoolean $notifyLeft false)
-executeString="${executeString}?AlwaysNotifyPlayerLeft=${notifyLeft}"
+AlwaysNotifyPlayerLeft=$(checkBoolean $AlwaysNotifyPlayerLeft false)
+executeString="${executeString}?AlwaysNotifyPlayerLeft=${AlwaysNotifyPlayerLeft}"
 
 # Allow Third Person Player
-thirdPerson=$(checkBoolean $thirdPerson false)
-executeString="${executeString}?AllowThirdPersonPlayer=${thirdPerson}"
+AllowThirdPersonPlayer=$(checkBoolean $AllowThirdPersonPlayer false)
+executeString="${executeString}?AllowThirdPersonPlayer=${AllowThirdPersonPlayer}"
 
 # Global Voice Chat
-globalVoice=$(checkBoolean $globalVoice false)
-executeString="${executeString}?GlobalVoiceChat=${globalVoice}"
+GlobalVoiceChat=$(checkBoolean $GlobalVoiceChat false)
+executeString="${executeString}?GlobalVoiceChat=${GlobalVoiceChat}"
 
 # Show Map Player Location
-showPlayers=$(checkBoolean $showPlayers false)
-executeString="${executeString}?ShowMapPlayerLocation=${showPlayers}"
+ShowMapPlayerLocation=$(checkBoolean $ShowMapPlayerLocation false)
+executeString="${executeString}?ShowMapPlayerLocation=${ShowMapPlayerLocation}"
 
 # No Tribute Downloads
-noTributeDl=$(checkBoolean $noTributeDl false)
-executeString="${executeString}?NoTributeDownloads=${noTributeDl}"
+NoTributeDownloads=$(checkBoolean $NoTributeDownloads false)
+executeString="${executeString}?NoTributeDownloads=${NoTributeDownloads}"
 
 # Proximity Chat
-proxChat=$(checkBoolean $proxChat false)
-executeString="${executeString}?ProximityChat=${proxChat}"
+ProximityChat=$(checkBoolean $ProximityChat false)
+executeString="${executeString}?ProximityChat=${ProximityChat}"
 
 # Server PvE
-pveServer=$(checkBoolean $pveServer false)
-executeString="${executeString}?ServerPVE=${pveServer}"
+ServerPVE=$(checkBoolean $ServerPVE false)
+executeString="${executeString}?ServerPVE=${ServerPVE}"
 
 # Server Hardcore
-hardcore=$(checkBoolean $hardcore false)
-executeString="${executeString}?ServerHardcore=${hardcore}"
+ServerHardcore=$(checkBoolean $ServerHardcore false)
+executeString="${executeString}?ServerHardcore=${ServerHardcore}"
 
 # Server Force No Hud
-noHud=$(checkBoolean $noHud false)
-executeString="${executeString}?ServerForceNoHUD=${noHud}"
+ServerForceNoHUD=$(checkBoolean $ServerForceNoHUD false)
+executeString="${executeString}?ServerForceNoHUD=${ServerForceNoHUD}"
 
 # Server Crosshair
-crossHair=$(checkBoolean $crossHair false)
-executeString="${executeString}?ServerCrosshair=${crossHair}"
+ServerCrosshair=$(checkBoolean $ServerCrosshair false)
+executeString="${executeString}?ServerCrosshair=${ServerCrosshair}"
 
 # Enable PvP Gamma
-enablePvPGamma=$(checkBoolean $enablePvPGamma false)
-executeString="${executeString}?EnablePvPGamma=${enablePvPGamma}"
+EnablePvPGamma=$(checkBoolean $EnablePvPGamma false)
+executeString="${executeString}?EnablePvPGamma=${EnablePvPGamma}"
 
-# Disable Structure Decay PvE (NEW)
-disableStructureDecayPvE=$(checkBoolean $disableStructureDecayPvE false)
-executeString="${executeString}?DisableStructureDecayPvE=${disableStructureDecayPvE}"
+# Disable Structure Decay PvE
+DisableStructureDecayPvE=$(checkBoolean $DisableStructureDecayPvE false)
+executeString="${executeString}?DisableStructureDecayPvE=${DisableStructureDecayPvE}"
 
-# Allow Flyer Carry PvE (NEW)
-allowFlyerCarryPvE=$(checkBoolean $allowFlyerCarryPvE false)
-executeString="${executeString}?AllowFlyerCarryPvE=${allowFlyerCarryPvE}"
+# Allow Flyer Carry PvE
+AllowFlyerCarryPvE=$(checkBoolean $AllowFlyerCarryPvE false)
+executeString="${executeString}?AllowFlyerCarryPvE=${AllowFlyerCarryPvE}"
 
-# Clamp Resource Harvest Damage (NEW)
+# Clamp Resource Harvest Damage
 ClampResourceHarvestDamage=$(checkBoolean $ClampResourceHarvestDamage false)
 executeString="${executeString}?ClampResourceHarvestDamage=${ClampResourceHarvestDamage}"
 
-# Prevent Download Survivors (NEW)
+# Prevent Download Survivors
 PreventDownloadSurvivors=$(checkBoolean $PreventDownloadSurvivors false)
 executeString="${executeString}?PreventDownloadSurvivors=${PreventDownloadSurvivors}"
 
-# Prevent Download Items (NEW)
+# Prevent Download Items
 PreventDownloadItems=$(checkBoolean $PreventDownloadItems false)
 executeString="${executeString}?PreventDownloadItems=${PreventDownloadItems}"
 
-# Prevent Download Dinos (NEW)
+# Prevent Download Dinos
 PreventDownloadDinos=$(checkBoolean $PreventDownloadDinos false)
 executeString="${executeString}?PreventDownloadDinos=${PreventDownloadDinos}"
 
 # RCON Enabled
-if [[ -z $adminPass ]]; then
-    rconEnabled="false"
+if [[ -z $ServerAdminPassword ]]; then
+    RconEnabled="false"
 fi
-rconEnabled=$(checkBoolean $rconEnabled false)
-executeString="${executeString}?RCONEnabled=${rconEnabled}"
+RconEnabled=$(checkBoolean $RconEnabled false)
+executeString="${executeString}?RCONEnabled=${RconEnabled}"
 
 ########################
 ## Integer Parameters ##
@@ -133,44 +133,44 @@ PvEStructureDecayDestructionPeriod=$(checkInteger $PvEStructureDecayDestructionP
 executeString="${executeString}?PvEStructureDecayDestructionPeriod=${PvEStructureDecayDestructionPeriod}"
 
 # Max Players
-playerCount=$(checkInteger $playerCount 70)
-executeString="${executeString}?MaxPlayers=${playerCount}"
+MaxPlayers=$(checkInteger $MaxPlayers 70)
+executeString="${executeString}?MaxPlayers=${MaxPlayers}"
 
 # Kick Idle Players Period (AFK Timer)
-afkTimer=$(checkInteger $afkTimer 2400)
-executeString="${executeString}?KickIdlePlayersPeriod=${afkTimer}"
+KickIdlePlayersPeriod=$(checkInteger $KickIdlePlayersPeriod 2400)
+executeString="${executeString}?KickIdlePlayersPeriod=${KickIdlePlayersPeriod}"
 
 # Auto Save Period Minutes
-autoSave=$(checkInteger $autoSave 15)
-executeString="${executeString}?AutoSavePeriodMinutes=${autoSave}"
+AutoSavePeriodMinutes=$(checkInteger $AutoSavePeriodMinutes 15)
+executeString="${executeString}?AutoSavePeriodMinutes=${AutoSavePeriodMinutes}"
 
 # Port
-gamePort=$(checkInteger $gamePort 7777)
-executeString="${executeString}?Port=${gamePort}"
+GamePort=$(checkInteger $GamePort 7777)
+executeString="${executeString}?Port=${GamePort}"
 
 # Query Port
-queryPort=$(checkInteger $queryPort 27015)
-executeString="${executeString}?QueryPort=${queryPort}"
+QueryPort=$(checkInteger $QueryPort 27015)
+executeString="${executeString}?QueryPort=${QueryPort}"
 
 # RCON Port
-rconPort=$(checkInteger $rconPort 32330)
-executeString="${executeString}?RCONPort=${rconPort}"
+RconPort=$(checkInteger $RconPort 32330)
+executeString="${executeString}?RCONPort=${RconPort}"
 
 ########################
 ## String Parameters  ##
 ########################
 
 # Server Password
-executeString="${executeString}?ServerPassword=${serverPass}"
+executeString="${executeString}?ServerPassword=${ServerPassword}"
 
 # Server Admin Password
-executeString="${executeString}?ServerAdminPassword=${adminPass}"
+executeString="${executeString}?ServerAdminPassword=${ServerAdminPassword}"
 
 # Session Name
-executeString="${executeString}?SessionName=${hostName}"
+executeString="${executeString}?SessionName=${SessionName}"
 
 # Multi Home (IP Address)
-executeString="${executeString}?MultiHome=${ipAddress}"
+executeString="${executeString}?MultiHome=${IpAddress}"
 
 ########################
 ## Double Parameters  ##
@@ -224,7 +224,7 @@ executeString="${executeString}?StructureResistanceMultiplier=${StructureResista
 XPMultiplier=$(checkDouble $XPMultiplier 1.0)
 executeString="${executeString}?XPMultiplier=${XPMultiplier}"
 
-# PvE Structure Decay Period Multiplier (NEW)
+# PvE Structure Decay Period Multiplier
 PvEStructureDecayPeriodMultiplier=$(checkDouble $PvEStructureDecayPeriodMultiplier 1.0)
 executeString="${executeString}?PvEStructureDecayPeriodMultiplier=${PvEStructureDecayPeriodMultiplier}"
 
@@ -240,7 +240,7 @@ executeString="${executeString}?HarvestAmountMultiplier=${HarvestAmountMultiplie
 HarvestHealthMultiplier=$(checkDouble $HarvestHealthMultiplier 1.0)
 executeString="${executeString}?HarvestHealthMultiplier=${HarvestHealthMultiplier}"
 
-# Resources Respawn Period Multiplier (NEW)
+# Resources Respawn Period Multiplier
 ResourcesRespawnPeriodMultiplier=$(checkDouble $ResourcesRespawnPeriodMultiplier 1.0)
 executeString="${executeString}?ResourcesRespawnPeriodMultiplier=${ResourcesRespawnPeriodMultiplier}"
 
@@ -277,8 +277,8 @@ DinoCountMultiplier=$(checkDouble $DinoCountMultiplier 1.0)
 executeString="${executeString}?DinoCountMultiplier=${DinoCountMultiplier}"
 
 # Difficulty Offset
-difficulty=$(checkDouble $difficulty 0.2)
-executeString="${executeString}?DifficultyOffset=${difficulty}"
+DifficultyOffset=$(checkDouble $DifficultyOffset 0.2)
+executeString="${executeString}?DifficultyOffset=${DifficultyOffset}"
 
 
 # Server

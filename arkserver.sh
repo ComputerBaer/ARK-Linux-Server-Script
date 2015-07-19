@@ -128,12 +128,12 @@ if [[ $safetyNotify =~ true ]]; then
     echo -e "$YELLOW Checking IPTables $RESET"
 fi
 
-if [ -z "$(iptables -nL | grep $gamePort)" ]; then
+if [ -z "$(iptables -nL | grep $GamePort)" ]; then
     sleep 0.5s
     echo -e " IPTables (Game Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Game Port)"
-    iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
+    iptables -I INPUT -p udp --dport $GamePort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $GamePort -j ACCEPT
 else
     if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
@@ -141,12 +141,12 @@ else
     fi
 fi
 
-if [ -z "$(iptables -nL | grep $queryPort)" ]; then
+if [ -z "$(iptables -nL | grep $QueryPort)" ]; then
     sleep 0.5s
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Query Port)"
-    iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
+    iptables -I INPUT -p udp --dport $QueryPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $QueryPort -j ACCEPT
 else
     if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
@@ -154,12 +154,12 @@ else
     fi
 fi
 
-if [ -z "$(iptables -nL | grep $rconPort)" ]; then
+if [ -z "$(iptables -nL | grep $RconPort)" ]; then
     sleep 0.5s
     echo -e " IPTables (RCON Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (RCON Port)"
-    iptables -I INPUT -p udp --dport $rconPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $rconPort -j ACCEPT
+    iptables -I INPUT -p udp --dport $RconPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $RconPort -j ACCEPT
 else
     if [[ $safetyNotify =~ true ]]; then
         sleep 0.5s
