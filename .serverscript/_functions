@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-versionFunc="1.0.0"
+versionFunc="1.1.0"
 
 source ../version.ini
 source ../configuration.ini
@@ -20,9 +20,15 @@ else
     sleep 1s
 fi
 
-# Global Variables 
+shopt -s nocasematch
+
+# Global Variables
 SCRIPT_DIR=$(dirname "$(readlink -fn "$0")")
 BASE_DIR=$(dirname $SCRIPT_DIR)
+
+GAME_APPID=376030
+GAME_DIR="$BASE_DIR/ShooterGame/Binaries/Linux"
+GAME_EXECUTABLE="ShooterGameServer"
 
 STEAM_DIR="$BASE_DIR/steamcmd"
 STEAM_APPS_DIR="$BASE_DIR/steamapps"
@@ -96,9 +102,9 @@ function runSteam
     
     # Run Steam
     if [ $1 == 0 ]; then
-        ./steamcmd.sh +login anonymous +app_info_print $gameid +quit | parseSteamAcf "$gameid.depots.branches.public.buildid" > ark_tmp_version &
+        ./steamcmd.sh +login anonymous +app_info_print $GAME_APPID +quit | parseSteamAcf "${GAME_APPID}.depots.branches.public.buildid" > ark_tmp_version &
     elif [ $1 == 1 ]; then
-        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $gameid validate +quit > /dev/null &
+        ./steamcmd.sh +login anonymous +force_install_dir ../ +app_update $GAME_APPID validate +quit > /dev/null &
     fi
     waitBackgroundTask $!
     
@@ -169,4 +175,68 @@ function parseSteamAcf
     done
     
     echo "NOT FOUND! ERROR?"
+}
+
+# checkInteger <num> <default>
+function checkInteger
+{
+    local num=$1
+    local default=$2
+    local regex='^[0-9]+$' # Positive Numbers
+    #local regex='^-?[0-9]+$' # Positive and negative Numbers
+    
+    if [[ $num =~ $regex ]]; then
+        # Is valid Integer
+        echo $num
+    else
+        # Is invalid Integer
+        echo $default
+    fi
+}
+
+# checkDouble <num> <default>
+function checkDouble
+{
+    local num=$1
+    local default=$2
+    local regex='^[0-9]+([.][0-9]+)?$' # Positive Numbers
+    #local regex='^-?[0-9]+([.][0-9]+)?$' # Positive and negative Numbers
+    
+    if [[ $num =~ $regex ]]; then
+        # Is valid Double
+        echo $num
+    else
+        # Is invalid Double
+        echo $default
+    fi
+}
+
+# checkBoolean <bool> <default>
+function checkBoolean
+{
+    local bool=$1
+    local default=$2
+    
+    if [[ $bool =~ true ]] || [[ $bool =~ false ]]; then
+        # Is valid Boolean
+        echo ${bool,,}
+    else
+        # Is invalid Boolean
+        echo ${default,,}
+    fi
+}
+
+# invertBoolean <bool>
+function invertBoolean
+{
+    local bool=$1
+    
+    if [[ $bool =~ true ]]; then
+        echo "false"
+    elif [[ $bool =~ false ]]; then
+        echo "true"
+    else
+        # Is invalid Boolean, return Input
+        echo $bool
+    fi
 }

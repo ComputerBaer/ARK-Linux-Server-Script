@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.9"
+version="1.1.10"
 
 source ../version.ini
 source ../configuration.ini
@@ -35,17 +35,17 @@ fi
 echo -e; sleep 0.5s
 echo -e "$YELLOW Checking compression format. $RESET"
 sleep 0.5s
-if [[ $compFormat =~ gz ]]; then
+if [[ $CompressionFormat =~ gz ]]; then
     fileExt="tgz"
     tarParam="-z"
     echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
-elif [[ $compFormat =~ bz2 ]]; then
+elif [[ $CompressionFormat =~ bz2 ]]; then
     fileExt="tar.bz2"
     tarParam="-j"
     echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
 else
     echo -e "$ERR Invalid format detected in the configuration file!"
-    echo -e " Please fix the 'compFormat' option in the configuration.ini"
+    echo -e " Please fix the 'CompressionFormat' option in the configuration.ini"
     exit 0
 fi
 

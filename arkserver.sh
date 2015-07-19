@@ -12,7 +12,7 @@ ERR='\e[1;31m ERROR\e[0m'
 
 # Version Checker
 # Don't change this number.
-version="1.2.6"
+version="1.2.7"
 
 if [ -f version.ini ]; then
     rm version.ini
@@ -41,13 +41,13 @@ shopt -s nocasematch
 if [ -f configuration.ini ]; then
     source configuration.ini
 
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 1s
         echo -e "$YELLOW Configuration file found. $RESET"; echo -e
     fi
     
     # Config Version Checker
-    if [ $configVersion != $liveConfig ]; then
+    if [ $ConfigVersion != $liveConfig ]; then
         echo -e "$ERR You have an outdated configuration file!"
         echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
         echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
@@ -62,7 +62,7 @@ if [ -f configuration.ini ]; then
     fi
     
     # Saftey Switch Notification
-    if [[ ! $safetySwitch =~ true ]]; then
+    if [[ ! $SafetySwitch =~ true ]]; then
         echo -e =========================================================================
         echo -e
         echo -e "$ERR You have yet to edit the config file!"
@@ -83,13 +83,13 @@ fi
 
 
 # Hard dep's check.
-if [[ $safetyNotify =~ true ]]; then
+if [[ $InfoNotify =~ true ]]; then
     sleep 0.5s
     echo -e "$YELLOW Checking dependencies $RESET"
 fi
 
 if [ -x /usr/bin/curl ]; then
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN CURL installed $RESET"
     fi
@@ -100,7 +100,7 @@ else
 fi
 
 if [ -x /usr/bin/screen ]; then
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN SCREEN installed $RESET"
     fi
@@ -111,7 +111,7 @@ else
 fi
 
 if [ -x /usr/bin/git ]; then
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e "$GREEN GIT installed $RESET"
     fi
@@ -123,45 +123,45 @@ fi
 
 
 # IPTables Check
-if [[ $safetyNotify =~ true ]]; then
+if [[ $InfoNotify =~ true ]]; then
     sleep 0.5s; echo -e
     echo -e "$YELLOW Checking IPTables $RESET"
 fi
 
-if [ -z "$(iptables -nL | grep $gamePort)" ]; then
+if [ -z "$(iptables -nL | grep $GamePort)" ]; then
     sleep 0.5s
     echo -e " IPTables (Game Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Game Port)"
-    iptables -I INPUT -p udp --dport $gamePort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $gamePort -j ACCEPT
+    iptables -I INPUT -p udp --dport $GamePort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $GamePort -j ACCEPT
 else
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (Game Port):$GREEN OK $RESET"
     fi
 fi
 
-if [ -z "$(iptables -nL | grep $queryPort)" ]; then
+if [ -z "$(iptables -nL | grep $QueryPort)" ]; then
     sleep 0.5s
     echo -e " IPTables (Query Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (Query Port)"
-    iptables -I INPUT -p udp --dport $queryPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $queryPort -j ACCEPT
+    iptables -I INPUT -p udp --dport $QueryPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $QueryPort -j ACCEPT
 else
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (Query Port):$GREEN OK $RESET"
     fi
 fi
 
-if [ -z "$(iptables -nL | grep $rconPort)" ]; then
+if [ -z "$(iptables -nL | grep $RconPort)" ]; then
     sleep 0.5s
     echo -e " IPTables (RCON Port):$RED MISSING $RESET"
     echo -e " Adding IPTables requirements. (RCON Port)"
-    iptables -I INPUT -p udp --dport $rconPort -j ACCEPT
-    iptables -I INPUT -p tcp --dport $rconPort -j ACCEPT
+    iptables -I INPUT -p udp --dport $RconPort -j ACCEPT
+    iptables -I INPUT -p tcp --dport $RconPort -j ACCEPT
 else
-    if [[ $safetyNotify =~ true ]]; then
+    if [[ $InfoNotify =~ true ]]; then
         sleep 0.5s
         echo -e " IPTables (RCON Port):$GREEN OK $RESET"
     fi
@@ -169,7 +169,7 @@ fi
 
 
 # Server Script Check
-if [[ $safetyNotify =~ true ]]; then
+if [[ $InfoNotify =~ true ]]; then
     sleep 0.5s; echo -e
     echo -e "$YELLOW Checking script files. $RESET"
     sleep 1s
@@ -265,7 +265,7 @@ fi
 
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 
-if [[ $safetyNotify =~ true ]]; then
+if [[ $InfoNotify =~ true ]]; then
     echo -e " All scripts found."
     echo -e; sleep 0.5s
 fi
