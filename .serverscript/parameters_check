@@ -27,10 +27,10 @@ echo -e "$YELLOW Checking parameters. $RESET"; echo -e
 executeString=""
 
 # Map Name (must be the first option !!!)
-if [[ -z $map ]]; then
+if [[ -z $MapName ]]; then
     executeString="${executeString}TheIsland"
 else
-    executeString="${executeString}${map}"
+    executeString="${executeString}${MapName}"
 fi
 
 # Server
