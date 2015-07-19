@@ -1,24 +1,10 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.10"
+parameters_Current="1.1.10"
 
-source ../version.ini
 source ../configuration.ini
 source formatting.ini
-
-# Version Checker
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $backupserver ]; then
-    echo -e " Script update available! (Backup Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
 
 shopt -s nocasematch
 
