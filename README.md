@@ -29,7 +29,7 @@ An advanced ark linux server script that enables you to do a number of things fo
   - Map Name (advanced usage)
   - Difficulty modifier.
 - Ability to run Multiple servers.
-- IPTables Checker (Game and Query Ports)
+- IPTables Checker (Game, Query, and RCON)
 - ArkServers Integration
 - Script security and integrity checks.
 - Script auto update checker and installer.
@@ -40,9 +40,16 @@ An advanced ark linux server script that enables you to do a number of things fo
 
 # Recently Changed/Updated
 - Server automatic updater & checker.
+- Script updater changes.
+  - You can now disable the updater.
+  - Updater now only checks once per launch, not every script now.
+- General performance increases.
+- Formatting fixes.
 
 # Upcoming Features
-- Ability to disable script updates. (Because some people do?)
+- Better RCON Support
+- Message Relay System
+- Email Notification (On Crash, etc)
 
 # How To Install
 Open SSH, direct to your GameServer folder. Then run the following command:
