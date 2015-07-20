@@ -7,13 +7,17 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-source _functions
+function installServer {
 
-installSteam
+    source _functions
 
-# Install Server Files
-echo -e "$YELLOW Now installing game server. This may take a while. $RESET"
-runSteam 1
+    installSteam
 
-echo -e "$GREEN Complete. Exiting. $RESET"
-echo -e " You may now start the server with $GREEN ./arkserver.sh start $RESET"
+    # Install Server Files
+    echo -e "$YELLOW Now installing game server. This may take a while. $RESET"
+    runSteam 1
+
+    echo -e "$GREEN Complete. Exiting. $RESET"
+    echo -e " You may now start the server with $GREEN ./arkserver.sh start $RESET"
+
+}
