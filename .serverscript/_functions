@@ -1,24 +1,10 @@
 #!/bin/bash
 
 # Version Checker 
-functionVer_Current="1.1.0"
+functionVer_Current="1.1.1"
 
-source ../version.ini
 source ../configuration.ini
 source formatting.ini
-
-# Version Checker
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $versionFunc != $functions ]; then
-    echo -e " Script update available! (Functions Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
 
 shopt -s nocasematch
 
