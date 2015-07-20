@@ -248,7 +248,7 @@ cd ../
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 
 # Check Script Version
-if [ $ScriptUpdater = "true" ]; then
+if [[ $ScriptUpdater =~ true ]] then
     if [ -f version.ini ]; then
         rm version.ini
     fi
