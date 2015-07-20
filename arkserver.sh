@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.11"
+arkserver_Current="1.2.12"
 
 shopt -s nocasematch
 clear; echo -e
@@ -356,6 +356,20 @@ if [[ $ScriptUpdater =~ true ]]; then
     rm version.ini
 else
     echo -e "$RED Script Update Checker Disabled $RESET"
+    
+    cd .serverscript
+    source _functions
+    source parameters_check
+    source backupserver
+    source installserver
+    source serverstatus
+    source startserver
+    source stopserver
+    source update_check
+    source updateserver
+    source viewserver
+    cd ../
+    source configuration.ini
 fi
 
 cd .serverscript
