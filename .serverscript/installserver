@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-installserver_Current="1.2.0"
+installserver_Current="1.2.1"
 
 source ../version.ini
 source ../configuration.ini
