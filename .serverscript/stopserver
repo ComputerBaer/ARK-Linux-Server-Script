@@ -23,7 +23,7 @@ function stopServer {
         echo -e "$RED Server stopped $RESET"
     else
         echo -e "$ERR Could not find the server session. The server is not running. $RESET"
-        exit 0
+        echo -e; exit 0
     fi
     
 }
