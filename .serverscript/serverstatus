@@ -12,7 +12,7 @@ shopt -s nocasematch
 function serverStatus {
 
     # Couple If Statements for Stats Info
-    echo -e "$YELLOW Collecting status of your Ark server... $RESET"
+    echo -e; echo -e "$YELLOW Collecting status of your Ark server... $RESET"
 
     if ps ax | grep -v grep | grep $ArkExecute > /dev/null; then
         setRunning="$GREEN YES $RESET"
