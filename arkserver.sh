@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.12"
+arkserver_Current="1.2.13"
 
 shopt -s nocasematch
 clear; echo -e
@@ -231,12 +231,6 @@ if [ ! -f parameters_check ]; then
     echo -e "$YELLOW Parameter Script $RESET"
     curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
     chmod 777 parameters_check
-fi
-
-# Formatting File
-if [ ! -f formatting.ini ]; then
-    echo -e "$YELLOW Formatting $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/formatting.ini -o formatting.ini -#
 fi
 
 if [[ $InfoNotify =~ true ]]; then

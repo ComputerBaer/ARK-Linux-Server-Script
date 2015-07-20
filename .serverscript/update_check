@@ -1,19 +1,9 @@
 #!/bin/bash
 
 # Version Checker 
-updatecheck_Current="1.0.4"
-
-source ../version.ini
-source ../configuration.ini
-source formatting.ini
-
-shopt -s nocasematch
+updatecheck_Current="1.0.5"
 
 function updateCheck {
-    
-    source _functions
-
-    installSteam
 
     # Get current ARK-Version from appmanifest
     if [ ! -f $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf ]; then

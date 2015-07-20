@@ -1,12 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-backupserver_Current="1.2.3"
-
-source ../configuration.ini
-source formatting.ini
-
-shopt -s nocasematch
+backupserver_Current="1.2.4"
 
 function backupServer {
 

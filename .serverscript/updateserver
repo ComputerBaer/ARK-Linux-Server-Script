@@ -1,15 +1,9 @@
 #!/bin/bash
 
 # Version Checker 
-updateserver_Current="1.2.3"
-
-source ../version.ini
-source ../configuration.ini
-source formatting.ini
+updateserver_Current="1.2.4"
 
 function updateServer {
-
-    source _functions
 
     echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
     sleep 0.5s

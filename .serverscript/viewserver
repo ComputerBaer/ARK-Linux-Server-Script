@@ -1,11 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-viewserver_Current="1.2.1"
-
-source ../version.ini
-source ../configuration.ini
-source formatting.ini
+viewserver_Current="1.2.2"
 
 function viewServer {
 

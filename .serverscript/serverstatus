@@ -1,13 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-serverstatus_Current="1.0.9"
-
-source ../version.ini
-source ../configuration.ini
-source formatting.ini
-
-shopt -s nocasematch
+serverstatus_Current="1.0.10"
 
 function serverStatus {
 

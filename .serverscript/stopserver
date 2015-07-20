@@ -1,11 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-stopserver_Current="1.2.1"
-
-source ../version.ini
-source ../configuration.ini
-source formatting.ini
+stopserver_Current="1.2.2"
 
 function stopServer {
 
