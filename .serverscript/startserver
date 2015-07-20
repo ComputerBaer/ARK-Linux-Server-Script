@@ -13,7 +13,7 @@ function startServer {
 
     source _functions
 
-    echo -e "$YELLOW Checking if server session exists..."
+    echo -e; echo -e "$YELLOW Checking if server session exists..."
     sleep 0.5s; cd ../
     if screen -list | grep -q $ScreenName; then
         echo -e "$ERR The server is already running. The server session name is:$YELLOW $ScreenName $RESET"
