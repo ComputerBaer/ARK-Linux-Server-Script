@@ -7,19 +7,23 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-echo -e " Checking if server session exists..."
-sleep 0.5s
-if screen -list | grep -q $ScreenName; then
-    echo -e
-    echo -e "$GREEN Server is running! $RESET"
+function viewServer {
+
+    echo -e " Checking if server session exists..."
     sleep 0.5s
-    echo -e "$YELLOW To detach from the session, hold CTRL+A+D (in that order) $RESET"
-    echo -e; sleep 0.5s
-    echo -e "$YELLOW You will be brought to the session in 10 seconds. $RESET"
-    echo -e
-    sleep 10s
-    screen -r $ScreenName
-else
-  echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
-  exit 0
-fi
+    if screen -list | grep -q $ScreenName; then
+        echo -e
+        echo -e "$GREEN Server is running! $RESET"
+        sleep 0.5s
+        echo -e "$YELLOW To detach from the session, hold CTRL+A+D (in that order) $RESET"
+        echo -e; sleep 0.5s
+        echo -e "$YELLOW You will be brought to the session in 10 seconds. $RESET"
+        echo -e
+        sleep 10s
+        screen -r $ScreenName
+    else
+      echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
+      exit 0
+    fi
+
+}
