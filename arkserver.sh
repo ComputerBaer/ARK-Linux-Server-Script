@@ -259,6 +259,7 @@ if [ $scriptUpdater = "true" ]; then
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
     fi
     # Parameters Check
+    source parameters_check
     if [ $parameters_Current != $parameters ]; then
         echo -e " Script update available! (Parameters Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
@@ -354,42 +355,42 @@ help () {
 
 start () {
     clear
-    ./startserver
+    startServer
 }
 
 stop () {
     clear
-    ./stopserver
+    stopServer
 }
 
 view () {
     clear
-    ./viewserver
+    viewServer
 }
 
 install () {
     clear
-    ./installserver
+    installServer
 }
 
 update () {
     clear
-    ./updateserver
+    updateServer
 }
 
 updatecheck () {
     clear
-    ./update_check
+    updateCheck
 }
 
 backup () {
     clear
-    ./backupserver
+    backupServer
 }
 
 status () {
     clear
-    ./serverstatus
+    serverStatus
 }
 
 [ "$1" = "" ] && {
