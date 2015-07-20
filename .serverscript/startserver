@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-startserver_Current="1.3.6"
+startserver_Current="1.3.7"
 
 source ../version.ini
 source ../configuration.ini
@@ -32,10 +32,10 @@ function startServer {
             echo -e "$RED Server stopped $RESET"
         elif [[ $runningsession =~ N ]]; then
             echo -e; echo -e "$RED Exiting script. $RESET"
-            exit 0
+            return
         else
             echo -e "$ERR You have entered an invalid response. Exiting $RESET"
-            echo -e; exit 0
+            echo -e; return
         fi
     else
         echo -e " Server isn't running."
@@ -76,7 +76,7 @@ function startServer {
         else
             echo -e; echo -e "$ERR Unable to fix executable name."
             echo -e " Please change the file named$YELLOW ${GAME_EXECUTABLE}$RESET to$GREEN $ArkExecute $RESET"
-            sleep 1s; exit 0
+            sleep 1s; return
         fi
     fi
 
@@ -113,6 +113,6 @@ function startServer {
     cd $SCRIPT_DIR
     parametersCheck
 
-    exit 0
+    return
 
 }

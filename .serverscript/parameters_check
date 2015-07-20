@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.1.1"
+parameters_Current="1.1.2"
 
 source ../version.ini
 source ../configuration.ini
@@ -284,6 +284,6 @@ function parametersCheck {
     screen -A -m -d -S $ScreenName ./$ArkExecute $executeString
 
     echo -e; echo -e "$GREEN Server is starting up. To access the console, relaunch the script and use: ./arkserver.sh view $RESET"
-    echo -e; exit 0
+    echo -e; return
 
 }
