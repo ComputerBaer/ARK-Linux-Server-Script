@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-startserver_Current="1.3.8"
+startserver_Current="1.3.9"
 
 function startServer {
 
@@ -73,7 +73,9 @@ function startServer {
     fi
 
     if [[ -z $SessionName ]]; then
-        SessionName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
+        setSessionName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
+    else
+        setSessionName=$SessionName
     fi
 
     sleep 1s
@@ -81,7 +83,7 @@ function startServer {
     echo -e; echo -e "-----------------------------------------------------"; echo -e
     echo -e " Executed File: $ArkExecute"
     echo -e " Screen Name: $ScreenName"
-    echo -e " HostName: $GREEN$SessionName $RESET"
+    echo -e " HostName: $GREEN$setSessionName $RESET"
     echo -e " AdminPass: \e[1;33m$ServerAdminPassword $RESET"
 
     if [ -z $ServerPassword ]; then

@@ -152,7 +152,7 @@ function parametersCheck {
 
     # Session Name
     if [ ! -z $SessionName ] && [ ! -z $ArkServers ]; then
-        SessionName='${SessionName}_${ArkServers}'
+        SessionName="${SessionName}_${ArkServers}"
     fi
     executeString="${executeString}?SessionName=${SessionName}"
 
