@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.8"
+arkserver_Current="1.2.9"
 
 shopt -s nocasematch
 clear; echo -e
@@ -235,7 +235,7 @@ cd ../
 #####################################[ SERVER SCRIPT SCAN ]#####################################
 
 # Check Script Version
-if [ $scriptUpdater = "true" ]; then
+if [ $ScriptUpdater = "true" ]; then
     if [ -f version.ini ]; then
         rm version.ini
     fi
