@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-backupserver_Current="1.2.2"
+backupserver_Current="1.2.3"
 
 source ../configuration.ini
 source formatting.ini
@@ -11,7 +11,7 @@ shopt -s nocasematch
 function backupServer {
 
     # Check for backups directory.
-    echo -e "$YELLOW Checking if there is a backups directory. $RESET"
+    echo -e; echo -e "$YELLOW Checking if there is a backups directory. $RESET"
     sleep 0.5s; cd ../
     if [ -d backups ]; then
         echo -e " Backups directory already created. Moving on."
@@ -55,10 +55,10 @@ function backupServer {
         echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
         sleep 1s
     else
-        echo -e " $ERR No saves folder found! (Maybe you never ran the server?)"
+        echo -e "$ERR No saves folder found! (Maybe you never ran the server?)"
         echo -e " Directory checked: $YELLOW ShooterGame/Saved/ $RESET"
-       echo -e " Looking for: $YELLOW SavedArks/ $RESET"
-       return
+        echo -e " Looking for: $YELLOW SavedArks/ $RESET"
+        echo -e; return
     fi
 
 }
