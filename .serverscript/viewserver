@@ -9,7 +9,7 @@ source formatting.ini
 
 function viewServer {
 
-    echo -e " Checking if server session exists..."
+    echo -e; echo -e "$YELLOW Checking if server session exists..."
     sleep 0.5s
     if screen -list | grep -q $ScreenName; then
         echo -e
@@ -23,7 +23,7 @@ function viewServer {
         screen -r $ScreenName
     else
       echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
-      exit 0
+      echo -e; exit 0
     fi
 
 }
