@@ -11,7 +11,7 @@ function parametersCheck {
 
     source _functions
 
-    echo -e "$YELLOW Checking parameters. $RESET"; echo -e
+    echo -e " Checking parameters."
 
     # Parameters String
     executeString=""
