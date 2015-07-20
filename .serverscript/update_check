@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-updatecheck_Current="1.0.2"
+updatecheck_Current="1.0.3"
 
 source ../version.ini
 source ../configuration.ini
@@ -46,7 +46,7 @@ function updateCheck {
         
             cd $SCRIPT_DIR
             clear
-            ./updateserver
+            updateServer
         
             echo -e; exit 0
         fi
@@ -61,7 +61,7 @@ function updateCheck {
         
             cd $SCRIPT_DIR
             clear
-           ./updateserver
+            updateServer
         
             echo -e; exit 0
         elif [[ $input =~ N ]]; then
