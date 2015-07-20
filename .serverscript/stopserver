@@ -7,19 +7,23 @@ source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
-sleep 0.5s
-if screen -list | grep -q $ScreenName; then
-    echo -e " Server is running, now stopping."
-    screen -S $ScreenName -X quit
-    echo -e " Session stopped. Removing PID's"
-    PID=`pgrep -f $ArkExecute`
-    kill -9 $PID
+function stopServer {
+
+    echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
     sleep 0.5s
-    echo -e " PID's removed"
-    echo -e; sleep 0.5s
-    echo -e "$RED Server stopped $RESET"
-else
-    echo -e "$ERR Could not find the server session. The server is not running. $RESET"
-    exit 0
-fi
+    if screen -list | grep -q $ScreenName; then
+        echo -e " Server is running, now stopping."
+        screen -S $ScreenName -X quit
+        echo -e " Session stopped. Removing PID's"
+        PID=`pgrep -f $ArkExecute`
+        kill -9 $PID
+        sleep 0.5s
+        echo -e " PID's removed"
+        echo -e; sleep 0.5s
+        echo -e "$RED Server stopped $RESET"
+    else
+        echo -e "$ERR Could not find the server session. The server is not running. $RESET"
+        exit 0
+    fi
+    
+}
