@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.13"
+arkserver_Current="1.2.14"
 
 shopt -s nocasematch
 clear; echo -e
@@ -243,6 +243,7 @@ cd ../
 
 # Check Script Version
 if [[ $ScriptUpdater =~ true ]]; then
+    updateFound="false"
     if [ -f version.ini ]; then
         rm version.ini
     fi
@@ -254,8 +255,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Main Script)"
         echo -e; echo -e "$YELLOW Downloading shell file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh -o arkserver.sh -#
-        echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-        exit 0
+        updateFound="true"
     fi
     cd .serverscript
     # Script Functions Script
@@ -264,6 +264,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Functions Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+        updateFound="true"
     fi
     # Parameters Check
     source parameters_check
@@ -271,6 +272,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Parameters Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+        updateFound="true"
     fi
     # Backup Server Script
     source backupserver
@@ -278,6 +280,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Backup Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
+        updateFound="true"
     fi
     # Install Server Script
     source installserver
@@ -285,6 +288,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Install Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
+        updateFound="true"
     fi
     # Server Status Script
     source serverstatus
@@ -292,6 +296,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Status Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
+        updateFound="true"
     fi
     # Server Start Script
     source startserver
@@ -299,6 +304,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Start Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
+        updateFound="true"
     fi
     # Server Stop Script
     source stopserver
@@ -306,6 +312,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Stop Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
+        updateFound="true"
     fi
     # Update Check Script
     source update_check
@@ -313,6 +320,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Update Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
+        updateFound="true"
     fi
     # Server Updater Script
     source updateserver
@@ -320,6 +328,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (Server Updater Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
+        updateFound="true"
     fi
     # Server Viewer Script
     source viewserver
@@ -327,25 +336,31 @@ if [[ $ScriptUpdater =~ true ]]; then
         echo -e " Script update available! (View Server Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
+        updateFound="true"
     fi
+    
+    if [[ $updateFound =~ true ]]; then
+        echo -e; echo -e "$GREEN Script Update installed. Please restart the script. $RESET"
+        exit 0
+    fi
+    
     cd ../
-    if [ -f configuration.ini ]; then
-        # Config Version Checker
-        source configuration.ini
-        if [ $ConfigVersion != $liveConfig ]; then
-            echo -e "$ERR You have an outdated configuration file!"
-            echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
-            echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
-            echo -e "$YELLOW edit the config file again. Sorry for the flaw in this design of the script. $RESET"
-            sleep 1s
-            echo -e; mv configuration.ini configuration_backup.ini
-            echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
-            curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
-            echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
-            echo -e "$GREEN Most options you can simply copy and paste as most config updates are additions or formatting. $RESET"
-            echo -e; exit 0
-        fi
+    # Config Version Checker
+    #source configuration.ini
+    if [ $ConfigVersion != $liveConfig ]; then
+        echo -e "$ERR You have an outdated configuration file!"
+        echo -e "$YELLOW There is a config update! Any config updates are important to the script. $RESET"
+        echo -e "$YELLOW The script will make a backup of your current config. However you will have to $RESET"
+        echo -e "$YELLOW edit the config file again. Sorry for the flaw in this design of the script. $RESET"
+        sleep 1s
+        echo -e; mv configuration.ini configuration_backup.ini
+        echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
+        echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
+        echo -e "$GREEN Most options you can simply copy and paste as most config updates are additions or formatting. $RESET"
+        echo -e; exit 0
     fi
+    
     echo -e " All scripts up to date!"
     rm version.ini
 else
@@ -363,7 +378,7 @@ else
     source updateserver
     source viewserver
     cd ../
-    source configuration.ini
+    #source configuration.ini
 fi
 
 cd .serverscript
