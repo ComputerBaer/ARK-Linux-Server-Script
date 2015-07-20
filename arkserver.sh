@@ -240,7 +240,7 @@ if [ $ScriptUpdater = "true" ]; then
         rm version.ini
     fi
     echo -e "$YELLOW Checking for script updates... $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -#
+    curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -#
     source version.ini
     # Main Shell Script
     if [ $arkserver_Current != $arkserver ]; then
