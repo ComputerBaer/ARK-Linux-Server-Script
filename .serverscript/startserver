@@ -111,7 +111,7 @@ function startServer {
     echo -e "$YELLOW Now executing.... $RESET"
 
     cd $SCRIPT_DIR
-    ./parameters_check
+    parametersCheck
 
     exit 0
 
