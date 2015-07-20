@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.1.3"
+parameters_Current="1.1.4"
 
 function parametersCheck {
 
@@ -151,6 +151,9 @@ function parametersCheck {
     executeString="${executeString}?ServerAdminPassword=${ServerAdminPassword}"
 
     # Session Name
+    if [ ! -z $SessionName ] && [ ! -z $ArkServers ]; then
+        SessionName='${SessionName}_${ArkServers}'
+    fi
     executeString="${executeString}?SessionName=${SessionName}"
 
     # Multi Home (IP Address)
