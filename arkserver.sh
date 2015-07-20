@@ -19,6 +19,19 @@ clear; echo -e
 if [ -f configuration.ini ]; then
     source configuration.ini
 
+    # Fix new Updater for old Configuration Versions, can be removed later
+    if [ -z $ScriptUpdater ]; then
+        InfoNotify=$safetyNotify
+        SafetySwitch=$safetySwitch
+        GamePort=$gamePort
+        QueryPort=$queryPort
+        RconPort=$rconPort
+        ConfigVersion=$configVersion
+        ScriptUpdater="true"
+        rm -r .serverscript
+    fi
+    # End, old config fix
+    
     if [[ $InfoNotify =~ true ]]; then
         sleep 1s
         echo -e "$YELLOW Configuration file found. $RESET"; echo -e
