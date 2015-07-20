@@ -1,38 +1,29 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.9"
+stopserver_Current="1.2.0"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-# Version Checker
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $stopserver ]; then
-    echo -e " Script update available! (Stop Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
+function stopServer {
 
-echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
-sleep 0.5s
-if screen -list | grep -q $ScreenName; then
-    echo -e " Server is running, now stopping."
-    screen -S $ScreenName -X quit
-    echo -e " Session stopped. Removing PID's"
-    PID=`pgrep -f $ArkExecute`
-    kill -9 $PID
+    echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
     sleep 0.5s
-    echo -e " PID's removed"
-    echo -e; sleep 0.5s
-    echo -e "$RED Server stopped $RESET"
-else
-    echo -e "$ERR Could not find the server session. The server is not running. $RESET"
-    exit 0
-fi
+    if screen -list | grep -q $ScreenName; then
+        echo -e " Server is running, now stopping."
+        screen -S $ScreenName -X quit
+        echo -e " Session stopped. Removing PID's"
+        PID=`pgrep -f $ArkExecute`
+        kill -9 $PID
+        sleep 0.5s
+        echo -e " PID's removed"
+        echo -e; sleep 0.5s
+        echo -e "$RED Server stopped $RESET"
+    else
+        echo -e "$ERR Could not find the server session. The server is not running. $RESET"
+        echo -e; exit 0
+    fi
+    
+}

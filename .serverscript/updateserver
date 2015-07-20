@@ -1,72 +1,63 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.2.1"
+updateserver_Current="1.2.2"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-source _functions
+function updateServer {
 
-# Compare Versions
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $updateserver ]; then
-    echo -e " Script update available! (Update Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
+    source _functions
 
-echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
-sleep 0.5s
-if screen -list | grep -q $ScreenName; then
-    echo -e " Server is running, now stopping."
-    screen -S $ScreenName -X quit
-    echo -e " Session stopped. Removing PID's"
-    PID=`pgrep -f $ArkExecute`
-    kill -9 $PID
+    echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
     sleep 0.5s
-    echo -e " PID's removed"
-    echo -e; sleep 0.5s
-    echo -e "$RED Server stopped $RESET"
-else
-    echo -e " Server is offline. Moving on."
-fi
-
-echo -e; sleep 0.5s
-
-installSteam
-
-cd $STEAM_DIR
-echo -e; sleep 0.5s
-echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
-runSteam 1
-
-cd $GAME_DIR
-echo -e; sleep 0.5s
-echo -e "$YELLOW Making sure old executable is removed. $RESET"
-sleep 0.5s
-if [ -f $ArkExecute ] && [ $ArkExecute != $GAME_EXECUTABLE ]; then
-    echo -e "$ERR Old executable found, removing it. $RESET"
-    rm $ArkExecute
-    sleep 0.5s
-    if [ -f $ArkExecute ]; then
-        echo -e; echo -e "$ERR Unable to delete old executable. $RESET"
-        echo -e " Please remove the file named$YELLOW $ArkExecute$RESET."
+    if screen -list | grep -q $ScreenName; then
+        echo -e " Server is running, now stopping."
+        screen -S $ScreenName -X quit
+        echo -e " Session stopped. Removing PID's"
+        PID=`pgrep -f $ArkExecute`
+        kill -9 $PID
+        sleep 0.5s
+        echo -e " PID's removed"
+        echo -e; sleep 0.5s
+        echo -e "$RED Server stopped $RESET"
     else
-        echo -e " Old executable removed. Moving on."
+        echo -e " Server is offline. Moving on."
     fi
-else
-    echo -e " Old executable not found."
-fi
 
-echo -e; sleep 0.5s
-echo -e "$GREEN Server update complete. $RESET"
-echo -e; sleep 0.5s
-echo -e "$YELLOW Please restart the script to start the server. $RESET"
-exit 0
+    echo -e; sleep 0.5s
+
+    installSteam
+
+    cd $STEAM_DIR
+    echo -e; sleep 0.5s
+    echo -e "$YELLOW Now updating the server. This may take a while. $RESET"
+    runSteam 1
+
+    cd $GAME_DIR
+    echo -e; sleep 0.5s
+    echo -e "$YELLOW Making sure old executable is removed. $RESET"
+    sleep 0.5s
+    if [ -f $ArkExecute ] && [ $ArkExecute != $GAME_EXECUTABLE ]; then
+        echo -e "$ERR Old executable found, removing it. $RESET"
+        rm $ArkExecute
+        sleep 0.5s
+        if [ -f $ArkExecute ]; then
+            echo -e; echo -e "$ERR Unable to delete old executable. $RESET"
+            echo -e " Please remove the file named$YELLOW $ArkExecute$RESET."
+        else
+            echo -e " Old executable removed. Moving on."
+        fi
+    else
+        echo -e " Old executable not found."
+    fi
+
+    echo -e; sleep 0.5s
+    echo -e "$GREEN Server update complete. $RESET"
+    echo -e; sleep 0.5s
+    echo -e "$YELLOW Please restart the script to start the server. $RESET"
+    exit 0
+
+}

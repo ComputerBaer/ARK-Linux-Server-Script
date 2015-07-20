@@ -1,38 +1,29 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.9"
+viewserver_Current="1.2.0"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-# Version Checker
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $viewserver ]; then
-    echo -e " Script update available! (Stop Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
+function viewServer {
 
-echo -e " Checking if server session exists..."
-sleep 0.5s
-if screen -list | grep -q $ScreenName; then
-    echo -e
-    echo -e "$GREEN Server is running! $RESET"
+    echo -e; echo -e "$YELLOW Checking if server session exists..."
     sleep 0.5s
-    echo -e "$YELLOW To detach from the session, hold CTRL+A+D (in that order) $RESET"
-    echo -e; sleep 0.5s
-    echo -e "$YELLOW You will be brought to the session in 10 seconds. $RESET"
-    echo -e
-    sleep 10s
-    screen -r $ScreenName
-else
-  echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
-  exit 0
-fi
+    if screen -list | grep -q $ScreenName; then
+        echo -e
+        echo -e "$GREEN Server is running! $RESET"
+        sleep 0.5s
+        echo -e "$YELLOW To detach from the session, hold CTRL+A+D (in that order) $RESET"
+        echo -e; sleep 0.5s
+        echo -e "$YELLOW You will be brought to the session in 10 seconds. $RESET"
+        echo -e
+        sleep 10s
+        screen -r $ScreenName
+    else
+      echo -e "$ERR Unable to find the server session. Script is assuming the server isn't running."
+      echo -e; exit 0
+    fi
+
+}

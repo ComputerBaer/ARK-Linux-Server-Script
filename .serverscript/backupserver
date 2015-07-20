@@ -1,74 +1,64 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.1.10"
+backupserver_Current="1.2.1"
 
-source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-# Version Checker
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $backupserver ]; then
-    echo -e " Script update available! (Backup Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
-
 shopt -s nocasematch
 
-# Check for backups directory.
-echo -e "$YELLOW Checking if there is a backups directory. $RESET"
-sleep 0.5s; cd ../
-if [ -d backups ]; then
-    echo -e " Backups directory already created. Moving on."
-else
-    echo -e "$ERR The backups directory doesn't exist, creating it. $RESET"
-    mkdir backups
-fi
+function backupServer {
 
-echo -e; sleep 0.5s
-echo -e "$YELLOW Checking compression format. $RESET"
-sleep 0.5s
-if [[ $CompressionFormat =~ gz ]]; then
-    fileExt="tgz"
-    tarParam="-z"
-    echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
-elif [[ $CompressionFormat =~ bz2 ]]; then
-    fileExt="tar.bz2"
-    tarParam="-j"
-    echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
-else
-    echo -e "$ERR Invalid format detected in the configuration file!"
-    echo -e " Please fix the 'CompressionFormat' option in the configuration.ini"
-    exit 0
-fi
+    # Check for backups directory.
+    echo -e "$YELLOW Checking if there is a backups directory. $RESET"
+    sleep 0.5s; cd ../
+    if [ -d backups ]; then
+        echo -e " Backups directory already created. Moving on."
+    else
+        echo -e "$ERR The backups directory doesn't exist, creating it. $RESET"
+        mkdir backups
+    fi
 
-DATE=`date +"%m-%d-%y_%H.%M.%S"`
+    echo -e; sleep 0.5s
+    echo -e "$YELLOW Checking compression format. $RESET"
+    sleep 0.5s
+    if [[ $CompressionFormat =~ gz ]]; then
+        fileExt="tgz"
+        tarParam="-z"
+        echo -e " Format Type:$GREEN GZ (Short Compression Time / Medium Sized Files)$RESET"
+    elif [[ $CompressionFormat =~ bz2 ]]; then
+        fileExt="tar.bz2"
+        tarParam="-j"
+        echo -e " Format Type:$GREEN BZ2 (Long Compression Time / Small Sized Files)$RESET"
+    else
+       echo -e "$ERR Invalid format detected in the configuration file!"
+       echo -e " Please fix the 'CompressionFormat' option in the configuration.ini"
+       exit 0
+    fi
 
-echo -e; echo -e "$YELLOW Trying to create backup for save files. $RESET"
-sleep 0.5s
-if [ -d ShooterGame/Saved/SavedArks/ ]; then
-    echo -e " Saves directory found, copying files."
-    cd ShooterGame/Saved/
-    cp -r SavedArks/ ../../backups
-    echo -e " Copied save files."
-    echo -e; cd ../../backups
+    DATE=`date +"%m-%d-%y_%H.%M.%S"`
+
+    echo -e; echo -e "$YELLOW Trying to create backup for save files. $RESET"
+    sleep 0.5s
+    if [ -d ShooterGame/Saved/SavedArks/ ]; then
+        echo -e " Saves directory found, copying files."
+        cd ShooterGame/Saved/
+        cp -r SavedArks/ ../../backups
+        echo -e " Copied save files."
+        echo -e; cd ../../backups
     
-    echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
-    FILE="Backup_$DATE.$fileExt"
-    tar $tarParam -cf $FILE SavedArks/
-    rm -rf SavedArks
-    echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
-    sleep 1s
-else
-    echo -e " $ERR No saves folder found! (Maybe you never ran the server?)"
-    echo -e " Directory checked: $YELLOW ShooterGame/Saved/ $RESET"
-    echo -e " Looking for: $YELLOW SavedArks/ $RESET"
-    exit 0
-fi
+        echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
+        FILE="Backup_$DATE.$fileExt"
+        tar $tarParam -cf $FILE SavedArks/
+        rm -rf SavedArks
+        echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
+        sleep 1s
+    else
+        echo -e " $ERR No saves folder found! (Maybe you never ran the server?)"
+        echo -e " Directory checked: $YELLOW ShooterGame/Saved/ $RESET"
+       echo -e " Looking for: $YELLOW SavedArks/ $RESET"
+       exit 0
+    fi
+
+}

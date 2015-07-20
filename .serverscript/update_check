@@ -1,89 +1,80 @@
 #!/bin/bash
 
 # Version Checker 
-version="1.0.1"
+updatecheck_Current="1.0.2"
 
 source ../version.ini
 source ../configuration.ini
 source formatting.ini
 
-source _functions
-
-# Compare Script Versions
-echo -e; echo -e "$YELLOW Checking version with github. $RESET"
-if [ $version != $updatecheck ]; then
-    echo -e " Script update available! (Update Check Script)"
-    echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
-    echo -e; echo -e "$GREEN File overwritten. Please restart the script. $RESET"
-    exit 0
-else
-    echo -e " Up to date!"; echo -e
-    sleep 1s
-fi
-
 shopt -s nocasematch
 
-installSteam
-
-# Get current ARK-Version from appmanifest
-if [ ! -f $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf ]; then
-    echo -e "$RED ARK-Server is not installed! $RESET"
-    echo -e; exit 0
-fi
-
-currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf | parseSteamAcf "AppState.buildid"`
-
-# Get new ARK-Version from Steam Network
-echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
-runSteam 0
-echo -e "$YELLOW Request completed! $RESET"
-
-# Comparing version numbers
-sleep 0.5; echo -e
-echo -e "$YELLOW Comparing ARK-Server version numbers. $RESET"
-
-echo -e " Current Version:$CYAN   $currentVersion $RESET"
-echo -e " New Version:$CYAN       $newVersion $RESET"
-
-sleep 0.5; echo -e
-if [ $newVersion -gt $currentVersion ]; then
-    echo -e "$RED ARK-Server update found! $RESET"
-    sleep 1
+function updateCheck {
     
-    if [[ $AutomaticallyInstallUpdates =~ true ]]; then
-        echo -e "$GREEN Starting update script. $RESET"
-        sleep 1
-        
-        cd $SCRIPT_DIR
-        clear
-        ./updateserver
-        
+    source _functions
+
+    installSteam
+
+    # Get current ARK-Version from appmanifest
+    if [ ! -f $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf ]; then
+        echo -e "$RED ARK-Server is not installed! $RESET"
         echo -e; exit 0
     fi
-    
-    echo -e " Would you like to update the server?"
-    echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET"
-    read input
-    echo -e; sleep 0.5s
-    if [[ $input =~ Y ]]; then
-        echo -e "$GREEN Starting update script. $RESET"
+
+    currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf | parseSteamAcf "AppState.buildid"`
+
+    # Get new ARK-Version from Steam Network
+    echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
+    runSteam 0
+    echo -e "$YELLOW Request completed! $RESET"
+
+    # Comparing version numbers
+    sleep 0.5; echo -e
+    echo -e "$YELLOW Comparing ARK-Server version numbers. $RESET"
+
+    echo -e " Current Version:$CYAN   $currentVersion $RESET"
+    echo -e " New Version:$CYAN       $newVersion $RESET"
+
+    sleep 0.5; echo -e
+    if [ $newVersion -gt $currentVersion ]; then
+        echo -e "$RED ARK-Server update found! $RESET"
         sleep 1
+    
+        if [[ $AutomaticallyInstallUpdates =~ true ]]; then
+            echo -e "$GREEN Starting update script. $RESET"
+            sleep 1
         
-        cd $SCRIPT_DIR
-        clear
-        ./updateserver
+            cd $SCRIPT_DIR
+            clear
+            ./updateserver
         
-        echo -e; exit 0
-    elif [[ $input =~ N ]]; then
-        echo -e "$RED Exiting script. $RESET"
-        echo -e; exit 0
+            echo -e; exit 0
+        fi
+    
+        echo -e " Would you like to update the server?"
+            echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET"
+        read input
+        echo -e; sleep 0.5s
+        if [[ $input =~ Y ]]; then
+            echo -e "$GREEN Starting update script. $RESET"
+            sleep 1
+        
+            cd $SCRIPT_DIR
+            clear
+           ./updateserver
+        
+            echo -e; exit 0
+        elif [[ $input =~ N ]]; then
+            echo -e "$RED Exiting script. $RESET"
+            echo -e; exit 0
+        else
+            echo -e "$ERR You have entered an invalid response. Exiting $RESET"
+            echo -e; exit 0
+        fi
     else
-        echo -e "$ERR You have entered an invalid response. Exiting $RESET"
-        echo -e; exit 0
+        echo -e "$GREEN ARK-Server is up to date! $RESET"
     fi
-else
-    echo -e "$GREEN ARK-Server is up to date! $RESET"
-fi
 
-echo -e; exit 0
+    echo -e; exit 0
+
+}
