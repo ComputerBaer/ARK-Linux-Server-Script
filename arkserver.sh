@@ -345,7 +345,7 @@ else
     echo -e "$RED Script Update Checker Disabled $RESET"
 fi
 
-
+cd .serverscript
 # Commands
 help () {
     echo -e; echo -e "$WHITE Use the following commands: $RESET"
