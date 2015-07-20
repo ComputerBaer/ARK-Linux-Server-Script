@@ -14,7 +14,7 @@ ERR='\e[1;31m ERROR\e[0m'
 arkserver_Current="1.2.7"
 
 shopt -s nocasematch
-clear
+clear; echo -e
 # Check for config file.
 if [ -f configuration.ini ]; then
     source configuration.ini
