@@ -62,3 +62,6 @@ wget https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/ar
 # Contributors
 - Zendrex
 - ComputerBaer
+
+# Testers
+- Svetty (Param Patch)
