@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-serverstatus_Current="1.0.10"
+serverstatus_Current="1.0.11"
 
 function serverStatus {
 
@@ -103,7 +103,8 @@ function serverStatus {
     if [[ $StatusShowParametersNumber =~ true ]]; then
         sleep 0.3s; echo -e
         sleep 0.3s; echo -e "############[$CYAN Server Parameters Number$RESET ]############"
-        sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange $RESET"
+#        sleep 0.3s; echo -e " MaxStructuresInRange:$CYAN        $MaxStructuresInRange $RESET"
+        sleep 0.3s; echo -e " NewMaxStructuresInRange:$CYAN     $NewMaxStructuresInRange $RESET"
         sleep 0.3s; echo -e " PvEStructureDecayPeriod:$CYAN     $PvEStructureDecayDestructionPeriod $RESET"
         sleep 0.3s; echo -e
         sleep 0.3s; echo -e " PlayerDamage:$CYAN                $PlayerDamageMultiplier $RESET"

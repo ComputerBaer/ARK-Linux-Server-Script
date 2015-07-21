@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.1.4"
+parameters_Current="1.1.5"
 
 function parametersCheck {
 
@@ -111,6 +111,10 @@ function parametersCheck {
     # Max Structures In Range
     MaxStructuresInRange=$(checkInteger $MaxStructuresInRange 1300)
     executeString="${executeString}?MaxStructuresInRange=${MaxStructuresInRange}"
+    
+    # New Max Structures In Range
+    NewMaxStructuresInRange=$(checkInteger $NewMaxStructuresInRange 6000)
+    executeString="${executeString}?NewMaxStructuresInRange=${NewMaxStructuresInRange}"
 
     # PvE Structure Decay Destruction Period ( Not in GameUserSettings.ini ? )
     PvEStructureDecayDestructionPeriod=$(checkInteger $PvEStructureDecayDestructionPeriod 0)
