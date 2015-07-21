@@ -23,7 +23,7 @@ function updateCheck {
     echo -e "$YELLOW Comparing ARK-Server version numbers. $RESET"
 
     echo -e " Current Version:$CYAN   $currentVersion $RESET"
-    echo -e " New Version:$CYAN       $newVersion $RESET"
+    echo -e " Latest Version:$CYAN    $newVersion $RESET"
 
     sleep 0.5; echo -e
     if [ $newVersion -gt $currentVersion ]; then
