@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.1.5"
+parameters_Current="1.1.6"
 
 function parametersCheck {
 
@@ -145,25 +145,6 @@ function parametersCheck {
     executeString="${executeString}?RCONPort=${RconPort}"
 
     ########################
-    ## String Parameters  ##
-    ########################
-
-    # Server Password
-    executeString="${executeString}?ServerPassword=${ServerPassword}"
-
-    # Server Admin Password
-    executeString="${executeString}?ServerAdminPassword=${ServerAdminPassword}"
-
-    # Session Name
-    if [ ! -z $SessionName ] && [ ! -z $ArkServers ]; then
-        SessionName="${SessionName}_${ArkServers}"
-    fi
-    executeString="${executeString}?SessionName=${SessionName}"
-
-    # Multi Home (IP Address)
-    executeString="${executeString}?MultiHome=${IpAddress}"
-
-    ########################
     ## Double Parameters  ##
     ########################
 
@@ -271,6 +252,26 @@ function parametersCheck {
     DifficultyOffset=$(checkDouble $DifficultyOffset 0.2)
     executeString="${executeString}?DifficultyOffset=${DifficultyOffset}"
 
+    ########################
+    ## String Parameters  ##
+    ########################
+
+    # Server Password
+    executeString="${executeString}?ServerPassword=${ServerPassword}"
+
+    # Server Admin Password
+    executeString="${executeString}?ServerAdminPassword=${ServerAdminPassword}"
+
+    # Session Name
+    if [ ! -z $SessionName ] && [ ! -z $ArkServers ]; then
+        SessionName="${SessionName}_${ArkServers}"
+    fi
+    executeString="${executeString}?SessionName=${SessionName}"
+
+    # Multi Home (IP Address)
+    executeString="${executeString}?MultiHome=${IpAddress}"
+
+    ########################
 
     # Server
     executeString="${executeString} -server -log"
