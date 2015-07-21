@@ -59,7 +59,7 @@ if [ -f configuration.ini ]; then
 
 else
     echo -e "$ERR No configuration file found. Downloading from github now."
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$Branch/configuration.ini -o configuration.ini -#; echo -e
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#; echo -e
     echo -e "$GREEN Configuration file download was successful."
     echo -e " Please edit the config file before running the script again. $RESET"
     echo -e; exit 0
