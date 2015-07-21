@@ -46,6 +46,7 @@ An advanced ark linux server script that enables you to do a number of things fo
 - General performance increases.
 - Formatting fixes.
 - Added new params and removed old params.
+- Fixed params arguments. AGAIN
 
 # Upcoming Features
 - Better RCON Support
