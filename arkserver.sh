@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.14"
+arkserver_Current="1.2.15"
 
 shopt -s nocasematch
 clear; echo -e
@@ -21,7 +21,7 @@ if [ -f configuration.ini ]; then
 
     if [ $GitBranch != "master" ]; then
         echo -e "$RED Using Developer Branch! $RESET"
-        sleep 1s
+        echo -e; sleep 1s
         Branch="$GitBranch"
     else
         Branch="master"
