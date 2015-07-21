@@ -45,6 +45,7 @@ An advanced ark linux server script that enables you to do a number of things fo
   - Updater now only checks once per launch, not every script now.
 - General performance increases.
 - Formatting fixes.
+- Added new params and removed old params.
 
 # Upcoming Features
 - Better RCON Support
