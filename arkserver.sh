@@ -51,7 +51,7 @@ if [ -f configuration.ini ]; then
 
 else
     echo -e "$ERR No configuration file found. Downloading from github now."
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#; echo -e
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/configuration.ini -o configuration.ini -#; echo -e
     echo -e "$GREEN Configuration file download was successful."
     echo -e " Please edit the config file before running the script again. $RESET"
     echo -e; exit 0
@@ -166,70 +166,70 @@ cd .serverscript
 # Functions Script
 if [ ! -f _functions ]; then
     echo -e "$YELLOW Functions Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/_functions -o _functions -#
     chmod 777 _functions
 fi
 
 # Start Server Script
 if [ ! -f startserver ]; then
     echo -e "$YELLOW Start Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/startserver -o startserver -#
     chmod 777 startserver
 fi
 
 # Stop Server Script
 if [ ! -f stopserver ]; then
     echo -e "$YELLOW Stop Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/stopserver -o stopserver -#
     chmod 777 stopserver
 fi
 
 # View Server Script
 if [ ! -f viewserver ]; then
     echo -e "$YELLOW View Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/viewserver -o viewserver -#
     chmod 777 viewserver
 fi
 
 # Install Server Script
 if [ ! -f installserver ]; then
     echo -e "$YELLOW Install Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/installserver -o installserver -#
     chmod 777 installserver
 fi
 
 # Update Server Script
 if [ ! -f updateserver ]; then
     echo -e "$YELLOW Update Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/updateserver -o updateserver -#
     chmod 777 updateserver
 fi
 
 # Update Check Script
 if [ ! -f update_check ]; then
     echo -e "$YELLOW Update Check Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/update_check -o update_check -#
     chmod 777 update_check
 fi
 
 # Backup Server Script
 if [ ! -f backupserver ]; then
     echo -e "$YELLOW Backup Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/backupserver -o backupserver -#
     chmod 777 backupserver
 fi
 
 # Server Status Script
 if [ ! -f serverstatus ]; then
     echo -e "$YELLOW Server Status Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/serverstatus -o serverstatus -#
     chmod 777 serverstatus
 fi
 
 # Parameter Script
 if [ ! -f parameters_check ]; then
     echo -e "$YELLOW Parameter Script $RESET"
-    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+    curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/parameters_check -o parameters_check -#
     chmod 777 parameters_check
 fi
 
@@ -248,13 +248,13 @@ if [[ $ScriptUpdater =~ true ]]; then
         rm version.ini
     fi
     echo -e "$YELLOW Checking for script updates... $RESET"
-    curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini -o version.ini -#
+    curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/version.ini -o version.ini -#
     source version.ini
     # Main Shell Script
     if [ $arkserver_Current != $arkserver ]; then
         echo -e " Script update available! (Main Script)"
         echo -e; echo -e "$YELLOW Downloading shell file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/arkserver.sh -o arkserver.sh -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/arkserver.sh -o arkserver.sh -#
         updateFound="true"
     fi
     cd .serverscript
@@ -263,7 +263,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $functionVer_Current != $functions ]; then
         echo -e " Script update available! (Functions Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/_functions -o _functions -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/_functions -o _functions -#
         updateFound="true"
     fi
     # Parameters Check
@@ -271,7 +271,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $parameters_Current != $parameters ]; then
         echo -e " Script update available! (Parameters Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/parameters_check -o parameters_check -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/parameters_check -o parameters_check -#
         updateFound="true"
     fi
     # Backup Server Script
@@ -279,7 +279,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $backupserver_Current != $backupserver ]; then
         echo -e " Script update available! (Backup Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/backupserver -o backupserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/backupserver -o backupserver -#
         updateFound="true"
     fi
     # Install Server Script
@@ -287,7 +287,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $installserver_Current != $installserver ]; then
         echo -e " Script update available! (Install Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/installserver -o installserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/installserver -o installserver -#
         updateFound="true"
     fi
     # Server Status Script
@@ -295,7 +295,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $serverstatus_Current != $serverstatus ]; then
         echo -e " Script update available! (Status Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/serverstatus -o serverstatus -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/serverstatus -o serverstatus -#
         updateFound="true"
     fi
     # Server Start Script
@@ -303,7 +303,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $startserver_Current != $startserver ]; then
         echo -e " Script update available! (Start Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/startserver -o startserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/startserver -o startserver -#
         updateFound="true"
     fi
     # Server Stop Script
@@ -311,7 +311,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $stopserver_Current != $stopserver ]; then
         echo -e " Script update available! (Stop Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/stopserver -o stopserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/stopserver -o stopserver -#
         updateFound="true"
     fi
     # Update Check Script
@@ -319,7 +319,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $updatecheck_Current != $updatecheck ]; then
         echo -e " Script update available! (Update Check Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/update_check -o update_check -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/update_check -o update_check -#
         updateFound="true"
     fi
     # Server Updater Script
@@ -327,7 +327,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $updateserver_Current != $updateserver ]; then
         echo -e " Script update available! (Server Updater Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/updateserver -o updateserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/updateserver -o updateserver -#
         updateFound="true"
     fi
     # Server Viewer Script
@@ -335,7 +335,7 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $viewserver_Current != $viewserver ]; then
         echo -e " Script update available! (View Server Script)"
         echo -e; echo -e "$YELLOW Downloading script file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/.serverscript/viewserver -o viewserver -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/.serverscript/viewserver -o viewserver -#
         updateFound="true"
     fi
     
@@ -355,7 +355,7 @@ if [[ $ScriptUpdater =~ true ]]; then
         sleep 1s
         echo -e; mv configuration.ini configuration_backup.ini
         echo -e "$YELLOW File backed up. Downloading new config file. $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/configuration.ini -o configuration.ini -#
+        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$DevBranch/configuration.ini -o configuration.ini -#
         echo -e; echo -e "$GREEN Configuration file updated. Please edit your config once again then restart the script. $RESET"
         echo -e "$GREEN Most options you can simply copy and paste as most config updates are additions or formatting. $RESET"
         echo -e; exit 0
