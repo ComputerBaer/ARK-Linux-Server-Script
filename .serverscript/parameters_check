@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.1.6"
+parameters_Current="1.1.7"
 
 function parametersCheck {
 
@@ -266,15 +266,22 @@ function parametersCheck {
     if [ ! -z $SessionName ] && [ ! -z $ArkServers ]; then
         SessionName="${SessionName}_${ArkServers}"
     fi
-    executeString="${executeString}?SessionName=${SessionName}"
-
+    if [ ! -z $SessionName ]; then
+        executeString="${executeString}?SessionName=${SessionName}"
+    fi
+    
     # Multi Home (IP Address)
-    executeString="${executeString}?MultiHome=${IpAddress}"
+    if [ ! -z $IpAddress ]; then
+        executeString="${executeString}?MultiHome=${IpAddress}"
+    fi
 
     ########################
 
     # Server
     executeString="${executeString} -server -log"
+    
+    # "Experiment Fast Load Cache"
+    #executeString="${executeString} -usecache"
 
 
     sleep 1s; echo -e " Check complete, starting server compiling."
