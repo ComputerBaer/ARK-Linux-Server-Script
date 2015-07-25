@@ -3,6 +3,74 @@
 # Version Checker 
 updateserver_Current="1.2.4"
 
+# Update Check
+function updateCheck {
+
+    # Get current ARK-Version from appmanifest
+    if [ ! -f $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf ]; then
+        echo -e "$RED ARK-Server is not installed! $RESET"
+        echo -e; return
+    fi
+
+    currentVersion=`cat $STEAM_APPS_DIR/appmanifest_$GAME_APPID.acf | parseSteamAcf "AppState.buildid"`
+
+    # Get new ARK-Version from Steam Network
+    echo -e; echo -e "$YELLOW Requesting new ARK-Server-Version from Steam ... $RESET"
+    runSteam 0
+    echo -e "$YELLOW Request completed! $RESET"
+
+    # Comparing version numbers
+    sleep 0.5; echo -e
+    echo -e "$YELLOW Comparing ARK-Server version numbers. $RESET"
+
+    echo -e " Current Version:$CYAN   $currentVersion $RESET"
+    echo -e " Latest Version:$CYAN    $newVersion $RESET"
+
+    sleep 0.5; echo -e
+    if [ $newVersion -gt $currentVersion ]; then
+        echo -e "$RED ARK-Server update found! $RESET"
+        sleep 1
+    
+        if [[ $AutomaticallyInstallUpdates =~ true ]]; then
+            echo -e "$GREEN Starting update script. $RESET"
+            sleep 1
+        
+            cd $SCRIPT_DIR
+            clear
+            updateServer
+        
+            echo -e; return
+        fi
+    
+        echo -e " Would you like to update the server?"
+            echo -e -n "$YELLOW Type: Yes(Y) or No(N): $RESET"
+        read input
+        echo -e; sleep 0.5s
+        if [[ $input =~ Y ]]; then
+            echo -e "$GREEN Starting update script. $RESET"
+            sleep 1
+        
+            cd $SCRIPT_DIR
+            clear
+            updateServer
+        
+            echo -e; return
+        elif [[ $input =~ N ]]; then
+            echo -e "$RED Exiting script. $RESET"
+            echo -e; return
+        else
+            echo -e "$ERR You have entered an invalid response. Exiting $RESET"
+            echo -e; return
+        fi
+    else
+        echo -e "$GREEN ARK-Server is up to date! $RESET"
+    fi
+
+    echo -e; return
+
+}
+
+# Update Server
 function updateServer {
 
     echo -e; echo -e "$YELLOW Preparing to stop the server. $RESET"
