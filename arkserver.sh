@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.24"
+arkserver_Current="1.2.25"
 
 shopt -s nocasematch
 clear; echo -e
@@ -328,13 +328,6 @@ if [[ $ScriptUpdater =~ true ]]; then
     if [ $stopserver_Current != $stopserver ]; then
         echo -e; echo -e "$YELLOW Stop Script $RESET"
         curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$Branch/.serverscript/stopserver -o stopserver -#
-        updateFound="true"
-    fi
-    # Update Check Script
-    source update_check
-    if [ $updatecheck_Current != $updatecheck ]; then
-        echo -e; echo -e "$YELLOW Update Check Script $RESET"
-        curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$Branch/.serverscript/update_check -o update_check -#
         updateFound="true"
     fi
     # Server Updater Script
