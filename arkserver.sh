@@ -257,7 +257,7 @@ fi
 ####################################[ CHECK FOR OLD FILES ]#####################################
 
 # Update Check Script
-if [ ! -f update_check ]; then
+if [ -f update_check ]; then
     echo -e "$RED Old Files Found, Remove Them $RESET"
 fi
 
