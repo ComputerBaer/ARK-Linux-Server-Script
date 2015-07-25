@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # Version Checker 
-backupserver_Current="1.2.4"
+backupserver_Current="1.2.6"
 
-# Backup Server Save Files
 function backupServer {
 
     # Check for backups directory.
