@@ -3,6 +3,7 @@
 # Version Checker 
 backupserver_Current="1.2.4"
 
+# Backup Server Save Files
 function backupServer {
 
     # Check for backups directory.
@@ -34,19 +35,30 @@ function backupServer {
 
     DATE=`date +"%m-%d-%y_%H.%M.%S"`
 
-    echo -e; echo -e "$YELLOW Trying to create backup for save files. $RESET"
+    echo -e; echo -e "$YELLOW Trying to create backup for save file(s). $RESET"
     sleep 0.5s
     if [ -d ShooterGame/Saved/SavedArks/ ]; then
         echo -e " Saves directory found, copying files."
         cd ShooterGame/Saved/
-        cp -r SavedArks/ ../../backups
-        echo -e " Copied save files."
+        if [[ $CompressMainOnly =~ true ]]; then
+            cd SavedArks
+            cp $MapName.ark ../../../backups
+            cd ../
+        else
+            cp -r SavedArks/ ../../backups
+        fi
+        echo -e " Copied save file(s)."
         echo -e; cd ../../backups
     
-        echo -e "$YELLOW Compressing directory. Please wait. (This may take a while) $RESET"
+        echo -e "$YELLOW Compressing file(s). Please wait. (This may take a while) $RESET"
         FILE="Backup_$DATE.$fileExt"
-        tar $tarParam -cf $FILE SavedArks/
-        rm -rf SavedArks
+        if [[ $CompressMainOnly =~ true ]]; then
+            tar $tarParam -cf $FILE $MapName.ark
+            rm $MapName.ark
+        else
+            tar $tarParam -cf $FILE SavedArks/
+            rm -rf SavedArks
+        fi
         echo -e " Compression complete! File Name:$GREEN $FILE $RESET"
         sleep 1s
     else
