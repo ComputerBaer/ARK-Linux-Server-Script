@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# Version Checker 
+pushFile_Current="1.1.5"
+
+function pushFileSystem {
+
+    sleep 1s
+    
+    FILE="GameUserSettings.ini"
+    DATE=`date +"%r"`
+    
+    # Remove old file.
+    cd ../ShooterGame/Saved/Config/LinuxServer
+    if [ -f $FILE ]; then
+        rm -f $FILE
+    fi
+    
+    
+    echo "; ##########################" >> $FILE
+    echo "; #      Custom Config     #" >> $FILE
+    echo "; #       By Zendrex       #" >> $FILE
+    echo "; ##########################" >> $FILE
+    echo "; File Generated: $DATE" >>      $FILE
+    
+    echo "" >> $FILE
+    
+    echo "[SessionSettings]" >>                                                                 $FILE
+    if [ ! -z $ArkServers ]; then
+        echo "SessionName=$SessionName_$ArkServers" >>                                          $FILE
+    else
+        echo "SessionName=$SessionName" >>                                                      $FILE
+    fi
+    
+    echo "" >> $FILE
+    
+    echo "[/Script/Engine.GameSession]" >>                                                      $FILE
+    echo "MaxPlayers=$MaxPlayers" >>                                                            $FILE
+    
+    echo "" >> $FILE
+    sleep 0.2s
+    
+    echo "[ServerSettings]" >>                                                                  $FILE
+    echo "DifficultyOffset=$DifficultyOffset" >>                                                $FILE
+    echo "ShowMapPlayerLocation=$ShowMapPlayerLocation" >>                                      $FILE
+    echo "GlobalVoiceChat=$GlobalVoiceChat" >>                                                  $FILE
+    echo "ProximityChat=$ProximityChat" >>                                                      $FILE
+    echo "NoTributeDownloads=$NoTributeDownloads" >>                                            $FILE
+    echo "AllowThirdPersonPlayer=$AllowThirdPersonPlayer" >>                                    $FILE
+    echo "AlwaysNotifyPlayerLeft=$AlwaysNotifyPlayerLeft" >>                                    $FILE
+    echo "DontAlwaysNotifyPlayerJoined=$AlwaysNotifyPlayerJoined" >>                            $FILE
+    echo "ServerHardcore=$ServerHardcore" >>                                                    $FILE
+    echo "ServerPVE=$ServerPVE" >>                                                              $FILE
+    echo "ServerCrosshair=$ServerCrosshair" >>                                                  $FILE
+    echo "ServerForceNoHUD=$ServerForceNoHUD" >>                                                $FILE
+    echo "EnablePvPGamma=$EnablePvPGamma" >>                                                    $FILE
+    echo "ServerPassword=$ServerPassword" >>                                                    $FILE
+    echo "ServerAdminPassword=$ServerAdminPassword" >>                                          $FILE
+    echo "RCONEnabled=$RconEnabled" >>                                                          $FILE
+    echo "RCONPort=$RconPort" >>                                                                $FILE
+    echo "KickIdlePlayersPeriod=$KickIdlePlayersPeriod" >>                                      $FILE
+    echo "AutoSavePeriodMinutes=$AutoSavePeriodMinutes" >>                                      $FILE
+    echo "AllowFlyerCarryPvE=$AllowFlyerCarryPvE" >>                                            $FILE
+    echo "DisableStructureDecayPvE=$DisableStructureDecayPvE" >>                                $FILE
+    echo "ClampResourceHarvestDamage=$ClampResourceHarvestDamage" >>                            $FILE
+    echo "PreventDownloadSurvivors=$PreventDownloadSurvivors" >>                                $FILE
+    echo "PreventDownloadItems=$PreventDownloadItems" >>                                        $FILE
+    echo "PreventDownloadDinos=$PreventDownloadDinos" >>                                        $FILE
+    
+    echo "" >> $FILE
+    sleep 0.2s
+    
+    echo "NewMaxStructuresInRange=$NewMaxStructuresInRange" >>                                  $FILE
+    echo "PvEStructureDecayDestructionPeriod=$PvEStructureDecayDestructionPeriod" >>            $FILE
+    echo "PlayerDamageMultiplier=$PlayerDamageMultiplier" >>                                    $FILE
+    echo "PlayerResistanceMultiplier=$PlayerResistanceMultiplier" >>                            $FILE
+    echo "PlayerCharacterWaterDrainMultiplier=$PlayerCharacterWaterDrainMultiplier" >>          $FILE
+    echo "PlayerCharacterFoodDrainMultiplier=$PlayerCharacterFoodDrainMultiplier" >>            $FILE
+    echo "PlayerCharacterStaminaDrainMultiplier=$PlayerCharacterStaminaDrainMultiplier" >>      $FILE
+    echo "PlayerCharacterHealthRecoveryMultiplier=$PlayerCharacterHealthRecoveryMultiplier" >>  $FILE
+    echo "DinoDamageMultiplier=$DinoDamageMultiplier" >>                                        $FILE
+    echo "DinoResistanceMultiplier=$DinoResistanceMultiplier" >>                                $FILE
+    echo "DinoCharacterFoodDrainMultiplier=$DinoCharacterFoodDrainMultiplier" >>                $FILE
+    echo "DinoCharacterStaminaDrainMultiplier=$DinoCharacterStaminaDrainMultiplier" >>          $FILE
+    echo "DinoCharacterHealthRecoveryMultiplier=$DinoCharacterHealthRecoveryMultiplier" >>      $FILE
+    echo "TamedDinoDamageMultiplier=$TamedDinoDamageMultiplier" >>                              $FILE
+    echo "TamedDinoResistanceMultiplier=$TamedDinoResistanceMultiplier" >>                      $FILE
+    echo "StructureDamageMultiplier=$StructureDamageMultiplier" >>                              $FILE
+    echo "StructureResistanceMultiplier=$StructureResistanceMultiplier" >>                      $FILE
+    
+    echo "" >> $FILE
+    sleep 0.2s
+    
+    echo "DayCycleSpeedScale=$DayCycleSpeedScale" >>                                            $FILE
+    echo "DayTimeSpeedScale=$DayTimeSpeedScale" >>                                              $FILE
+    echo "NightTimeSpeedScale=$NightTimeSpeedScale" >>                                          $FILE
+    echo "TamingSpeedMultiplier=$TamingSpeedMultiplier" >>                                      $FILE
+    echo "DinoCountMultiplier=$DinoCountMultiplier" >>                                          $FILE
+    echo "HarvestAmountMultiplier=$HarvestAmountMultiplier" >>                                  $FILE
+    echo "HarvestHealthMultiplier=$HarvestHealthMultiplier" >>                                  $FILE
+    echo "ResourcesRespawnPeriodMultiplier=$ResourcesRespawnPeriodMultiplier" >>                $FILE
+    echo "PvEStructureDecayPeriodMultiplier=$PvEStructureDecayPeriodMultiplier" >>              $FILE
+    echo "XPMultiplier=$XPMultiplier" >>                                                        $FILE
+    
+    echo "" >> $FILE
+    sleep 0.5s
+    
+    WindowSettings=`curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/newParamSystem/extra_files/StartupSettings`
+    
+    sleep 0.3s
+    echo "$WindowSettings" >> $FILE
+    
+    echo -e " Compiling Complete. (Sent to server config and commandline)"
+    sleep 0.5s
+    
+}
