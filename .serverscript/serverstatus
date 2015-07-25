@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-serverstatus_Current="1.0.11"
+serverstatus_Current="1.0.12"
 
 function serverStatus {
 
@@ -20,11 +20,7 @@ function serverStatus {
         setAddress="$YELLOW $IpAddress $RESET"
     fi
 
-    if [ -z $SessionName ]; then
-        setHostName="$YELLOW LOADED FROM GameUserSettings.ini $RESET"
-    else
-        setHostName="$GREEN $SessionName $RESET"
-    fi
+    setHostName="$GREEN $SessionName $RESET"
 
     if [ -z $ArkServers ]; then
         arkServerList="$RED DISABLED $RESET"
