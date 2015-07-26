@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-parameters_Current="1.2.3"
+parameters_Current="1.2.4"
 
 function parametersCheck {
 
@@ -215,7 +215,7 @@ function parametersCheck {
     executeString="${executeString} -server -log"
     
     # "Experiment Fast Load Cache"
-    if [[ $UserCache =~ true ]]; then
+    if [[ $UseCache =~ true ]]; then
         executeString="${executeString} -usecache"
     fi
 
