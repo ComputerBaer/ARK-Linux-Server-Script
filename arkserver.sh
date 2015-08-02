@@ -11,7 +11,7 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.2.26"
+arkserver_Current="1.3.0"
 
 shopt -s nocasematch
 clear; echo -e
@@ -458,6 +458,11 @@ pushFile () {
 changelog () {
     clear
     checkChangelog
+}
+
+versions () {
+    clear
+    readVersions
 }
 
 [ "$1" = "" ] && {
