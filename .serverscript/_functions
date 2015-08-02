@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version Checker 
-functionVer_Current="1.1.3"
+functionVer_Current="1.1.5"
 
 shopt -s nocasematch
 
@@ -222,4 +222,21 @@ function invertBoolean
         # Is invalid Boolean, return Input
         echo $bool
     fi
+}
+
+function readVersions
+{
+    echo -e "$YELLOW arhserver.sh:$RESET    $arkserver"
+    echo -e "$YELLOW backupserver:$RESET    $backupserver"
+    echo -e "$YELLOW installserver:$RESET   $installserver"
+    echo -e "$YELLOW serverstatus:$RESET    $serverstatus"
+    echo -e "$YELLOW startserver:$RESET     $startserver"
+    echo -e "$YELLOW stopserver:$RESET      $stopserver"
+    echo -e "$YELLOW updateserver:$RESET    $updateserver"
+    echo -e "$YELLOW viewserver:$RESET      $viewserver"
+    echo -e "$YELLOW liveConfig:$RESET      $liveConfig"
+    echo -e "$YELLOW parameters:$RESET      $parameters"
+    echo -e "$YELLOW functions:$RESET       $functions"
+    echo -e "$YELLOW pushfile:$RESET        $pushfile"
+    echo -e "$YELLOW changelog:$RESET       $changelog"
 }
