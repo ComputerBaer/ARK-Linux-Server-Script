@@ -8,5 +8,6 @@
     - Added new params.
         - Spectator Pass
         - Decomposition Multipliers
+    - Fixed issues with the file not properly pushing to the config.
     - Numberious bugs fixes.
     "
