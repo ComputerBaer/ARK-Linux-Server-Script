@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Version (DO NOT CHANGE THIS)
-changelog_Current="1.0.2"
+changelog_Current="1.0.3"
 
 shopt -s nocasematch
 
 function checkChangelog {
 
-    curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/newParamSystem/extra_files/changelog.txt -o changelog.txt
+    curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$Branch/extra_files/changelog.txt -o changelog.txt
 
     source changelog.txt
 
