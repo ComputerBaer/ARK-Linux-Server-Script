@@ -11,7 +11,10 @@ RESET='\e[0m'
 ERR='\e[1;31m ERROR\e[0m'
 
 # Version (DO NOT CHANGE THIS)
-arkserver_Current="1.3.0"
+arkserver_Current="1.3.1"
+
+# Refresh Version
+curl https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/master/version.ini >> /dev/null &
 
 shopt -s nocasematch
 clear; echo -e
