@@ -105,7 +105,7 @@ function pushFileSystem {
     echo "" >> $FILE
     sleep 0.5s
     
-    WindowSettings=`curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/newParamSystem/extra_files/StartupSettings`
+    WindowSettings=`curl -s https://raw.githubusercontent.com/Zendrex/ARK-Linux-Server-Script/$Branch/extra_files/StartupSettings`
     
     sleep 0.3s
     echo "$WindowSettings" >> $FILE
