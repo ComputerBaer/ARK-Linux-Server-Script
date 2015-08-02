@@ -1,15 +1,12 @@
 # CHANGELOG FOR ARK-Linux-Server-Script #
 
-    Date="7/24/15"
+    Date="8/1/15"
     
-    LogNumber="1"
+    LogNumber="2"
     
     Changelog="
-    - Added changelog feature.
-    - Added multiple backup options.
-    - Changed how server starts now.
-        - Server no longer has massive commandline.
-        Everything is now set in the configuration properly!
-    - Fixed formatting issues.
-    - Numberious other bugs.
+    - Added new params.
+        - Spectator Pass
+        - Decomposition Multipliers
+    - Numberious bugs fixes.
     "
